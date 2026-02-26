@@ -1,1 +1,197 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Toimeenpanotilannekuva – demo</title>
+  <style>
+    :root{
+      --orange:#E8781E; --orangeL:#FFF2E8; --text:#1A1A1A; --muted:#6A6A6A;
+      --line:#E6E6E6; --panel:#F8F8F8; --panel2:#F4F4F4; --white:#fff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--white)}
+    .topbar{padding:20px 28px;border-bottom:2px solid var(--line);position:sticky;top:0;background:#fff;z-index:10}
+    .topbar::after{content:"";display:block;height:4px;background:var(--orange);margin:18px -28px -20px -28px}
+    .title{font-size:28px;font-weight:800;margin:0}
+    .subtitle{margin:6px 0 0 0;color:var(--muted)}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 28px 50px 28px}
+    .row{display:flex;gap:16px;flex-wrap:wrap}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+    .card .accent{width:8px;background:var(--orange);border-radius:16px 0 0 16px}
+    .card .inner{padding:14px 16px}
+    .kpi{flex:1;min-width:220px;display:flex;overflow:hidden}
+    .kpi .label{color:var(--muted);font-size:12px}
+    .kpi .val{font-weight:800;font-size:18px;margin-top:6px}
+    .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .h2{font-size:16px;font-weight:800;margin:0 0 8px 0}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;color:var(--muted);margin-right:8px}
+    .pill.on{background:var(--orangeL);border-color:var(--orange);color:var(--text)}
+    .list a{color:var(--text);text-decoration:none}
+    .list a:hover{text-decoration:underline}
+    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+    thead th{font-size:12px;text-align:left;background:#EEE;padding:10px;border-bottom:1px solid var(--line)}
+    tbody td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+    tbody tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:4px 8px;border-radius:10px;font-size:11px;border:1px solid var(--line);background:#eee;color:var(--muted)}
+    .badge.orange{background:var(--orangeL);border-color:var(--orange);color:var(--orange)}
+    .note{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h1 class="title">Toimeenpanotilannekuva (demo)</h1>
+    <p class="subtitle">Säädöspaketti = laki + asetukset • kenttävaikutus ja kasautumat (abstrakti)</p>
+  </div>
 
+  <div class="wrap">
+
+    <!-- KPI row -->
+    <div class="row">
+      <div class="card kpi"><div class="accent"></div><div class="inner">
+        <div class="label">Säädöspaketti</div>
+        <div class="val">Työllistymisen monialainen tuki (muutos)</div>
+      </div></div>
+      <div class="card kpi"><div class="accent"></div><div class="inner">
+        <div class="label">Seuraava virstanpylväs</div>
+        <div class="val">1.1.2026 (voimaantulo)</div>
+      </div></div>
+      <div class="card kpi"><div class="accent"></div><div class="inner">
+        <div class="label">Kohdistus</div>
+        <div class="val">Kunnat + Hyvinvointialueet</div>
+      </div></div>
+      <div class="card kpi"><div class="accent"></div><div class="inner">
+        <div class="label">Asetukset</div>
+        <div class="val">VNA mukana • MIN ei tunnistettu</div>
+      </div></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <span class="pill on">Julkinen demo</span>
+      <span class="pill">Abstrakti kenttälinssi</span>
+      <span class="pill">Ankkurit mukana</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- Left column -->
+      <div class="card">
+        <div class="inner">
+          <h2 class="h2">Virstanpylväät</h2>
+          <table>
+            <thead>
+              <tr><th>Tyyppi</th><th>Päivä / ajankohta</th><th>Kohdistus</th><th>Ankkuri</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Voimaantulo</td>
+                <td>2026-01-01</td>
+                <td>Kaikki</td>
+                <td>Laki – “Tämä laki tulee voimaan 1 päivänä tammikuuta 2026.”</td>
+              </tr>
+              <tr>
+                <td>Asetus voimaan</td>
+                <td>2025-01-01</td>
+                <td>Kunnat, HVA, Valtio</td>
+                <td>VNA – “Tämä asetus tulee voimaan 1 päivänä tammikuuta 2025.”</td>
+              </tr>
+              <tr>
+                <td>Muu</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Ministeriön asetus ei tunnistettu (Sprintti 1)</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="height:12px"></div>
+          <div class="note">
+            Huom: tämä demo ei arvioi yksittäisten kuntien työmäärää. Se näyttää, mihin vaikutusalueisiin muutos osuu ja missä kasautumia voi syntyä.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="card">
+        <div class="inner">
+          <h2 class="h2">Säädöspaketti (lähteet)</h2>
+          <div class="list">
+            <div style="margin:8px 0">
+              <span class="badge">Laki</span>
+              <a href="https://www.finlex.fi/fi/lainsaadanto/saadoskokoelma/2025/730" target="_blank" rel="noreferrer">
+                Laki 730/2025 (Finlex)
+              </a>
+              <span style="color:var(--muted)">• julkaistu 11.7.2025 • voimaan 1.1.2026</span>
+            </div>
+            <div style="margin:8px 0">
+              <span class="badge orange">VNA</span>
+              <a href="https://www.finlex.fi/fi/lainsaadanto/saadoskokoelma/2024/388" target="_blank" rel="noreferrer">
+                VNA 388/2024 (Finlex)
+              </a>
+              <span style="color:var(--muted)">• julkaistu 25.6.2024 • voimaan 1.1.2025</span>
+            </div>
+            <div style="margin:8px 0">
+              <span class="badge">MIN</span>
+              <span style="color:var(--muted)">Ei tunnistettu tähän pakettiin Sprintti 1:ssä</span>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+          <h2 class="h2">Kasautuma (abstrakti)</h2>
+          <div class="note">
+            <b>Ajurit:</b> Data-IT, yhteistyö, ohjeistus. <br/>
+            <b>Kohdistus:</b> Kunnat + HVA. <br/>
+            <b>Huomio:</b> Yhteisrekisterinpitäjyys ja tietojen tallettaminen ovat tyypillisesti “ristiin kytkeytyviä” teemoja.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="height:16px"></div>
+
+    <div class="card">
+      <div class="inner">
+        <h2 class="h2">Toimeenpanoteemat (abstrakti)</h2>
+        <table>
+          <thead>
+            <tr><th>Vaikutusalue</th><th>Kohdistus</th><th>Suunta</th><th>Teema</th><th>Lähde</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Data-IT</td><td>Kunnat, HVA</td><td>Kuormittava</td><td>Asiakastietojärjestelmän ja asiakastietoaineiston ylläpito sekä tietojen tallettamisvelvollisuus täsmentyy.</td><td>Laki 12 §</td></tr>
+            <tr><td>Data-IT</td><td>Kunnat, HVA</td><td>Kuormittava</td><td>Rekisterinpitäjäroolit ja tietosuojavelvoitteiden vastuunjako täsmentyy (yhteisrekisterinpitäjyys).</td><td>Laki 13 §</td></tr>
+            <tr><td>Prosessi</td><td>Kunnat, HVA</td><td>Sekavaikutus</td><td>Nuorten hyvinvoinnin ja elämänhallinnan valmennuksen tarjoaminen (roolit ja palvelusisältö) täsmentyy.</td><td>Laki 17 §</td></tr>
+            <tr><td>Yhteistyö</td><td>Kunnat, HVA, Valtio</td><td>Kuormittava</td><td>Yhteistoimintamallin organisointia (mm. johtoryhmän tehtävät ja seuranta) täsmennetään valtioneuvoston asetuksella.</td><td>VNA 388/2024</td></tr>
+            <tr><td>Ohjeistus</td><td>Kunnat, HVA</td><td>Sekavaikutus</td><td>KEHA-keskuksen tukipalvelut kunnille ja muille toimijoille selkeytyvät (palveluintegraatio ja monialainen työ).</td><td>Laki 18 §</td></tr>
+            <tr><td>Ohjeistus</td><td>Kunnat, HVA</td><td>Keventävä</td><td>Yhtenäiset roolit ja yhteisrekisterinpitäjyys voivat vähentää tulkinnan hajontaa toimijoiden välillä.</td><td>Laki 13 §</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="height:16px"></div>
+
+    <div class="card">
+      <div class="inner">
+        <h2 class="h2">Täsmennyskohdat asetuksilla</h2>
+        <table>
+          <thead>
+            <tr><th>Asetus</th><th>Täsmennys</th><th>Vaikutusalue</th><th>Kohdistus</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>VNA 388/2024</td><td>Yhteistoimintamallin organisointi (johtoryhmä, tehtävät, seuranta)</td><td>Yhteistyö</td><td>Kunnat, HVA, Valtio</td></tr>
+            <tr><td>VNA 388/2024</td><td>Voimaantulo (1.1.2025)</td><td>Prosessi</td><td>Kaikki</td></tr>
+            <tr><td>Ministeriön asetus</td><td>Ei tunnistettu tähän pakettiin Sprintti 1:ssä</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="height:24px"></div>
+    <div style="color:var(--muted);font-size:12px">
+      Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi
+    </div>
+
+  </div>
+</body>
+</html>
