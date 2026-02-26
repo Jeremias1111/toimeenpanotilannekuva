@@ -3,195 +3,580 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Toimeenpanotilannekuva – demo</title>
+  <title>Toimeenpanotilannekuva</title>
+  <meta name="description" content="Säädöspaketti = laki + asetukset. Kenttävaikutus ja kasautumat päätöksenteon ja toimeenpanon tueksi." />
+
   <style>
     :root{
-      --orange:#E8781E; --orangeL:#FFF2E8; --text:#1A1A1A; --muted:#6A6A6A;
-      --line:#E6E6E6; --panel:#F8F8F8; --panel2:#F4F4F4; --white:#fff;
+      /* Owal brand main colors */
+      --owal-orange:#FF9900;
+      --owal-purple:#6600CC;
+
+      /* Neutrals */
+      --text:#1A1A1A;
+      --muted:#666666;
+      --line:#E6E6E6;
+      --panel:#F8F8F8;
+      --panel2:#F4F4F4;
+      --white:#FFFFFF;
+
+      /* Accent tints */
+      --orangeL:#FFF2E8;
+      --purpleL:#F2EBFF;
+
+      /* Sizing */
+      --radius:18px;
+      --shadow:0 1px 0 rgba(0,0,0,.03);
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--white)}
-    .topbar{padding:20px 28px;border-bottom:2px solid var(--line);position:sticky;top:0;background:#fff;z-index:10}
-    .topbar::after{content:"";display:block;height:4px;background:var(--orange);margin:18px -28px -20px -28px}
-    .title{font-size:28px;font-weight:800;margin:0}
-    .subtitle{margin:6px 0 0 0;color:var(--muted)}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 28px 50px 28px}
-    .row{display:flex;gap:16px;flex-wrap:wrap}
-    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
-    .card .accent{width:8px;background:var(--orange);border-radius:16px 0 0 16px}
-    .card .inner{padding:14px 16px}
-    .kpi{flex:1;min-width:220px;display:flex;overflow:hidden}
-    .kpi .label{color:var(--muted);font-size:12px}
-    .kpi .val{font-weight:800;font-size:18px;margin-top:6px}
-    .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    .h2{font-size:16px;font-weight:800;margin:0 0 8px 0}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;color:var(--muted);margin-right:8px}
-    .pill.on{background:var(--orangeL);border-color:var(--orange);color:var(--text)}
-    .list a{color:var(--text);text-decoration:none}
-    .list a:hover{text-decoration:underline}
-    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
-    thead th{font-size:12px;text-align:left;background:#EEE;padding:10px;border-bottom:1px solid var(--line)}
-    tbody td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--white);
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background:var(--white);
+      border-bottom:2px solid var(--line);
+      padding:18px 24px 14px 24px;
+    }
+    .topbar::after{
+      content:"";
+      display:block;
+      height:4px;
+      background:var(--owal-orange);
+      margin:14px -24px -14px -24px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .logo{
+      width:160px; height:34px;
+      display:flex; align-items:center;
+      font-weight:900;
+      color:var(--text);
+      letter-spacing:.2px;
+    }
+    /* Optional: if you want to use a real logo image later:
+       .logo img{height:34px}
+    */
+    .titleWrap{min-width:260px; flex:1}
+    h1{
+      margin:0;
+      font-size:24px;
+      font-weight:900;
+      line-height:1.15;
+    }
+    .subtitle{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      color:var(--text);
+      font-size:12px;
+      text-decoration:none;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill.on{
+      background:var(--orangeL);
+      border-color:var(--owal-orange);
+    }
+    .pill.purple{
+      background:var(--purpleL);
+      border-color:var(--owal-purple);
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:22px 24px 60px 24px;
+    }
+
+    /* Cards */
+    .row{display:flex; gap:14px; flex-wrap:wrap}
+    .card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardAccent{
+      width:10px;
+      background:var(--owal-orange);
+      border-radius:var(--radius) 0 0 var(--radius);
+      flex:0 0 auto;
+    }
+    .cardBody{padding:14px 16px}
+    .kpi{flex:1; min-width:240px; display:flex}
+    .kpi .label{color:var(--muted); font-size:12px}
+    .kpi .val{font-weight:900; font-size:18px; margin-top:6px}
+    .kpi .sub{color:var(--muted); font-size:12px; margin-top:2px}
+
+    .grid{display:grid; grid-template-columns:1.35fr 1fr; gap:14px; margin-top:14px}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+
+    h2{
+      margin:0 0 10px 0;
+      font-size:16px;
+      font-weight:900;
+    }
+    .hint{color:var(--muted); font-size:13px; margin:0 0 12px 0}
+
+    /* Badges */
+    .badge{
+      display:inline-flex; align-items:center;
+      padding:4px 9px;
+      border-radius:12px;
+      font-size:11px;
+      border:1px solid var(--line);
+      background:#EEE;
+      color:var(--muted);
+      margin-right:10px;
+      white-space:nowrap;
+    }
+    .badge.orange{background:var(--orangeL); border-color:var(--owal-orange); color:var(--owal-orange)}
+    .badge.purple{background:var(--purpleL); border-color:var(--owal-purple); color:var(--owal-purple)}
+
+    /* Tables */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+    }
+    thead th{
+      text-align:left;
+      font-size:12px;
+      color:var(--text);
+      background:#EEE;
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    tbody td{
+      font-size:13px;
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
     tbody tr:last-child td{border-bottom:none}
-    .badge{display:inline-block;padding:4px 8px;border-radius:10px;font-size:11px;border:1px solid var(--line);background:#eee;color:var(--muted)}
-    .badge.orange{background:var(--orangeL);border-color:var(--orange);color:var(--orange)}
-    .note{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;color:var(--muted);font-size:13px}
+
+    a{color:var(--text); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .note{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+
+    .footer{
+      margin-top:22px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .rightCol .card + .card{margin-top:14px}
+
+    .small{font-size:12px;color:var(--muted)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+
+    .loading{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel);
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .error{
+      border:1px solid #ffb4b4;
+      border-radius:14px;
+      background:#fff0f0;
+      padding:12px;
+      color:#7a1a1a;
+      font-size:13px;
+    }
   </style>
 </head>
+
 <body>
   <div class="topbar">
-    <h1 class="title">Toimeenpanotilannekuva (demo)</h1>
-    <p class="subtitle">Säädöspaketti = laki + asetukset • kenttävaikutus ja kasautumat (abstrakti)</p>
+    <div class="brand">
+      <div class="logo">owalgroup</div>
+      <div class="titleWrap">
+        <h1>Toimeenpanotilannekuva</h1>
+        <div class="subtitle">Säädöspaketti = laki + asetukset • kenttävaikutus ja kasautumat (abstrakti)</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="pill on" href="./index.html">Uudistusnäkymä</a>
+      <a class="pill" href="./hallinnonalat.html" title="Lisää myöhemmin">Hallinnonalat</a>
+      <a class="pill" href="./kunnat.html" title="Lisää myöhemmin">Kunnat</a>
+      <a class="pill" href="./hva.html" title="Lisää myöhemmin">Hyvinvointialueet</a>
+      <span class="pill purple" id="pkg-chip">Paketti: pkg-001</span>
+    </div>
   </div>
 
   <div class="wrap">
-
     <!-- KPI row -->
     <div class="row">
-      <div class="card kpi"><div class="accent"></div><div class="inner">
-        <div class="label">Säädöspaketti</div>
-        <div class="val">Työllistymisen monialainen tuki (muutos)</div>
-      </div></div>
-      <div class="card kpi"><div class="accent"></div><div class="inner">
-        <div class="label">Seuraava virstanpylväs</div>
-        <div class="val">1.1.2026 (voimaantulo)</div>
-      </div></div>
-      <div class="card kpi"><div class="accent"></div><div class="inner">
-        <div class="label">Kohdistus</div>
-        <div class="val">Kunnat + Hyvinvointialueet</div>
-      </div></div>
-      <div class="card kpi"><div class="accent"></div><div class="inner">
-        <div class="label">Asetukset</div>
-        <div class="val">VNA mukana • MIN ei tunnistettu</div>
-      </div></div>
-    </div>
+      <div class="card kpi">
+        <div class="cardAccent"></div>
+        <div class="cardBody">
+          <div class="label">Säädöspaketti</div>
+          <div class="val" id="pkg-title">—</div>
+          <div class="sub" id="pkg-desc">—</div>
+        </div>
+      </div>
 
-    <div style="margin-top:12px">
-      <span class="pill on">Julkinen demo</span>
-      <span class="pill">Abstrakti kenttälinssi</span>
-      <span class="pill">Ankkurit mukana</span>
+      <div class="card kpi">
+        <div class="cardAccent"></div>
+        <div class="cardBody">
+          <div class="label">Seuraava virstanpylväs</div>
+          <div class="val" id="kpi-next">—</div>
+          <div class="sub" id="kpi-next-sub">—</div>
+        </div>
+      </div>
+
+      <div class="card kpi">
+        <div class="cardAccent"></div>
+        <div class="cardBody">
+          <div class="label">Kohdistus</div>
+          <div class="val" id="kpi-scope">—</div>
+          <div class="sub" id="kpi-scope-sub">—</div>
+        </div>
+      </div>
+
+      <div class="card kpi">
+        <div class="cardAccent"></div>
+        <div class="cardBody">
+          <div class="label">Asetukset</div>
+          <div class="val" id="kpi-decrees">—</div>
+          <div class="sub" id="kpi-decrees-sub">—</div>
+        </div>
+      </div>
     </div>
 
     <div class="grid">
-
       <!-- Left column -->
       <div class="card">
-        <div class="inner">
-          <h2 class="h2">Virstanpylväät</h2>
-          <table>
-            <thead>
-              <tr><th>Tyyppi</th><th>Päivä / ajankohta</th><th>Kohdistus</th><th>Ankkuri</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Voimaantulo</td>
-                <td>2026-01-01</td>
-                <td>Kaikki</td>
-                <td>Laki – “Tämä laki tulee voimaan 1 päivänä tammikuuta 2026.”</td>
-              </tr>
-              <tr>
-                <td>Asetus voimaan</td>
-                <td>2025-01-01</td>
-                <td>Kunnat, HVA, Valtio</td>
-                <td>VNA – “Tämä asetus tulee voimaan 1 päivänä tammikuuta 2025.”</td>
-              </tr>
-              <tr>
-                <td>Muu</td>
-                <td>—</td>
-                <td>—</td>
-                <td>Ministeriön asetus ei tunnistettu (Sprintti 1)</td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="height:12px"></div>
-          <div class="note">
-            Huom: tämä demo ei arvioi yksittäisten kuntien työmäärää. Se näyttää, mihin vaikutusalueisiin muutos osuu ja missä kasautumia voi syntyä.
-          </div>
+        <div class="cardBody">
+          <h2>Virstanpylväät</h2>
+          <p class="hint">Voimaantulo, soveltaminen, siirtymät ja asetusten voimaantulot. Kaikissa näkyy ankkuri.</p>
+
+          <div id="events-wrap" class="loading">Ladataan virstanpylväitä…</div>
         </div>
       </div>
 
       <!-- Right column -->
-      <div class="card">
-        <div class="inner">
-          <h2 class="h2">Säädöspaketti (lähteet)</h2>
-          <div class="list">
-            <div style="margin:8px 0">
-              <span class="badge">Laki</span>
-              <a href="https://www.finlex.fi/fi/lainsaadanto/saadoskokoelma/2025/730" target="_blank" rel="noreferrer">
-                Laki 730/2025 (Finlex)
-              </a>
-              <span style="color:var(--muted)">• julkaistu 11.7.2025 • voimaan 1.1.2026</span>
-            </div>
-            <div style="margin:8px 0">
-              <span class="badge orange">VNA</span>
-              <a href="https://www.finlex.fi/fi/lainsaadanto/saadoskokoelma/2024/388" target="_blank" rel="noreferrer">
-                VNA 388/2024 (Finlex)
-              </a>
-              <span style="color:var(--muted)">• julkaistu 25.6.2024 • voimaan 1.1.2025</span>
-            </div>
-            <div style="margin:8px 0">
-              <span class="badge">MIN</span>
-              <span style="color:var(--muted)">Ei tunnistettu tähän pakettiin Sprintti 1:ssä</span>
-            </div>
+      <div class="rightCol">
+        <div class="card">
+          <div class="cardBody">
+            <h2>Säädöspaketti (lähteet)</h2>
+            <p class="hint">Laki + asetukset muodostavat kokonaisuuden. Tämä näkymä näyttää kenttävaikutuksen abstraktisti.</p>
+            <div id="docs-wrap" class="loading">Ladataan lähteitä…</div>
           </div>
+        </div>
 
-          <div style="height:14px"></div>
-          <h2 class="h2">Kasautuma (abstrakti)</h2>
-          <div class="note">
-            <b>Ajurit:</b> Data-IT, yhteistyö, ohjeistus. <br/>
-            <b>Kohdistus:</b> Kunnat + HVA. <br/>
-            <b>Huomio:</b> Yhteisrekisterinpitäjyys ja tietojen tallettaminen ovat tyypillisesti “ristiin kytkeytyviä” teemoja.
+        <div class="card">
+          <div class="cardBody">
+            <h2>Kenttävaikutus (abstrakti)</h2>
+            <p class="hint">Ei arvioi yksittäisten kuntien työmäärää. Näyttää mihin vaikutusalueisiin muutos osuu ja missä kasautumia voi syntyä.</p>
+            <div id="impact-wrap" class="loading">Lasketaan yhteenvetoa…</div>
           </div>
         </div>
       </div>
-
     </div>
 
-    <div style="height:16px"></div>
+    <div style="height:14px"></div>
 
     <div class="card">
-      <div class="inner">
-        <h2 class="h2">Toimeenpanoteemat (abstrakti)</h2>
-        <table>
-          <thead>
-            <tr><th>Vaikutusalue</th><th>Kohdistus</th><th>Suunta</th><th>Teema</th><th>Lähde</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Data-IT</td><td>Kunnat, HVA</td><td>Kuormittava</td><td>Asiakastietojärjestelmän ja asiakastietoaineiston ylläpito sekä tietojen tallettamisvelvollisuus täsmentyy.</td><td>Laki 12 §</td></tr>
-            <tr><td>Data-IT</td><td>Kunnat, HVA</td><td>Kuormittava</td><td>Rekisterinpitäjäroolit ja tietosuojavelvoitteiden vastuunjako täsmentyy (yhteisrekisterinpitäjyys).</td><td>Laki 13 §</td></tr>
-            <tr><td>Prosessi</td><td>Kunnat, HVA</td><td>Sekavaikutus</td><td>Nuorten hyvinvoinnin ja elämänhallinnan valmennuksen tarjoaminen (roolit ja palvelusisältö) täsmentyy.</td><td>Laki 17 §</td></tr>
-            <tr><td>Yhteistyö</td><td>Kunnat, HVA, Valtio</td><td>Kuormittava</td><td>Yhteistoimintamallin organisointia (mm. johtoryhmän tehtävät ja seuranta) täsmennetään valtioneuvoston asetuksella.</td><td>VNA 388/2024</td></tr>
-            <tr><td>Ohjeistus</td><td>Kunnat, HVA</td><td>Sekavaikutus</td><td>KEHA-keskuksen tukipalvelut kunnille ja muille toimijoille selkeytyvät (palveluintegraatio ja monialainen työ).</td><td>Laki 18 §</td></tr>
-            <tr><td>Ohjeistus</td><td>Kunnat, HVA</td><td>Keventävä</td><td>Yhtenäiset roolit ja yhteisrekisterinpitäjyys voivat vähentää tulkinnan hajontaa toimijoiden välillä.</td><td>Laki 13 §</td></tr>
-          </tbody>
-        </table>
+      <div class="cardBody">
+        <h2>Toimeenpanoteemat</h2>
+        <p class="hint">Teemat eivät ole checklist. Ne auttavat priorisoimaan: mihin vaikutusalueeseen muutos osuu (data-IT, raportointi, prosessi…).</p>
+
+        <div id="themes-wrap" class="loading">Ladataan teemoja…</div>
       </div>
     </div>
 
-    <div style="height:16px"></div>
+    <div style="height:14px"></div>
 
     <div class="card">
-      <div class="inner">
-        <h2 class="h2">Täsmennyskohdat asetuksilla</h2>
-        <table>
-          <thead>
-            <tr><th>Asetus</th><th>Täsmennys</th><th>Vaikutusalue</th><th>Kohdistus</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>VNA 388/2024</td><td>Yhteistoimintamallin organisointi (johtoryhmä, tehtävät, seuranta)</td><td>Yhteistyö</td><td>Kunnat, HVA, Valtio</td></tr>
-            <tr><td>VNA 388/2024</td><td>Voimaantulo (1.1.2025)</td><td>Prosessi</td><td>Kaikki</td></tr>
-            <tr><td>Ministeriön asetus</td><td>Ei tunnistettu tähän pakettiin Sprintti 1:ssä</td><td>—</td><td>—</td></tr>
-          </tbody>
-        </table>
+      <div class="cardBody">
+        <h2>Täsmennyskohdat asetuksilla</h2>
+        <p class="hint">Mitä asioita asetuksissa täsmennetään (osa suunniteltua kokonaisuutta).</p>
+
+        <div id="ref-wrap" class="loading">Ladataan täsmennyksiä…</div>
       </div>
     </div>
 
-    <div style="height:24px"></div>
-    <div style="color:var(--muted);font-size:12px">
-      Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi
+    <div class="footer">
+      <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
+      <div class="mono">data: <span id="data-path">./data/pkg-001.json</span></div>
     </div>
-
   </div>
+
+  <script>
+    // -------- Config --------
+    const DEFAULT_ID = "pkg-001";
+    const DATA_DIR = "./data/";
+
+    // -------- Helpers --------
+    const $ = (id) => document.getElementById(id);
+
+    function getQueryParam(name){
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function uniq(arr){ return [...new Set(arr.filter(Boolean))]; }
+
+    function isIsoDate(s){
+      return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s);
+    }
+
+    function fmtDate(s){
+      if(!isIsoDate(s)) return s;
+      // YYYY-MM-DD -> D.M.YYYY
+      const [y,m,d] = s.split("-").map(x=>parseInt(x,10));
+      return `${d}.${m}.${y}`;
+    }
+
+    function sortEventsByDate(events){
+      return [...events].sort((a,b)=>{
+        const da = (isIsoDate(a.date) ? a.date : "9999-99-99");
+        const db = (isIsoDate(b.date) ? b.date : "9999-99-99");
+        return da.localeCompare(db);
+      });
+    }
+
+    function findNextMilestone(events){
+      const today = new Date();
+      const todayIso = today.toISOString().slice(0,10);
+      const upcoming = events.filter(e => isIsoDate(e.date) && e.date >= todayIso);
+      const sorted = sortEventsByDate(upcoming);
+      return sorted[0] || null;
+    }
+
+    function countDocs(docs){
+      const counts = {Laki:0, VNA:0, MIN:0, Other:0};
+      (docs||[]).forEach(d=>{
+        if(d.type==="Laki") counts.Laki++;
+        else if(d.type==="VNA") counts.VNA++;
+        else if(d.type==="MIN") counts.MIN++;
+        else counts.Other++;
+      });
+      return counts;
+    }
+
+    function buildTable(headers, rowsHtml){
+      return `
+        <table>
+          <thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      `;
+    }
+
+    function safe(s){ return (s ?? "").toString(); }
+
+    // -------- Renderers --------
+    function renderDocs(pkg){
+      const docs = pkg.documents || [];
+      const rows = docs.map(d=>{
+        const badgeClass = d.type==="VNA" ? "orange" : (d.type==="MIN" ? "purple" : "");
+        const badgeText = d.type || "Dokumentti";
+        const link = d.url ? `<a href="${d.url}" target="_blank" rel="noreferrer">${safe(d.title)}</a>` : safe(d.title);
+        const date = d.date ? ` • ${fmtDate(d.date)}` : "";
+        return `<div style="margin:10px 0">
+          <span class="badge ${badgeClass}">${badgeText}</span>
+          ${link}
+          <span class="small">${date}</span>
+        </div>`;
+      }).join("");
+
+      $("docs-wrap").className = "";
+      $("docs-wrap").innerHTML = rows || `<div class="note">Ei dokumentteja.</div>`;
+    }
+
+    function renderEvents(pkg){
+      const events = pkg.events || [];
+      const rows = sortEventsByDate(events).map(ev=>{
+        const scope = (ev.scope || []).join(", ");
+        const anchor = ev.anchor
+          ? `<span class="badge">${safe(ev.anchor.doc_type||"—")}</span> ${safe(ev.anchor.ref||"—")}<div class="small">${safe(ev.anchor.quote||"")}</div>`
+          : "—";
+        return `<tr>
+          <td>${safe(ev.type)}</td>
+          <td>${fmtDate(safe(ev.date))}</td>
+          <td>${safe(scope)}</td>
+          <td>${anchor}</td>
+        </tr>`;
+      }).join("");
+
+      $("events-wrap").className = "";
+      $("events-wrap").innerHTML = buildTable(
+        ["Tyyppi","Päivä / ajankohta","Kohdistus","Ankkuri"],
+        rows || `<tr><td colspan="4">Ei virstanpylväitä.</td></tr>`
+      );
+    }
+
+    function renderThemes(pkg){
+      const themes = pkg.themes || [];
+      const rows = themes.map(th=>{
+        const scope = (th.scope || []).join(", ");
+        const src = th.anchor ? `${safe(th.anchor.doc_type)} ${safe(th.anchor.ref)}` : "—";
+        return `<tr>
+          <td>${safe(th.area)}</td>
+          <td>${safe(scope)}</td>
+          <td>${safe(th.direction)}</td>
+          <td>${safe(th.text)}</td>
+          <td><span class="badge">${src}</span></td>
+        </tr>`;
+      }).join("");
+
+      $("themes-wrap").className = "";
+      $("themes-wrap").innerHTML = buildTable(
+        ["Vaikutusalue","Kohdistus","Suunta","Teema","Lähde"],
+        rows || `<tr><td colspan="5">Ei teemoja.</td></tr>`
+      );
+    }
+
+    function renderRefinements(pkg){
+      const refs = pkg.decree_refinements || [];
+      const rows = refs.map(r=>{
+        const scope = (r.scope || []).join(", ");
+        const badgeClass = r.decree==="VNA" ? "orange" : (r.decree==="MIN" ? "purple" : "");
+        return `<tr>
+          <td><span class="badge ${badgeClass}">${safe(r.decree)}</span></td>
+          <td>${safe(r.what)}</td>
+          <td>${safe(r.area)}</td>
+          <td>${safe(scope)}</td>
+        </tr>`;
+      }).join("");
+
+      $("ref-wrap").className = "";
+      $("ref-wrap").innerHTML = buildTable(
+        ["Asetus","Täsmennys","Vaikutusalue","Kohdistus"],
+        rows || `<tr><td colspan="4">Ei täsmennyksiä.</td></tr>`
+      );
+    }
+
+    function renderImpactSummary(pkg){
+      const themes = pkg.themes || [];
+      const areas = uniq(themes.map(t => t.area));
+      const directions = themes.map(t => t.direction || "");
+      const plus = directions.filter(x => /Kuormittava/i.test(x)).length;
+      const minus = directions.filter(x => /Keventävä/i.test(x)).length;
+      const mixed = directions.filter(x => /Sekavaikutus/i.test(x)).length;
+
+      const scope = uniq([...(pkg.admin_tags?.kohdistus||[]), ...(pkg.admin_tags?.kohdistus||[])]);
+      const areaChips = areas.slice(0,6).map(a => `<span class="pill on" style="margin:0 6px 6px 0">${a}</span>`).join("");
+      const dirLine = `<span class="badge orange">Kuormittava: ${plus}</span>
+                       <span class="badge">Sekavaikutus: ${mixed}</span>
+                       <span class="badge purple">Keventävä: ${minus}</span>`;
+
+      $("impact-wrap").className = "";
+      $("impact-wrap").innerHTML = `
+        <div class="note">
+          <div style="margin-bottom:8px"><b>Ajurit (teemojen mukaan):</b></div>
+          <div>${areaChips || "<span class='small'>Ei teemoja.</span>"}</div>
+          <div style="margin-top:10px">${dirLine}</div>
+          <div style="margin-top:10px" class="small">
+            Kohdistus: ${uniq((pkg.admin_tags?.kohdistus||[])).join(", ") || "—"}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderKPIs(pkg){
+      $("pkg-title").textContent = pkg.title || "—";
+      $("pkg-desc").textContent = pkg.description || "—";
+
+      // Scope KPI
+      const scope = uniq(pkg.admin_tags?.kohdistus || []);
+      $("kpi-scope").textContent = scope.length ? scope.join(" + ") : "—";
+      $("kpi-scope-sub").textContent = (pkg.admin_tags?.hallinnonala ? `Hallinnonala: ${pkg.admin_tags.hallinnonala}` : "");
+
+      // Decrees KPI
+      const counts = countDocs(pkg.documents || []);
+      const vna = counts.VNA;
+      const min = counts.MIN;
+      $("kpi-decrees").textContent = `${vna} VNA • ${min} MIN`;
+      $("kpi-decrees-sub").textContent = (min===0 ? "Ministeriön asetukset: ei mukana tässä demossa" : "Asetukset mukana säädöspaketissa");
+
+      // Next milestone KPI
+      const next = findNextMilestone(pkg.events || []);
+      if(next){
+        $("kpi-next").textContent = fmtDate(next.date);
+        $("kpi-next-sub").textContent = `${next.type} • ${(next.scope||[]).join(", ") || "—"}`;
+      } else {
+        $("kpi-next").textContent = "—";
+        $("kpi-next-sub").textContent = "Ei tulevia päivämääriä datassa";
+      }
+    }
+
+    // -------- Load --------
+    async function load(){
+      const id = getQueryParam("id") || DEFAULT_ID;
+      $("pkg-chip").textContent = `Paketti: ${id}`;
+      const path = `${DATA_DIR}${id}.json`;
+      $("data-path").textContent = path;
+
+      try{
+        const res = await fetch(path, {cache:"no-cache"});
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const pkg = await res.json();
+
+        renderKPIs(pkg);
+        renderDocs(pkg);
+        renderEvents(pkg);
+        renderThemes(pkg);
+        renderRefinements(pkg);
+        renderImpactSummary(pkg);
+
+      } catch (e){
+        const msg = `JSONin lataus epäonnistui: ${e.message}. Varmista että tiedosto löytyy: ${DATA_DIR}${DEFAULT_ID}.json`;
+        ["docs-wrap","events-wrap","themes-wrap","ref-wrap","impact-wrap"].forEach(id=>{
+          $(id).className = "error";
+          $(id).textContent = msg;
+        });
+      }
+    }
+
+    load();
+  </script>
 </body>
 </html>
