@@ -9,43 +9,29 @@
     @font-face{
       font-family:"OwalMark";
       src:
-        local("MarkOffcPro"),
-        local("MarkOffcPro-Regular"),
-        local("MarkOffcPro-ExtraLight"),
-        local("MarkOffcPro-Light"),
-        local("MarkOffcPro-Medium"),
-        local("MarkOffcPro-Bold"),
-        local("MarkOffcPro-Black"),
-        local("MarkOffcPro-Heavy"),
-        local("MarkScOffcPro"),
-        local("MarkScOffcPro-Regular"),
-        local("MarkScOffcPro-ExtraLight"),
-        local("MarkScOffcPro-Light"),
-        local("MarkScOffcPro-Medium"),
-        local("MarkScOffcPro-Bold"),
-        local("MarkScOffcPro-Black"),
-        local("MarkScOffcPro-Heavy");
+        local("MarkOffcPro"), local("MarkOffcPro-Regular"), local("MarkOffcPro-ExtraLight"),
+        local("MarkOffcPro-Light"), local("MarkOffcPro-Medium"), local("MarkOffcPro-Bold"),
+        local("MarkOffcPro-Black"), local("MarkOffcPro-Heavy"),
+        local("MarkScOffcPro"), local("MarkScOffcPro-Regular"), local("MarkScOffcPro-ExtraLight"),
+        local("MarkScOffcPro-Light"), local("MarkScOffcPro-Medium"), local("MarkScOffcPro-Bold"),
+        local("MarkScOffcPro-Black"), local("MarkScOffcPro-Heavy");
       font-weight:100 900;
       font-style:normal;
       font-display:swap;
     }
 
     :root{
-      --owal-orange:#FF9900;
-      --owal-purple:#6600CC;
+      --orange:#FF9900;
+      --orangeRed:#FF6633;
       --orangeL:#FFF2E8;
-      --purpleL:#F2EBFF;
-
       --text:#141414;
-      --muted:#676767;
-      --line:#E6E6E6;
-      --panel:#F8F8F8;
-      --panel2:#F4F4F4;
-      --white:#FFFFFF;
-
+      --muted:#6A6A6A;
+      --line:#E7E7E7;
+      --panel:#F7F7F7;
+      --panel2:#F2F2F2;
+      --white:#fff;
       --radius:18px;
       --shadow:0 2px 0 rgba(0,0,0,.02);
-
       --fw-regular:400;
       --fw-medium:600;
       --fw-bold:700;
@@ -58,11 +44,11 @@
       font-family:"OwalMark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       font-weight:var(--fw-regular);
       color:var(--text);
-      background:linear-gradient(180deg, #fff 0%, #fff 60%, #fafafa 100%);
+      background:linear-gradient(180deg, #fff 0%, #fff 62%, #fafafa 100%);
     }
 
     .topbar{
-      position:sticky; top:0; z-index:30;
+      position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.92);
       backdrop-filter:saturate(140%) blur(10px);
       border-bottom:1px solid var(--line);
@@ -72,16 +58,17 @@
       content:"";
       display:block;
       height:4px;
-      background:linear-gradient(90deg, var(--owal-orange), #ffb64a);
+      background:linear-gradient(90deg, var(--orange), var(--orangeRed));
       margin:12px -22px -12px -22px;
     }
+
     .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
     .logo{display:flex;align-items:center;text-decoration:none;padding:6px 8px;border-radius:14px}
     .logo:hover{background:var(--panel)}
     .logo img{height:34px;width:auto;display:block}
     .titleWrap{flex:1;min-width:280px}
-    .productTitle{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
-    .productSubtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+    .title{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
+    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
     .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
     .pill{
@@ -94,8 +81,8 @@
       user-select:none;
     }
     .pill.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
-    .pill.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
-    .wrap{max-width:1240px;margin:0 auto;padding:18px 22px 70px 22px}
+    .pill.red{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff);border-color:rgba(255,102,51,.45)}
+    .wrap{max-width:1280px;margin:0 auto;padding:18px 22px 70px 22px}
 
     .hero{
       margin-top:10px;
@@ -104,30 +91,51 @@
       border-radius:22px;
       background:
         radial-gradient(1200px 420px at 15% 0%, var(--orangeL) 0%, rgba(255,242,232,0) 60%),
-        radial-gradient(900px 360px at 95% 25%, var(--purpleL) 0%, rgba(242,235,255,0) 60%),
         #fff;
       box-shadow:var(--shadow);
     }
     .heroTitle{margin:0;font-size:28px;font-weight:var(--fw-heavy);letter-spacing:-.35px;line-height:1.12}
     .heroDesc{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.4;max-width:900px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:var(--fw-medium)}
-    .chip.orange{background:var(--orangeL);border-color:rgba(255,153,0,.5)}
-    .chip.gray{background:var(--panel2)}
-    .chip strong{font-weight:var(--fw-bold)}
-    .dot{width:8px;height:8px;border-radius:99px;background:var(--owal-orange);box-shadow:0 0 0 3px rgba(255,153,0,.18)}
+    .meta{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{
+      font-size:12px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      color:var(--muted);
+      padding:7px 10px;
+      border-radius:999px;
+      font-weight:var(--fw-medium);
+    }
+    .tag strong{color:var(--text);font-weight:var(--fw-bold)}
 
-    .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-top:14px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
     @media (max-width:1000px){.grid{grid-template-columns:1fr}}
 
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .cardHeader{padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
+    .card{
+      background:#fff;border:1px solid var(--line);
+      border-radius:18px;box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardHeader{
+      padding:14px 16px;border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#fff 0%, #fafafa 100%);
+    }
     .cardBody{padding:14px 16px}
-    h2{margin:0;font-size:16px;font-weight:var(--fw-bold)}
+    .h2{margin:0;font-size:16px;font-weight:var(--fw-bold)}
     .hint{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
-    .tab{padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;font-weight:var(--fw-medium);cursor:pointer;user-select:none}
+    .tab{
+      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
+      background:var(--panel2);font-size:12px;font-weight:var(--fw-medium);
+      cursor:pointer;user-select:none;
+    }
     .tab.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
 
     table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
@@ -135,20 +143,32 @@
     tbody td{font-size:13px;padding:10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
     tbody tr:last-child td{border-bottom:none}
 
-    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);font-weight:var(--fw-medium);white-space:nowrap}
-    .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:var(--owal-orange)}
-    .badge.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
-    .small{font-size:12px;color:var(--muted)}
-    details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:8px 10px}
+    details{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 12px;margin-top:12px}
     details summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:var(--fw-medium)}
     details[open]{background:var(--panel)}
     .quote{margin-top:8px;color:var(--text);font-size:12px;line-height:1.35}
-    a{color:var(--text);text-decoration:none}
+
+    .badge{
+      display:inline-flex;align-items:center;
+      padding:4px 9px;border-radius:12px;
+      font-size:11px;border:1px solid var(--line);
+      background:#EEE;color:var(--muted);
+      font-weight:var(--fw-medium);
+      white-space:nowrap;
+    }
+    .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:#8a3a00}
+    .badge.red{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff);border-color:rgba(255,102,51,.45);color:#8a1f00}
+    .small{font-size:12px;color:var(--muted)}
+    a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
 
     .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
     .error{border:1px solid #ffb4b4;border-radius:14px;background:#fff0f0;padding:12px;color:#7a1a1a;font-size:13px}
-    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    .footer{
+      margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+      color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
   </style>
 </head>
 
@@ -159,16 +179,16 @@
         <img src="./assets/owal_logo.png" alt="Owal Group logo" />
       </a>
       <div class="titleWrap">
-        <div class="productTitle">Toimeenpanotilannekuva</div>
-        <div class="productSubtitle">Uudistusnäkymä: säädöspaketti (laki + asetukset) • toimeenpanoteemat ja samanaikaisuus (abstrakti)</div>
+        <div class="title">Uudistusnäkymä</div>
+        <div class="subtitle">Tarkennus: aikajana, toimeenpanoteemat ja asetustäsmennykset. Lähteet avautuvat lopussa.</div>
       </div>
     </div>
 
     <div class="nav">
       <a class="pill" href="./yleiskuva.html">Yleiskuva</a>
-      <a class="pill on" href="./index.html">Uudistusnäkymä</a>
+      <a class="pill on" href="./index.html?id=pkg-001">Uudistusnäkymä</a>
       <a class="pill" href="./hallinnonalat.html">Hallinnonalat</a>
-      <span class="pill purple" id="pkg-chip">Paketti: pkg-001</span>
+      <span class="pill red" id="pkg-chip">Paketti: —</span>
     </div>
   </div>
 
@@ -176,299 +196,172 @@
     <div class="hero">
       <div class="heroTitle" id="pkg-title">—</div>
       <div class="heroDesc" id="pkg-desc">—</div>
-      <div class="chips">
-        <span class="chip orange"><span class="dot"></span><strong>Hallinnonala</strong>: <span id="chip-admin">—</span></span>
-        <span class="chip gray"><strong>Kohdistus</strong>: <span id="chip-scope">—</span></span>
-        <span class="chip gray"><strong>Sektorit</strong>: <span id="chip-sectors">—</span></span>
+      <div class="meta">
+        <span class="tag"><strong>Hallinnonala</strong>: <span id="m-admin">—</span></span>
+        <span class="tag"><strong>Kohdistus</strong>: <span id="m-scope">—</span></span>
+        <span class="tag"><strong>Sektorit</strong>: <span id="m-sector">—</span></span>
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
         <div class="cardHeader">
-          <h2>Toimeenpanon tilannekuva</h2>
-          <div class="hint">Vaihda näkökulmaa ja selaa aikajanaa, toimeenpanoteemoja tai samanaikaisuutta. Katkelmat avautuvat “Näytä katkelma”.</div>
+          <div class="h2">Sisältö</div>
+          <div class="hint">Pidetään näkymä tiiviinä. Katkelmat avautuvat vain tarvittaessa.</div>
         </div>
-
         <div class="cardBody">
-          <div class="tabs">
-            <span class="tab on" data-view="Kunnat">Kunta</span>
-            <span class="tab" data-view="Hyvinvointialueet">Hyvinvointialue</span>
-            <span class="tab" data-view="Valtio">Hallinnonalat</span>
-          </div>
-
           <div class="tabs">
             <span class="tab on" data-tab="timeline">Aikajana</span>
             <span class="tab" data-tab="themes">Toimeenpanoteemat</span>
-            <span class="tab" data-tab="overlaps">Samanaikaisuus</span>
+            <span class="tab" data-tab="decrees">Täsmennykset asetuksilla</span>
           </div>
 
-          <div id="tab-timeline" class="loading">Ladataan…</div>
-          <div id="tab-themes" class="loading" style="display:none">Ladataan…</div>
-          <div id="tab-overlaps" class="loading" style="display:none">Ladataan…</div>
+          <div id="timeline" class="loading">Ladataan…</div>
+          <div id="themes" class="loading" style="display:none">Ladataan…</div>
+          <div id="decrees" class="loading" style="display:none">Ladataan…</div>
 
-          <details style="margin-top:12px">
+          <details>
             <summary>Avaa lähteet ja ankkurit</summary>
-            <div style="margin-top:10px" id="sources-wrap" class="loading">Ladataan…</div>
+            <div id="sources" class="loading" style="margin-top:10px">Ladataan…</div>
           </details>
         </div>
       </div>
 
-      <div>
-        <div class="card">
-          <div class="cardHeader">
-            <h2>Säädöspaketti</h2>
-            <div class="hint">Tiivis kooste: laki + asetukset.</div>
-          </div>
-          <div class="cardBody">
-            <div id="docs-wrap" class="loading">Ladataan…</div>
-          </div>
+      <div class="card">
+        <div class="cardHeader">
+          <div class="h2">Säädöspaketti (lähteet)</div>
+          <div class="hint">Laki + asetukset. Linkit Finlexiin.</div>
         </div>
-
-        <div class="card" style="margin-top:14px">
-          <div class="cardHeader">
-            <h2>Täsmennykset asetuksilla</h2>
-            <div class="hint">Mitä asetuksilla täsmennetään.</div>
-          </div>
-          <div class="cardBody">
-            <div id="ref-wrap" class="loading">Ladataan…</div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px">
-          <div class="cardHeader">
-            <h2>Sektorivaikutus</h2>
-            <div class="hint">Sektorit ja toimeenpanoteemat.</div>
-          </div>
-          <div class="cardBody">
-            <div id="sector-wrap" class="loading">Ladataan…</div>
-          </div>
+        <div class="cardBody">
+          <div id="docs" class="loading">Ladataan…</div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="small">Vaihda paketti: <span class="badge">?id=pkg-001</span></div>
+      <div>Owal Group • päätöksenteon ja toimeenpanon tuki</div>
+      <div class="small">Vaihda paketti URL:llä: <span class="badge">?id=pkg-001</span></div>
     </div>
   </div>
 
   <script>
-    const DEFAULT_ID = "pkg-001";
-    const DATA_DIR = "./data/";
-    const $ = (id) => document.getElementById(id);
+    const DEFAULT_ID="pkg-001";
+    const DATA_DIR="./data/";
+    const $=(id)=>document.getElementById(id);
 
-    function getQueryParam(name){ return new URL(window.location.href).searchParams.get(name); }
-    function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
-    function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
-    function fmtDate(s){
-      if(!isIsoDate(s)) return s;
-      const [y,m,d] = s.split("-").map(x=>parseInt(x,10));
-      return `${d}.${m}.${y}`;
-    }
-    function quarterLabel(dateStr){
-      if(!isIsoDate(dateStr)) return "—";
-      const [y,m] = dateStr.split("-").map(n=>parseInt(n,10));
-      const q = Math.floor((m-1)/3)+1;
-      return `${y} Q${q}`;
-    }
-    function sortEventsByDate(events){
+    function getId(){ return new URL(location.href).searchParams.get("id") || DEFAULT_ID; }
+    function uniq(a){ return [...new Set((a||[]).filter(Boolean))]; }
+    function isIsoDate(s){ return typeof s==="string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
+    function fmtDate(s){ if(!isIsoDate(s)) return s; const [y,m,d]=s.split("-"); return `${d}.${m}.${y}`; }
+    function sortByDate(events){
       return [...(events||[])].sort((a,b)=>{
-        const da = isIsoDate(a.date) ? a.date : "9999-99-99";
-        const db = isIsoDate(b.date) ? b.date : "9999-99-99";
+        const da=isIsoDate(a.date)?a.date:"9999-99-99";
+        const db=isIsoDate(b.date)?b.date:"9999-99-99";
         return da.localeCompare(db);
       });
     }
-    function buildTable(headers, rowsHtml){
-      return `<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rowsHtml}</tbody></table>`;
+    function table(headers, rows){
+      return `<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table>`;
     }
-    function safe(s){ return (s ?? "").toString(); }
-
-    let currentScope = "Kunnat";
-    let currentTab = "timeline";
-    let currentPkg = null;
+    function safe(s){ return (s??"").toString(); }
 
     function renderDocs(pkg){
-      const docs = pkg.documents || [];
-      const rows = docs.map(d=>{
-        const badgeClass = d.type==="VNA" ? "orange" : (d.type==="MIN" ? "purple" : "");
+      const rows = (pkg.documents||[]).map(d=>{
+        const cls = d.type==="VNA" ? "orange" : (d.type==="MIN" ? "red" : "");
         const link = d.url ? `<a href="${d.url}" target="_blank" rel="noreferrer">${safe(d.title)}</a>` : safe(d.title);
         const date = d.date ? ` • ${fmtDate(d.date)}` : "";
-        return `<div style="margin:10px 0"><span class="badge ${badgeClass}">${d.type||"Dokumentti"}</span> ${link}<span class="small">${date}</span></div>`;
+        return `<div style="margin:10px 0"><span class="badge ${cls}">${d.type||"Dokumentti"}</span> ${link}<span class="small">${date}</span></div>`;
       }).join("");
-      $("docs-wrap").className = "";
-      $("docs-wrap").innerHTML = rows || `<div class="small">—</div>`;
+      $("docs").className="";
+      $("docs").innerHTML = rows || `<div class="small">—</div>`;
     }
 
     function renderTimeline(pkg){
-      const events = sortEventsByDate(pkg.events || []);
-      const rows = events.map(ev=>{
-        const scope = (ev.scope || []).join(", ");
-        const anchorLabel = ev.anchor ? `${safe(ev.anchor.doc_type||"—")} • ${safe(ev.anchor.ref||"—")}` : "—";
-        const quote = ev.anchor?.quote ? ev.anchor.quote : "";
-        const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr><td>${safe(ev.type)}</td><td>${fmtDate(safe(ev.date))}</td><td>${safe(scope||"—")}</td><td><span class="badge">${anchorLabel}</span>${details}</td></tr>`;
+      const rows = sortByDate(pkg.events||[]).map(e=>{
+        const scope=(e.scope||[]).join(", ");
+        const anchor = e.anchor ? `${safe(e.anchor.doc_type||"—")} • ${safe(e.anchor.ref||"—")}` : "—";
+        const q = e.anchor?.quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(e.anchor.quote)}</div></details>` : "";
+        return `<tr><td>${safe(e.type)}</td><td>${fmtDate(safe(e.date))}</td><td>${safe(scope||"—")}</td><td><span class="badge orange">${anchor}</span>${q}</td></tr>`;
       }).join("");
-      $("tab-timeline").className = "";
-      $("tab-timeline").innerHTML = buildTable(["Tyyppi","Päivä / ajankohta","Kohdistus","Ankkuri"], rows || `<tr><td colspan="4">—</td></tr>`);
+      $("timeline").className="";
+      $("timeline").innerHTML = table(["Tyyppi","Päivä / ajankohta","Kohdistus","Ankkuri"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
-    function renderThemes(pkg, scope){
-      const themes = (pkg.themes || []).filter(t => (t.scope||[]).includes(scope) || scope==="Valtio");
-      const rows = themes.map(th=>{
-        const source = th.anchor ? `${safe(th.anchor.doc_type||"—")} • ${safe(th.anchor.ref||"—")}` : "—";
-        const quote = th.anchor?.quote ? th.anchor.quote : "";
-        const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr><td>${safe(th.text)}${details}</td><td><span class="badge orange">${safe(th.area||"—")}</span></td><td><span class="badge">${safe(th.direction||"—")}</span></td><td><span class="badge">${source}</span></td></tr>`;
+    function renderThemes(pkg){
+      const rows = (pkg.themes||[]).map(t=>{
+        const src = t.anchor ? `${safe(t.anchor.doc_type||"—")} • ${safe(t.anchor.ref||"—")}` : "—";
+        const q = t.anchor?.quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(t.anchor.quote)}</div></details>` : "";
+        return `<tr><td>${safe(t.text)}${q}</td><td><span class="badge orange">${safe(t.area||"—")}</span></td><td><span class="badge">${safe(t.direction||"—")}</span></td><td><span class="badge orange">${src}</span></td></tr>`;
       }).join("");
-      $("tab-themes").className = "";
-      $("tab-themes").innerHTML = buildTable(["Toimeenpanoteema","Vaikutusalue","Suunta","Lähde"], rows || `<tr><td colspan="4">—</td></tr>`);
+      $("themes").className="";
+      $("themes").innerHTML = table(["Toimeenpanoteema","Vaikutusalue","Suunta","Lähde"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
-    function renderConcurrency(pkg, scope){
-      const events = (pkg.events || []).filter(e => isIsoDate(e.date));
-      const byQ = {};
-      events.forEach(ev=>{
-        const q = quarterLabel(ev.date);
-        byQ[q] = byQ[q] || [];
-        byQ[q].push(ev);
-      });
-
-      const themes = (pkg.themes || []).filter(t => (t.scope||[]).includes(scope) || scope==="Valtio");
-      const countArea = (a) => themes.filter(t => (t.area||"") === a).length;
-
-      const qs = Object.keys(byQ).sort();
-      const rows = qs.map(q=>{
-        const evs = byQ[q] || [];
-        const themesTop = [
-          ["Data-IT", countArea("Data-IT")],
-          ["Raportointi", countArea("Raportointi")],
-          ["Prosessi", countArea("Prosessi")],
-          ["Ohjeistus", countArea("Ohjeistus")],
-          ["Yhteistyö", countArea("Yhteistyö")],
-          ["Rahoitus", countArea("Rahoitus")]
-        ].filter(x=>x[1]>0).slice(0,4);
-
-        const badges = themesTop.map(d=>`<span class="badge orange">${d[0]} (${d[1]})</span>`).join(" ");
-        const examples = evs.slice(0,5).map(e=>`${fmtDate(e.date)} • ${e.type}`).join("<br/>");
-        return `<tr><td><b>${q}</b></td><td>${evs.length}</td><td>${badges || "—"}</td><td class="small">${examples || "—"}</td></tr>`;
+    function renderDecrees(pkg){
+      const rows = (pkg.decree_refinements||[]).map(r=>{
+        const cls = r.decree==="VNA" ? "orange" : "red";
+        const scope=(r.scope||[]).join(", ");
+        const q = r.anchor?.quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(r.anchor.quote)}</div></details>` : "";
+        return `<tr><td><span class="badge ${cls}">${safe(r.decree)}</span></td><td>${safe(r.what)}${q}</td><td>${safe(r.area||"—")}</td><td>${safe(scope||"—")}</td></tr>`;
       }).join("");
-
-      $("tab-overlaps").className = "";
-      $("tab-overlaps").innerHTML = buildTable(["Ajankohta (kvartaali)","Eventtejä","Toimeenpanoteemat (top)","Esimerkkejä"], rows || `<tr><td colspan="4">—</td></tr>`);
-    }
-
-    function renderRefinements(pkg){
-      const refs = pkg.decree_refinements || [];
-      const rows = refs.map(r=>{
-        const badgeClass = r.decree==="VNA" ? "orange" : (r.decree==="MIN" ? "purple" : "");
-        const scope = (r.scope || []).join(", ");
-        const quote = r.anchor?.quote ? r.anchor.quote : "";
-        const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr><td><span class="badge ${badgeClass}">${safe(r.decree)}</span></td><td>${safe(r.what)}${details}</td><td>${safe(r.area||"—")}</td><td>${safe(scope||"—")}</td></tr>`;
-      }).join("");
-
-      $("ref-wrap").className = "";
-      $("ref-wrap").innerHTML = buildTable(["Asetus","Täsmennys","Vaikutusalue","Kohdistus"], rows || `<tr><td colspan="4">—</td></tr>`);
-    }
-
-    function renderSectors(pkg){
-      const sectors = uniq(pkg.admin_tags?.sektorit || []);
-      const areas = uniq((pkg.themes||[]).map(t=>t.area)).slice(0,8);
-      const sectorBadges = sectors.map(s=>`<span class="badge orange" style="margin-right:6px;margin-bottom:6px">${s}</span>`).join("");
-      const areaBadges = areas.map(a=>`<span class="badge" style="margin-right:6px;margin-bottom:6px">${a}</span>`).join("");
-
-      $("sector-wrap").className = "";
-      $("sector-wrap").innerHTML = `
-        <div class="small"><b>Sektorit</b></div>
-        <div style="margin:8px 0 12px 0">${sectorBadges || "<span class='small'>—</span>"}</div>
-        <div class="small"><b>Toimeenpanoteemat</b></div>
-        <div style="margin-top:8px">${areaBadges || "<span class='small'>—</span>"}</div>
-      `;
+      $("decrees").className="";
+      $("decrees").innerHTML = table(["Asetus","Täsmennys","Vaikutusalue","Kohdistus"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
     function renderSources(pkg){
-      const list = [];
-      (pkg.events || []).forEach(e=>{ if(e.anchor) list.push({doc:e.anchor.doc_type, ref:e.anchor.ref, quote:e.anchor.quote}); });
-      (pkg.themes || []).forEach(t=>{ if(t.anchor) list.push({doc:t.anchor.doc_type, ref:t.anchor.ref, quote:t.anchor.quote}); });
-      (pkg.decree_refinements || []).forEach(r=>{ if(r.anchor) list.push({doc:r.decree, ref:r.anchor.ref, quote:r.anchor.quote}); });
+      const items=[];
+      (pkg.events||[]).forEach(e=>{ if(e.anchor) items.push({doc:e.anchor.doc_type, ref:e.anchor.ref, quote:e.anchor.quote}); });
+      (pkg.themes||[]).forEach(t=>{ if(t.anchor) items.push({doc:t.anchor.doc_type, ref:t.anchor.ref, quote:t.anchor.quote}); });
+      (pkg.decree_refinements||[]).forEach(r=>{ if(r.anchor) items.push({doc:r.decree, ref:r.anchor.ref, quote:r.anchor.quote}); });
 
-      const seen = new Set();
-      const uniqList = list.filter(x=>{
-        const k = `${x.doc}|${x.ref}|${x.quote}`;
+      const seen=new Set();
+      const uniqItems=items.filter(x=>{
+        const k=`${x.doc}|${x.ref}|${x.quote}`;
         if(seen.has(k)) return false;
         seen.add(k);
         return true;
       }).slice(0,80);
 
-      const rows = uniqList.map(x=>`<tr><td><span class="badge">${safe(x.doc||"—")}</span></td><td>${safe(x.ref||"—")}</td><td class="small">${safe(x.quote||"")}</td></tr>`).join("");
-      $("sources-wrap").className = "";
-      $("sources-wrap").innerHTML = buildTable(["Lähde","Kohta","Katkelma"], rows || `<tr><td colspan="3">—</td></tr>`);
+      const rows = uniqItems.map(x=>`<tr><td><span class="badge">${safe(x.doc||"—")}</span></td><td>${safe(x.ref||"—")}</td><td class="small">${safe(x.quote||"")}</td></tr>`).join("");
+      $("sources").className="";
+      $("sources").innerHTML = table(["Lähde","Kohta","Katkelma"], rows || `<tr><td colspan="3">—</td></tr>`);
     }
 
-    function setScope(scope){ currentScope = scope; rerender(); }
-    function setTab(tab){
-      currentTab = tab;
-      ["timeline","themes","overlaps"].forEach(t=>{ $("tab-"+t).style.display = (t===tab) ? "block" : "none"; });
-      rerender();
-    }
-    function rerender(){
-      if(!currentPkg) return;
-      if(currentTab==="timeline") renderTimeline(currentPkg);
-      if(currentTab==="themes") renderThemes(currentPkg, currentScope);
-      if(currentTab==="overlaps") renderConcurrency(currentPkg, currentScope);
-    }
-
-    function wire(){
-      document.querySelectorAll("[data-view]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          document.querySelectorAll("[data-view]").forEach(x=>x.classList.remove("on"));
-          el.classList.add("on");
-          setScope(el.getAttribute("data-view"));
-        });
-      });
-      document.querySelectorAll("[data-tab]").forEach(el=>{
-        el.addEventListener("click", ()=>{
+    function wireTabs(){
+      document.querySelectorAll("[data-tab]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
           document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("on"));
-          el.classList.add("on");
-          setTab(el.getAttribute("data-tab"));
+          btn.classList.add("on");
+          const t=btn.getAttribute("data-tab");
+          ["timeline","themes","decrees"].forEach(id=>{
+            $(id).style.display = (id===t) ? "block" : "none";
+          });
         });
       });
     }
 
     async function load(){
-      wire();
-      const id = getQueryParam("id") || DEFAULT_ID;
-      $("pkg-chip").textContent = `Paketti: ${id}`;
-      const path = `${DATA_DIR}${id}.json`;
-
-      try{
-        const res = await fetch(path, {cache:"no-cache"});
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
-        const pkg = await res.json();
-        currentPkg = pkg;
-
-        $("pkg-title").textContent = pkg.title || "—";
-        $("pkg-desc").textContent = pkg.description || "—";
-        $("chip-admin").textContent = pkg.admin_tags?.hallinnonala || "—";
-        $("chip-scope").textContent = (pkg.admin_tags?.kohdistus || []).join(", ") || "—";
-        $("chip-sectors").textContent = (pkg.admin_tags?.sektorit || []).join(", ") || "—";
-
-        renderDocs(pkg);
-        renderRefinements(pkg);
-        renderSectors(pkg);
-        renderSources(pkg);
-
-        setScope("Kunnat");
-        setTab("timeline");
-
-      } catch(e){
-        const msg = `JSONin lataus epäonnistui: ${e.message}.`;
-        ["docs-wrap","ref-wrap","sector-wrap","sources-wrap","tab-timeline","tab-themes","tab-overlaps"].forEach(id=>{
-          $(id).className = "error";
-          $(id).textContent = msg;
-        });
+      wireTabs();
+      const id=getId();
+      $("pkg-chip").textContent=`Paketti: ${id}`;
+      const res=await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
+      if(!res.ok){
+        ["docs","timeline","themes","decrees","sources"].forEach(x=>$(x).className="error");
+        return;
       }
+      const pkg=await res.json();
+
+      $("pkg-title").textContent = pkg.title || id;
+      $("pkg-desc").textContent = pkg.description || "";
+      $("m-admin").textContent = pkg.admin_tags?.hallinnonala || "—";
+      $("m-scope").textContent = (pkg.admin_tags?.kohdistus||[]).join(", ") || "—";
+      $("m-sector").textContent = (pkg.admin_tags?.sektorit||[]).join(", ") || "—";
+
+      renderDocs(pkg);
+      renderTimeline(pkg);
+      renderThemes(pkg);
+      renderDecrees(pkg);
+      renderSources(pkg);
     }
 
     load();
