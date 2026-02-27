@@ -3,70 +3,171 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hallinnonalat – Toimeenpanotilannekuva</title>
+  <title>Toimeenpanotilannekuva – Hallinnonalat</title>
 
   <style>
     :root{
       --owal-orange:#FF9900;
       --owal-purple:#6600CC;
+      --orangeL:#FFF2E8;
+      --purpleL:#F2EBFF;
+
       --text:#1A1A1A;
       --muted:#666666;
       --line:#E6E6E6;
       --panel:#F8F8F8;
       --panel2:#F4F4F4;
       --white:#FFFFFF;
-      --orangeL:#FFF2E8;
-      --purpleL:#F2EBFF;
+
       --radius:18px;
       --shadow:0 1px 0 rgba(0,0,0,.03);
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--white)}
-    .topbar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2px solid var(--line);padding:18px 24px 14px 24px}
-    .topbar::after{content:"";display:block;height:4px;background:var(--owal-orange);margin:14px -24px -14px -24px}
-    .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .logo{width:160px;height:34px;display:flex;align-items:center;font-weight:900;letter-spacing:.2px}
+    body{
+      margin:0;
+      font-family:"Mark FF","MarkFF","Mark FF Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--white);
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background:var(--white);
+      border-bottom:2px solid var(--line);
+      padding:16px 22px 12px 22px;
+    }
+    .topbar::after{
+      content:"";
+      display:block;
+      height:4px;
+      background:var(--owal-orange);
+      margin:12px -22px -12px -22px;
+    }
+    .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;text-decoration:none}
+    .logo img{height:34px;width:auto;display:block}
     h1{margin:0;font-size:22px;font-weight:900}
     .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;text-decoration:none;color:var(--text)}
+
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:12px; align-items:center;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      font-size:12px;
+      text-decoration:none;
+      color:var(--text);
+      user-select:none;
+    }
     .pill.on{background:var(--orangeL);border-color:var(--owal-orange)}
     .pill.purple{background:var(--purpleL);border-color:var(--owal-purple)}
-    .wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px 24px}
+    .pill.ghost{background:#fff}
+
+    .wrap{max-width:1220px;margin:0 auto;padding:20px 22px 70px 22px}
 
     .row{display:flex;gap:14px;flex-wrap:wrap}
-    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
     .accent{width:10px;background:var(--owal-orange);border-radius:var(--radius) 0 0 var(--radius);flex:0 0 auto}
     .body{padding:14px 16px}
     .kpi{flex:1;min-width:240px;display:flex}
     .label{color:var(--muted);font-size:12px}
     .val{font-weight:900;font-size:18px;margin-top:6px}
     .sub{color:var(--muted);font-size:12px;margin-top:2px}
-    h2{margin:0 0 10px 0;font-size:16px;font-weight:900}
-    .hint{margin:0 0 12px 0;color:var(--muted);font-size:13px}
 
-    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-    thead th{background:#EEE;padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:12px}
-    tbody td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+    h2{margin:0 0 10px 0;font-size:16px;font-weight:900}
+    .hint{margin:0 0 12px 0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+    }
+    thead th{
+      text-align:left;
+      font-size:12px;
+      background:#EEE;
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    tbody td{
+      font-size:13px;
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
     tbody tr:last-child td{border-bottom:none}
 
-    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);white-space:nowrap}
+    .badge{
+      display:inline-flex;align-items:center;
+      padding:4px 9px;border-radius:12px;
+      font-size:11px;border:1px solid var(--line);
+      background:#EEE;color:var(--muted);
+      white-space:nowrap;
+      margin-right:6px;margin-bottom:6px;
+    }
     .badge.orange{background:var(--orangeL);border-color:var(--owal-orange);color:var(--owal-orange)}
     .badge.purple{background:var(--purpleL);border-color:var(--owal-purple);color:var(--owal-purple)}
     .small{font-size:12px;color:var(--muted)}
-    .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
-    .note{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:10px;color:var(--muted);font-size:13px;line-height:1.35}
-    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     a{color:var(--text);text-decoration:none}
     a:hover{text-decoration:underline}
+
+    .note{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+    .loading{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel);
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .error{
+      border:1px solid #ffb4b4;
+      border-radius:14px;
+      background:#fff0f0;
+      padding:12px;
+      color:#7a1a1a;
+      font-size:13px;
+    }
+    .footer{
+      margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
+      color:var(--muted);font-size:12px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
   </style>
 </head>
 
 <body>
   <div class="topbar">
-    <div class="brand">
-      <div class="logo">owalgroup</div>
+    <div class="brandRow">
+      <a class="logo" href="./yleiskuva.html" aria-label="Owal Group">
+        <img src="./assets/owal_logo.png" alt="Owal Group logo" />
+      </a>
       <div>
         <h1>Hallinnonalat</h1>
         <div class="subtitle">Päätöksenteon tuki: kentän kasautumat ja asetusten täsmennyskohdat (abstrakti)</div>
@@ -77,32 +178,33 @@
       <a class="pill" href="./yleiskuva.html">Yleiskuva</a>
       <a class="pill" href="./index.html">Uudistusnäkymä</a>
       <a class="pill on" href="./hallinnonalat.html">Hallinnonalat</a>
-      <span class="pill purple">data: ./data/index.json</span>
+      <span class="pill purple">MVP</span>
+      <span class="pill ghost small">Muista lisätä uudet paketit <span class="mono">PACKAGES</span>-listaan</span>
     </div>
   </div>
 
   <div class="wrap">
     <div class="row">
       <div class="card kpi"><div class="accent"></div><div class="body">
-        <div class="label">Uudistuksia listalla</div>
+        <div class="label">Säädöspaketteja</div>
         <div class="val" id="kpi-count">—</div>
-        <div class="sub">Säädöspaketit (laki + asetukset)</div>
+        <div class="sub">laki + asetukset</div>
       </div></div>
 
       <div class="card kpi"><div class="accent"></div><div class="body">
         <div class="label">Kunnat</div>
         <div class="val" id="kpi-kunnat">—</div>
-        <div class="sub">abstrakti yhteenveto</div>
+        <div class="sub">abstrakti kokonaiskuva</div>
       </div></div>
 
       <div class="card kpi"><div class="accent"></div><div class="body">
         <div class="label">Hyvinvointialueet</div>
         <div class="val" id="kpi-hva">—</div>
-        <div class="sub">abstrakti yhteenveto</div>
+        <div class="sub">abstrakti kokonaiskuva</div>
       </div></div>
 
       <div class="card kpi"><div class="accent"></div><div class="body">
-        <div class="label">Asetustäsmennykset</div>
+        <div class="label">Täsmennykset asetuksilla</div>
         <div class="val" id="kpi-ref">—</div>
         <div class="sub">VNA / MIN (määrä)</div>
       </div></div>
@@ -113,7 +215,10 @@
     <div class="card">
       <div class="body">
         <h2>Kasautumat (kentän näkökulma)</h2>
-        <p class="hint">Tässä vaiheessa kasautuma kuvataan abstraktisti ajureiden ja kohdistuksen kautta (ei valmisteluaikoja).</p>
+        <p class="hint">
+          Kasautumat muodostetaan ajankohdan (kvartaali) ja ajurien (vaikutusalueiden) perusteella.
+          Ei valmisteluaika-arvioita eikä oletusta, että kaikki kunnat tekevät kaiken.
+        </p>
         <div id="kasautumat" class="loading">Ladataan…</div>
       </div>
     </div>
@@ -123,48 +228,65 @@
     <div class="card">
       <div class="body">
         <h2>Täsmennyskohdat asetuksilla</h2>
-        <p class="hint">Mitä asioita asetuksissa täsmennetään (osa suunniteltua kokonaisuutta). Koottu kaikista säädöspaketeista.</p>
+        <p class="hint">Koonti kaikista säädöspaketeista: mitä asetuksissa täsmennetään ja mihin vaikutusalueeseen se kohdistuu.</p>
         <div id="ref-table" class="loading">Ladataan…</div>
+      </div>
+    </div>
+
+    <div style="height:14px"></div>
+
+    <div class="row">
+      <div class="card" style="flex:1;min-width:320px">
+        <div class="body">
+          <h2>Huomiot päätöksenteon tueksi</h2>
+          <p class="hint">Ei normatiivinen arvio – nostaa esiin kohtia, joissa kentän toteutus voi hajota kasautumien vuoksi.</p>
+          <div id="notes" class="loading">Kootaan…</div>
+        </div>
+      </div>
+
+      <div class="card" style="flex:1;min-width:320px">
+        <div class="body">
+          <h2>Ohjauksen tukitoimet</h2>
+          <p class="hint">Toiminnalliset next steps: mallipohjat, yhtenäistämiset ja viestintä.</p>
+          <div id="actions" class="loading">Kootaan…</div>
+        </div>
       </div>
     </div>
 
     <div class="footer">
       <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="mono">v1</div>
+      <div class="mono">data: ./data/&lt;id&gt;.json</div>
     </div>
   </div>
 
   <script>
-    // ---- Manual package list (MVP) ----
+    // ---------------- Manual package list (MVP) ----------------
     // Lisää tähän uusia paketteja, kun lisäät data/-kansioon uusia json-tiedostoja.
     const PACKAGES = ["pkg-001", "pkg-002"];
     const DATA_DIR = "./data/";
 
     const $ = (id) => document.getElementById(id);
-    const uniq = (arr) => [...new Set(arr.filter(Boolean))];
+    const uniq = (arr) => [...new Set((arr||[]).filter(Boolean))];
 
     function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
-    function sortEventsByDate(events){
-      return [...events].sort((a,b)=>{
-        const da = isIsoDate(a.date) ? a.date : "9999-99-99";
-        const db = isIsoDate(b.date) ? b.date : "9999-99-99";
-        return da.localeCompare(db);
-      });
-    }
-    function findNext(events){
-      const todayIso = new Date().toISOString().slice(0,10);
-      const upcoming = (events||[]).filter(e => isIsoDate(e.date) && e.date >= todayIso);
-      return sortEventsByDate(upcoming)[0] || null;
+    function quarterLabel(dateStr){
+      if(!isIsoDate(dateStr)) return "—";
+      const [y,m] = dateStr.split("-").map(n=>parseInt(n,10));
+      const q = Math.floor((m-1)/3)+1;
+      return `${y} Q${q}`;
     }
 
-    function impactLabel(themes, scopeName){
-      // abstrakti: jos löytyy vähintään 2 kuormittavaa teemaa -> "korkea", 1 -> "keskitaso", muuten "matala"
+    function scoreLabel(themes, scopeName){
       const scoped = (themes||[]).filter(t => (t.scope||[]).includes(scopeName));
-      const plus = scoped.filter(t => /Kuormittava/i.test(t.direction||"")).length;
-      const mixed = scoped.filter(t => /Sekavaikutus/i.test(t.direction||"")).length;
-      const score = plus + (mixed>0 ? 1 : 0);
-      if(score >= 2) return "Korkea";
-      if(score === 1) return "Keskitaso";
+      let score = 0;
+      scoped.forEach(t=>{
+        const d = (t.direction||"").toLowerCase();
+        if(d.includes("kuormittava")) score += 2;
+        else if(d.includes("sekavaikutus")) score += 1;
+        else if(d.includes("keventävä")) score -= 1;
+      });
+      if(score >= 6) return "Korkea";
+      if(score >= 3) return "Keskitaso";
       return "Matala";
     }
 
@@ -192,8 +314,8 @@
 
       // KPI abstract impact
       const allThemes = pkgs.flatMap(p => p.themes || []);
-      $("kpi-kunnat").textContent = impactLabel(allThemes, "Kunnat");
-      $("kpi-hva").textContent = impactLabel(allThemes, "Hyvinvointialueet");
+      $("kpi-kunnat").textContent = scoreLabel(allThemes, "Kunnat");
+      $("kpi-hva").textContent = scoreLabel(allThemes, "Hyvinvointialueet");
 
       // KPI refinements count
       const refs = pkgs.flatMap(p => p.decree_refinements || []);
@@ -201,37 +323,70 @@
       const min = refs.filter(r => r.decree==="MIN").length;
       $("kpi-ref").textContent = `${vna} VNA • ${min} MIN`;
 
-      // Kasautumat (MVP: listataan paketit, ajurit ja seuraava virstanpylväs)
-      const kasRows = pkgs.map(p => {
-        const next = findNext(p.events || []);
-        const areas = uniq((p.themes||[]).map(t => t.area)).slice(0,4);
-        const scopes = uniq((p.admin_tags?.kohdistus||[]));
-        const a = areas.map(x=>`<span class="badge orange" style="margin-right:6px">${x}</span>`).join("");
-        const s = scopes.map(x=>`<span class="badge" style="margin-right:6px">${x}</span>`).join("");
-        const nextStr = next ? `${next.date} • ${next.type}` : "—";
+      // Kasautumat: ryhmitellään kvartaaleihin eventtien mukaan, ja nostetaan ajurit (vaikutusalueet)
+      const bucket = {}; // q -> {packages:Set, events:count, areas:Map, scopes:Set}
+      pkgs.forEach(p=>{
+        const events = (p.events||[]).filter(e=>isIsoDate(e.date));
+        const qs = uniq(events.map(e=>quarterLabel(e.date)).filter(q=>q!=="—"));
+        qs.forEach(q=>{
+          bucket[q] = bucket[q] || {packages:new Set(), events:0, areas:new Map(), scopes:new Set(), titles:[]};
+          bucket[q].packages.add(p.package_id);
+          bucket[q].titles.push(p.title);
+          bucket[q].events += events.filter(e=>quarterLabel(e.date)===q).length;
+
+          // scopes from admin_tags
+          (p.admin_tags?.kohdistus||[]).forEach(s=>bucket[q].scopes.add(s));
+
+          // areas from themes
+          (p.themes||[]).forEach(t=>{
+            const area = t.area || "Muu";
+            const prev = bucket[q].areas.get(area) || 0;
+            bucket[q].areas.set(area, prev + 1);
+          });
+        });
+      });
+
+      const qs = Object.keys(bucket).sort();
+      const rows = qs.map(q=>{
+        const b = bucket[q];
+        const topAreas = [...b.areas.entries()].sort((a,b)=>b[1]-a[1]).slice(0,4);
+        const areaChips = topAreas.map(a=>`<span class="badge orange">${a[0]} (${a[1]})</span>`).join("");
+        const scopeChips = [...b.scopes].slice(0,5).map(s=>`<span class="badge">${s}</span>`).join("");
+
+        // abstract level based on number of packages & events
+        const pkgN = b.packages.size;
+        const evN = b.events;
+        let level = "Matala";
+        if(pkgN >= 3 || evN >= 5) level = "Korkea";
+        else if(pkgN === 2 || evN >= 3) level = "Keskitaso";
+
+        const packLinks = [...b.packages].map(id=>`<a href="./index.html?id=${id}">${id}</a>`).join(", ");
+
         return `<tr>
-          <td><a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a><div class="small">${p.description||""}</div></td>
-          <td>${nextStr}</td>
-          <td>${s || "—"}</td>
-          <td>${a || "—"}</td>
+          <td><b>${q}</b><div class="small">${level}</div></td>
+          <td>${pkgN}</td>
+          <td class="small">${packLinks}</td>
+          <td>${scopeChips || "—"}</td>
+          <td>${areaChips || "—"}</td>
         </tr>`;
       }).join("");
 
       $("kasautumat").className = "";
       $("kasautumat").innerHTML = buildTable(
-        ["Säädöspaketti","Seuraava virstanpylväs","Kohdistus","Ajurit (vaikutusalueet)"],
-        kasRows || `<tr><td colspan="4">Ei paketteja.</td></tr>`
+        ["Ajankohta","Paketteja","Paketit","Kohdistus","Ajurit"],
+        rows || `<tr><td colspan="5">Ei ajoitettuja eventtejä (päivämäärät puuttuvat) tai paketteja on liian vähän.</td></tr>`
       );
 
-      // Täsmennyskohdat asetuksilla (koonti)
-      const refRows = refs.map(r => {
+      // Täsmennykset koontina
+      const refRows = refs.map(r=>{
         const badgeClass = r.decree==="VNA" ? "orange" : (r.decree==="MIN" ? "purple" : "");
         const scope = (r.scope||[]).join(", ");
+        const quote = r.anchor?.quote ? `<div class="small">${r.anchor.quote}</div>` : "";
         return `<tr>
           <td><span class="badge ${badgeClass}">${r.decree}</span></td>
-          <td>${r.what||""}</td>
-          <td>${r.area||""}</td>
-          <td>${scope||""}</td>
+          <td>${r.what || ""}${quote}</td>
+          <td>${r.area || ""}</td>
+          <td>${scope || ""}</td>
         </tr>`;
       }).join("");
 
@@ -240,6 +395,31 @@
         ["Asetus","Täsmennys","Vaikutusalue","Kohdistus"],
         refRows || `<tr><td colspan="4">Ei täsmennyksiä.</td></tr>`
       );
+
+      // Notes (auto-generated, simple)
+      const noteItems = [];
+      if(qs.length){
+        noteItems.push(`Kasautumia löydetty: ${qs.length} (tarkastelussa kvartaaleittain).`);
+      }
+      if(vna+min > 0){
+        noteItems.push(`Asetustäsmennyksiä koottu: ${vna+min}.`);
+      }
+      const topAreasAll = [...(new Map(allThemes.map(t=>[t.area,0]))).keys()].slice(0,6);
+      if(topAreasAll.length){
+        noteItems.push(`Yleisimmät ajurit (teemoista): ${uniq(allThemes.map(t=>t.area)).slice(0,4).join(", ")}.`);
+      }
+      $("notes").className = "";
+      $("notes").innerHTML = `<div class="note">${noteItems.map(x=>`• ${x}`).join("<br/>") || "—"}</div>`;
+
+      // Actions (static but aligned with concept)
+      const actions = [
+        "Yhtenäistä asetustäsmennykset: minimisisällöt ja termit (data-IT / raportointi).",
+        "Julkaise kooste kentälle: mitä täsmentyy asetuksilla ja mihin se kohdistuu.",
+        "Kytke kasautumapiikit toimeenpanotukeen (Q&A, mallipohjat, yhteiset linjaukset).",
+        "Tee tulkinnan avoimet kohdat näkyviksi (ankkuri: pykälä + asetuksen kohta)."
+      ];
+      $("actions").className = "";
+      $("actions").innerHTML = `<div class="note">${actions.map(x=>`• ${x}`).join("<br/>")}</div>`;
     }
 
     loadAll();
