@@ -6,7 +6,6 @@
   <title>Toimeenpanotilannekuva – Uudistusnäkymä</title>
 
   <style>
-    /* Local brand font mapping (your machine shows MarkOffcPro / MarkScOffcPro) */
     @font-face{
       font-family:"OwalMark";
       src:
@@ -47,7 +46,6 @@
       --radius:18px;
       --shadow:0 2px 0 rgba(0,0,0,.02);
 
-      /* font weights */
       --fw-regular:400;
       --fw-medium:600;
       --fw-bold:700;
@@ -63,7 +61,6 @@
       background:linear-gradient(180deg, #fff 0%, #fff 60%, #fafafa 100%);
     }
 
-    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:30;
       background:rgba(255,255,255,.92);
@@ -92,8 +89,7 @@
       padding:8px 12px;border-radius:999px;
       border:1px solid var(--line);
       background:var(--panel2);
-      font-size:12px;
-      font-weight:var(--fw-medium);
+      font-size:12px;font-weight:var(--fw-medium);
       text-decoration:none;color:var(--text);
       user-select:none;
     }
@@ -101,7 +97,6 @@
     .pill.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
     .wrap{max-width:1240px;margin:0 auto;padding:18px 22px 70px 22px}
 
-    /* Hero */
     .hero{
       margin-top:10px;
       padding:16px 16px;
@@ -115,133 +110,45 @@
     }
     .heroTitle{margin:0;font-size:28px;font-weight:var(--fw-heavy);letter-spacing:-.35px;line-height:1.12}
     .heroDesc{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.4;max-width:900px}
-
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      font-size:12px;
-      font-weight:var(--fw-medium);
-      color:var(--text);
-    }
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:var(--fw-medium)}
     .chip.orange{background:var(--orangeL);border-color:rgba(255,153,0,.5)}
     .chip.gray{background:var(--panel2)}
-    .chip.purple{background:var(--purpleL);border-color:rgba(102,0,204,.25);color:var(--owal-purple)}
     .chip strong{font-weight:var(--fw-bold)}
-    .dot{
-      width:8px;height:8px;border-radius:99px;background:var(--owal-orange);
-      box-shadow:0 0 0 3px rgba(255,153,0,.18);
-    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--owal-orange);box-shadow:0 0 0 3px rgba(255,153,0,.18)}
 
-    /* Layout */
-    .mainGrid{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-top:14px}
-    @media (max-width:1000px){.mainGrid{grid-template-columns:1fr}}
+    .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-top:14px}
+    @media (max-width:1000px){.grid{grid-template-columns:1fr}}
 
-    /* Cards */
-    .card{
-      background:#fff;border:1px solid var(--line);
-      border-radius:var(--radius);box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .cardHeader{
-      padding:14px 16px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, #fff 0%, #fafafa 100%);
-    }
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .cardHeader{padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
     .cardBody{padding:14px 16px}
-    h2{margin:0;font-size:16px;font-weight:var(--fw-bold);letter-spacing:-.1px}
+    h2{margin:0;font-size:16px;font-weight:var(--fw-bold)}
     .hint{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
-    /* Toggle + tabs */
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
-    .tab{
-      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
-      background:var(--panel2);font-size:12px;
-      font-weight:var(--fw-medium);
-      cursor:pointer;user-select:none;
-    }
-    .tab.on{
-      background:var(--orangeL);
-      border-color:rgba(255,153,0,.65);
-    }
+    .tab{padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;font-weight:var(--fw-medium);cursor:pointer;user-select:none}
+    .tab.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
 
-    /* Situation block */
-    .situation{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
-      padding:12px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    @media (max-width:650px){.situation{grid-template-columns:1fr}}
-    .metric{
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:10px;
-      background:#fff;
-    }
-    .metric .mLabel{color:var(--muted);font-size:12px}
-    .metric .mVal{margin-top:6px;font-weight:var(--fw-heavy);font-size:16px;letter-spacing:-.2px}
-    .metric .mSub{margin-top:2px;color:var(--muted);font-size:12px;line-height:1.3}
-
-    .bars{margin-top:10px}
-    .barRow{display:grid;grid-template-columns:120px 1fr 36px;gap:10px;align-items:center;margin:8px 0}
-    .barLabel{font-size:12px;color:var(--muted)}
-    .barTrack{height:10px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
-    .barFill{height:100%;background:linear-gradient(90deg,var(--owal-orange),#ffb64a);width:0%}
-    .barN{font-size:12px;color:var(--muted);text-align:right}
-
-    /* Tables */
-    table{
-      width:100%;
-      border-collapse:separate;border-spacing:0;
-      border:1px solid var(--line);
-      border-radius:14px;overflow:hidden;background:#fff;
-    }
-    thead th{
-      text-align:left;font-size:12px;font-weight:var(--fw-bold);
-      background:linear-gradient(180deg,#f0f0f0 0%, #e9e9e9 100%);
-      padding:10px;border-bottom:1px solid var(--line);
-      vertical-align:top;
-    }
-    tbody td{
-      font-size:13px;padding:10px;border-bottom:1px solid var(--line);
-      vertical-align:top;line-height:1.35;
-    }
+    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+    thead th{font-size:12px;font-weight:var(--fw-bold);background:linear-gradient(180deg,#f0f0f0 0%, #e9e9e9 100%);padding:10px;border-bottom:1px solid var(--line);text-align:left}
+    tbody td{font-size:13px;padding:10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
     tbody tr:last-child td{border-bottom:none}
 
-    .badge{
-      display:inline-flex;align-items:center;
-      padding:4px 9px;border-radius:12px;
-      font-size:11px;border:1px solid var(--line);
-      background:#EEE;color:var(--muted);
-      white-space:nowrap;
-      font-weight:var(--fw-medium);
-    }
+    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);font-weight:var(--fw-medium);white-space:nowrap}
     .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:var(--owal-orange)}
     .badge.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
     .small{font-size:12px;color:var(--muted)}
-
     details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:8px 10px}
     details summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:var(--fw-medium)}
     details[open]{background:var(--panel)}
     .quote{margin-top:8px;color:var(--text);font-size:12px;line-height:1.35}
-
     a{color:var(--text);text-decoration:none}
     a:hover{text-decoration:underline}
 
     .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
     .error{border:1px solid #ffb4b4;border-radius:14px;background:#fff0f0;padding:12px;color:#7a1a1a;font-size:13px}
-
-    .footer{
-      margin-top:22px;padding-top:16px;border-top:1px solid var(--line);
-      color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
-    }
+    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </style>
 </head>
 
@@ -253,7 +160,7 @@
       </a>
       <div class="titleWrap">
         <div class="productTitle">Toimeenpanotilannekuva</div>
-        <div class="productSubtitle">Säädöspaketti = laki + asetukset • päätöksenteon ja toimeenpanon tuki (abstrakti)</div>
+        <div class="productSubtitle">Uudistusnäkymä: säädöspaketti (laki + asetukset) • toimeenpanoteemat ja samanaikaisuus (abstrakti)</div>
       </div>
     </div>
 
@@ -269,7 +176,6 @@
     <div class="hero">
       <div class="heroTitle" id="pkg-title">—</div>
       <div class="heroDesc" id="pkg-desc">—</div>
-
       <div class="chips">
         <span class="chip orange"><span class="dot"></span><strong>Hallinnonala</strong>: <span id="chip-admin">—</span></span>
         <span class="chip gray"><strong>Kohdistus</strong>: <span id="chip-scope">—</span></span>
@@ -277,47 +183,24 @@
       </div>
     </div>
 
-    <div class="mainGrid">
-      <!-- LEFT -->
+    <div class="grid">
       <div class="card">
         <div class="cardHeader">
-          <h2 id="panel-title">Toimeenpanon tilannekuva</h2>
-          <div class="hint" id="panel-hint">Valitse näkökulma ja selaa aikajanaa, teemoja tai päällekkäisyyksiä. Ankkurikatkelmat ovat piilossa “Näytä katkelma” -kohdissa.</div>
+          <h2>Toimeenpanon tilannekuva</h2>
+          <div class="hint">Vaihda näkökulmaa ja selaa aikajanaa, toimeenpanoteemoja tai samanaikaisuutta. Katkelmat avautuvat “Näytä katkelma”.</div>
         </div>
 
         <div class="cardBody">
-          <div class="tabs" aria-label="Tarkastelukulma">
+          <div class="tabs">
             <span class="tab on" data-view="Kunnat">Kunta</span>
             <span class="tab" data-view="Hyvinvointialueet">Hyvinvointialue</span>
             <span class="tab" data-view="Valtio">Hallinnonalat</span>
           </div>
 
-          <!-- Situation block (always visible) -->
-          <div class="situation">
-            <div class="metric">
-              <div class="mLabel">Seuraava virstanpylväs</div>
-              <div class="mVal" id="m-next">—</div>
-              <div class="mSub" id="m-next-sub">—</div>
-            </div>
-
-            <div class="metric">
-              <div class="mLabel">Kenttävaikutus (abstrakti)</div>
-              <div class="mVal" id="m-impact">—</div>
-              <div class="mSub" id="m-impact-sub">Ajurit-palkit alla perustuvat teemoihin.</div>
-            </div>
-
-            <div class="metric" style="grid-column:1/-1">
-              <div class="mLabel">Ajurit (vaikutusalueet)</div>
-              <div class="bars" id="driver-bars">
-                <div class="small">Ladataan…</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tabs" aria-label="Sisällys">
+          <div class="tabs">
             <span class="tab on" data-tab="timeline">Aikajana</span>
             <span class="tab" data-tab="themes">Toimeenpanoteemat</span>
-            <span class="tab" data-tab="overlaps">Päällekkäisyydet</span>
+            <span class="tab" data-tab="overlaps">Samanaikaisuus</span>
           </div>
 
           <div id="tab-timeline" class="loading">Ladataan…</div>
@@ -326,17 +209,16 @@
 
           <details style="margin-top:12px">
             <summary>Avaa lähteet ja ankkurit</summary>
-            <div style="margin-top:10px" id="sources-wrap" class="loading">Ladataan ankkureita…</div>
+            <div style="margin-top:10px" id="sources-wrap" class="loading">Ladataan…</div>
           </details>
         </div>
       </div>
 
-      <!-- RIGHT -->
       <div>
         <div class="card">
           <div class="cardHeader">
             <h2>Säädöspaketti</h2>
-            <div class="hint">Laki + asetukset. Pidämme tämän tiiviinä; tarkemmat perustelut löytyvät ankkureista.</div>
+            <div class="hint">Tiivis kooste: laki + asetukset.</div>
           </div>
           <div class="cardBody">
             <div id="docs-wrap" class="loading">Ladataan…</div>
@@ -345,8 +227,8 @@
 
         <div class="card" style="margin-top:14px">
           <div class="cardHeader">
-            <h2>Täsmennyskohdat asetuksilla</h2>
-            <div class="hint">Mitä asioita asetuksissa täsmennetään (osa suunniteltua kokonaisuutta).</div>
+            <h2>Täsmennykset asetuksilla</h2>
+            <div class="hint">Mitä asetuksilla täsmennetään.</div>
           </div>
           <div class="cardBody">
             <div id="ref-wrap" class="loading">Ladataan…</div>
@@ -356,7 +238,7 @@
         <div class="card" style="margin-top:14px">
           <div class="cardHeader">
             <h2>Sektorivaikutus</h2>
-            <div class="hint">Sektorit ja ajurit tiiviisti.</div>
+            <div class="hint">Sektorit ja toimeenpanoteemat.</div>
           </div>
           <div class="cardBody">
             <div id="sector-wrap" class="loading">Ladataan…</div>
@@ -367,20 +249,16 @@
 
     <div class="footer">
       <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="small">Vaihda paketti URL-parametrilla: <span class="badge">?id=pkg-001</span></div>
+      <div class="small">Vaihda paketti: <span class="badge">?id=pkg-001</span></div>
     </div>
   </div>
 
   <script>
     const DEFAULT_ID = "pkg-001";
     const DATA_DIR = "./data/";
-
     const $ = (id) => document.getElementById(id);
 
-    function getQueryParam(name){
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name);
-    }
+    function getQueryParam(name){ return new URL(window.location.href).searchParams.get(name); }
     function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
     function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
     function fmtDate(s){
@@ -402,75 +280,24 @@
       });
     }
     function buildTable(headers, rowsHtml){
-      return `
-        <table>
-          <thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
-          <tbody>${rowsHtml}</tbody>
-        </table>
-      `;
+      return `<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rowsHtml}</tbody></table>`;
     }
     function safe(s){ return (s ?? "").toString(); }
 
-    function scoreLabel(themes, scopeName){
-      const scoped = (themes||[]).filter(t => (t.scope||[]).includes(scopeName));
-      let score = 0;
-      scoped.forEach(t=>{
-        const d = (t.direction||"").toLowerCase();
-        if(d.includes("kuormittava")) score += 2;
-        else if(d.includes("sekavaikutus")) score += 1;
-        else if(d.includes("keventävä")) score -= 1;
-      });
-      if(score >= 4) return "Korkea";
-      if(score >= 2) return "Keskitaso";
-      return "Matala";
-    }
-
-    function findNextMilestone(events){
-      const todayIso = new Date().toISOString().slice(0,10);
-      const upcoming = (events||[]).filter(e => isIsoDate(e.date) && e.date >= todayIso);
-      const sorted = sortEventsByDate(upcoming);
-      return sorted[0] || null;
-    }
-
-    function renderDriverBars(pkg, scope){
-      const themes = (pkg.themes||[]).filter(t => (t.scope||[]).includes(scope) || scope==="Valtio");
-      const counts = new Map();
-      themes.forEach(t => counts.set(t.area||"Muu", (counts.get(t.area||"Muu")||0)+1));
-      const top = [...counts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
-      const max = top.length ? top[0][1] : 1;
-
-      if(!top.length){
-        $("driver-bars").innerHTML = `<div class="small">Ei ajureita (teemoja) valitulle näkökulmalle.</div>`;
-        return;
-      }
-
-      $("driver-bars").innerHTML = top.map(([area,n])=>{
-        const pct = Math.round((n/max)*100);
-        return `
-          <div class="barRow">
-            <div class="barLabel">${area}</div>
-            <div class="barTrack"><div class="barFill" style="width:${pct}%"></div></div>
-            <div class="barN">${n}</div>
-          </div>`;
-      }).join("");
-    }
+    let currentScope = "Kunnat";
+    let currentTab = "timeline";
+    let currentPkg = null;
 
     function renderDocs(pkg){
       const docs = pkg.documents || [];
       const rows = docs.map(d=>{
         const badgeClass = d.type==="VNA" ? "orange" : (d.type==="MIN" ? "purple" : "");
-        const badgeText = d.type || "Dokumentti";
         const link = d.url ? `<a href="${d.url}" target="_blank" rel="noreferrer">${safe(d.title)}</a>` : safe(d.title);
         const date = d.date ? ` • ${fmtDate(d.date)}` : "";
-        return `<div style="margin:10px 0">
-          <span class="badge ${badgeClass}">${badgeText}</span>
-          ${link}
-          <span class="small">${date}</span>
-        </div>`;
+        return `<div style="margin:10px 0"><span class="badge ${badgeClass}">${d.type||"Dokumentti"}</span> ${link}<span class="small">${date}</span></div>`;
       }).join("");
-
       $("docs-wrap").className = "";
-      $("docs-wrap").innerHTML = rows || `<div class="small">Ei dokumentteja.</div>`;
+      $("docs-wrap").innerHTML = rows || `<div class="small">—</div>`;
     }
 
     function renderTimeline(pkg){
@@ -480,19 +307,10 @@
         const anchorLabel = ev.anchor ? `${safe(ev.anchor.doc_type||"—")} • ${safe(ev.anchor.ref||"—")}` : "—";
         const quote = ev.anchor?.quote ? ev.anchor.quote : "";
         const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr>
-          <td>${safe(ev.type)}</td>
-          <td>${fmtDate(safe(ev.date))}</td>
-          <td>${safe(scope || "—")}</td>
-          <td><span class="badge">${anchorLabel}</span>${details}</td>
-        </tr>`;
+        return `<tr><td>${safe(ev.type)}</td><td>${fmtDate(safe(ev.date))}</td><td>${safe(scope||"—")}</td><td><span class="badge">${anchorLabel}</span>${details}</td></tr>`;
       }).join("");
-
       $("tab-timeline").className = "";
-      $("tab-timeline").innerHTML = buildTable(
-        ["Tyyppi","Päivä / ajankohta","Kohdistus","Ankkuri"],
-        rows || `<tr><td colspan="4">Ei virstanpylväitä.</td></tr>`
-      );
+      $("tab-timeline").innerHTML = buildTable(["Tyyppi","Päivä / ajankohta","Kohdistus","Ankkuri"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
     function renderThemes(pkg, scope){
@@ -501,22 +319,13 @@
         const source = th.anchor ? `${safe(th.anchor.doc_type||"—")} • ${safe(th.anchor.ref||"—")}` : "—";
         const quote = th.anchor?.quote ? th.anchor.quote : "";
         const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr>
-          <td>${safe(th.text)}${details}</td>
-          <td><span class="badge orange">${safe(th.area||"—")}</span></td>
-          <td><span class="badge">${safe(th.direction||"—")}</span></td>
-          <td><span class="badge">${source}</span></td>
-        </tr>`;
+        return `<tr><td>${safe(th.text)}${details}</td><td><span class="badge orange">${safe(th.area||"—")}</span></td><td><span class="badge">${safe(th.direction||"—")}</span></td><td><span class="badge">${source}</span></td></tr>`;
       }).join("");
-
       $("tab-themes").className = "";
-      $("tab-themes").innerHTML = buildTable(
-        ["Teema","Vaikutusalue","Suunta","Lähde"],
-        rows || `<tr><td colspan="4">Ei teemoja valitulle näkökulmalle.</td></tr>`
-      );
+      $("tab-themes").innerHTML = buildTable(["Toimeenpanoteema","Vaikutusalue","Suunta","Lähde"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
-    function renderOverlaps(pkg, scope){
+    function renderConcurrency(pkg, scope){
       const events = (pkg.events || []).filter(e => isIsoDate(e.date));
       const byQ = {};
       events.forEach(ev=>{
@@ -531,7 +340,7 @@
       const qs = Object.keys(byQ).sort();
       const rows = qs.map(q=>{
         const evs = byQ[q] || [];
-        const drivers = [
+        const themesTop = [
           ["Data-IT", countArea("Data-IT")],
           ["Raportointi", countArea("Raportointi")],
           ["Prosessi", countArea("Prosessi")],
@@ -540,22 +349,13 @@
           ["Rahoitus", countArea("Rahoitus")]
         ].filter(x=>x[1]>0).slice(0,4);
 
-        const driverBadges = drivers.map(d=>`<span class="badge orange">${d[0]} (${d[1]})</span>`).join(" ");
+        const badges = themesTop.map(d=>`<span class="badge orange">${d[0]} (${d[1]})</span>`).join(" ");
         const examples = evs.slice(0,5).map(e=>`${fmtDate(e.date)} • ${e.type}`).join("<br/>");
-
-        return `<tr>
-          <td><b>${q}</b></td>
-          <td>${evs.length}</td>
-          <td>${driverBadges || "—"}</td>
-          <td class="small">${examples || "—"}</td>
-        </tr>`;
+        return `<tr><td><b>${q}</b></td><td>${evs.length}</td><td>${badges || "—"}</td><td class="small">${examples || "—"}</td></tr>`;
       }).join("");
 
       $("tab-overlaps").className = "";
-      $("tab-overlaps").innerHTML = buildTable(
-        ["Ajankohta (kvartaali)","Eventtejä","Ajurit (top)","Esimerkkejä"],
-        rows || `<tr><td colspan="4">Ei päällekkäisyyksiä (tai päivämäärät puuttuvat).</td></tr>`
-      );
+      $("tab-overlaps").innerHTML = buildTable(["Ajankohta (kvartaali)","Eventtejä","Toimeenpanoteemat (top)","Esimerkkejä"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
     function renderRefinements(pkg){
@@ -565,19 +365,11 @@
         const scope = (r.scope || []).join(", ");
         const quote = r.anchor?.quote ? r.anchor.quote : "";
         const details = quote ? `<details><summary>Näytä katkelma</summary><div class="quote">${safe(quote)}</div></details>` : "";
-        return `<tr>
-          <td><span class="badge ${badgeClass}">${safe(r.decree)}</span></td>
-          <td>${safe(r.what)}${details}</td>
-          <td>${safe(r.area||"—")}</td>
-          <td>${safe(scope||"—")}</td>
-        </tr>`;
+        return `<tr><td><span class="badge ${badgeClass}">${safe(r.decree)}</span></td><td>${safe(r.what)}${details}</td><td>${safe(r.area||"—")}</td><td>${safe(scope||"—")}</td></tr>`;
       }).join("");
 
       $("ref-wrap").className = "";
-      $("ref-wrap").innerHTML = buildTable(
-        ["Asetus","Täsmennys","Vaikutusalue","Kohdistus"],
-        rows || `<tr><td colspan="4">Ei täsmennyksiä.</td></tr>`
-      );
+      $("ref-wrap").innerHTML = buildTable(["Asetus","Täsmennys","Vaikutusalue","Kohdistus"], rows || `<tr><td colspan="4">—</td></tr>`);
     }
 
     function renderSectors(pkg){
@@ -590,22 +382,16 @@
       $("sector-wrap").innerHTML = `
         <div class="small"><b>Sektorit</b></div>
         <div style="margin:8px 0 12px 0">${sectorBadges || "<span class='small'>—</span>"}</div>
-        <div class="small"><b>Ajurit</b></div>
+        <div class="small"><b>Toimeenpanoteemat</b></div>
         <div style="margin-top:8px">${areaBadges || "<span class='small'>—</span>"}</div>
       `;
     }
 
     function renderSources(pkg){
       const list = [];
-      (pkg.events || []).forEach(e=>{
-        if(e.anchor && (e.anchor.ref || e.anchor.quote)) list.push({doc:e.anchor.doc_type, ref:e.anchor.ref, quote:e.anchor.quote});
-      });
-      (pkg.themes || []).forEach(t=>{
-        if(t.anchor && (t.anchor.ref || t.anchor.quote)) list.push({doc:t.anchor.doc_type, ref:t.anchor.ref, quote:t.anchor.quote});
-      });
-      (pkg.decree_refinements || []).forEach(r=>{
-        if(r.anchor && (r.anchor.ref || r.anchor.quote)) list.push({doc:r.decree, ref:r.anchor.ref, quote:r.anchor.quote});
-      });
+      (pkg.events || []).forEach(e=>{ if(e.anchor) list.push({doc:e.anchor.doc_type, ref:e.anchor.ref, quote:e.anchor.quote}); });
+      (pkg.themes || []).forEach(t=>{ if(t.anchor) list.push({doc:t.anchor.doc_type, ref:t.anchor.ref, quote:t.anchor.quote}); });
+      (pkg.decree_refinements || []).forEach(r=>{ if(r.anchor) list.push({doc:r.decree, ref:r.anchor.ref, quote:r.anchor.quote}); });
 
       const seen = new Set();
       const uniqList = list.filter(x=>{
@@ -615,81 +401,25 @@
         return true;
       }).slice(0,80);
 
-      const rows = uniqList.map(x=>`
-        <tr>
-          <td><span class="badge">${safe(x.doc||"—")}</span></td>
-          <td>${safe(x.ref||"—")}</td>
-          <td class="small">${safe(x.quote||"")}</td>
-        </tr>
-      `).join("");
-
+      const rows = uniqList.map(x=>`<tr><td><span class="badge">${safe(x.doc||"—")}</span></td><td>${safe(x.ref||"—")}</td><td class="small">${safe(x.quote||"")}</td></tr>`).join("");
       $("sources-wrap").className = "";
-      $("sources-wrap").innerHTML = buildTable(
-        ["Lähde","Kohta","Katkelma"],
-        rows || `<tr><td colspan="3">Ei ankkureita.</td></tr>`
-      );
+      $("sources-wrap").innerHTML = buildTable(["Lähde","Kohta","Katkelma"], rows || `<tr><td colspan="3">—</td></tr>`);
     }
 
-    function updateSituation(pkg, scope){
-      const next = findNextMilestone(pkg.events || []);
-      if(next){
-        $("m-next").textContent = fmtDate(next.date);
-        $("m-next-sub").textContent = `${next.type} • ${(next.scope||[]).join(", ") || "—"}`;
-      } else {
-        $("m-next").textContent = "—";
-        $("m-next-sub").textContent = "Ei tulevia päivämääräeventtejä datassa.";
-      }
-
-      const impact = scoreLabel(pkg.themes||[], scope==="Valtio" ? "Kunnat" : scope);
-      $("m-impact").textContent = impact;
-      $("m-impact-sub").textContent = scope==="Valtio" ? "Kooste: kunnat/HVA (abstrakti)" : "Ajurit-palkit alla perustuvat teemoihin.";
-
-      renderDriverBars(pkg, scope);
-    }
-
-    // UI state
-    let currentScope = "Kunnat";
-    let currentTab = "timeline";
-    let currentPkg = null;
-
-    function setScope(scope){
-      currentScope = scope;
-      rerender();
-    }
+    function setScope(scope){ currentScope = scope; rerender(); }
     function setTab(tab){
       currentTab = tab;
-      ["timeline","themes","overlaps"].forEach(t=>{
-        $("tab-"+t).style.display = (t===tab) ? "block" : "none";
-      });
+      ["timeline","themes","overlaps"].forEach(t=>{ $("tab-"+t).style.display = (t===tab) ? "block" : "none"; });
       rerender();
     }
     function rerender(){
       if(!currentPkg) return;
-
-      updateSituation(currentPkg, currentScope);
-
-      if(currentTab === "timeline") renderTimeline(currentPkg);
-      if(currentTab === "themes") renderThemes(currentPkg, currentScope);
-      if(currentTab === "overlaps") renderOverlaps(currentPkg, currentScope);
-
-      // title changes slightly by scope
-      if(currentScope === "Kunnat") {
-        $("panel-title").textContent = "Toimeenpanon tilannekuva: Kunta";
-      } else if(currentScope === "Hyvinvointialueet") {
-        $("panel-title").textContent = "Toimeenpanon tilannekuva: Hyvinvointialue";
-      } else {
-        $("panel-title").textContent = "Toimeenpanon tilannekuva: Hallinnonalat";
-      }
+      if(currentTab==="timeline") renderTimeline(currentPkg);
+      if(currentTab==="themes") renderThemes(currentPkg, currentScope);
+      if(currentTab==="overlaps") renderConcurrency(currentPkg, currentScope);
     }
 
-    function wireTabs(){
-      document.querySelectorAll("[data-tab]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("on"));
-          el.classList.add("on");
-          setTab(el.getAttribute("data-tab"));
-        });
-      });
+    function wire(){
       document.querySelectorAll("[data-view]").forEach(el=>{
         el.addEventListener("click", ()=>{
           document.querySelectorAll("[data-view]").forEach(x=>x.classList.remove("on"));
@@ -697,14 +427,19 @@
           setScope(el.getAttribute("data-view"));
         });
       });
+      document.querySelectorAll("[data-tab]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("on"));
+          el.classList.add("on");
+          setTab(el.getAttribute("data-tab"));
+        });
+      });
     }
 
     async function load(){
-      wireTabs();
-
+      wire();
       const id = getQueryParam("id") || DEFAULT_ID;
       $("pkg-chip").textContent = `Paketti: ${id}`;
-
       const path = `${DATA_DIR}${id}.json`;
 
       try{
@@ -728,7 +463,7 @@
         setTab("timeline");
 
       } catch(e){
-        const msg = `JSONin lataus epäonnistui: ${e.message}. Varmista että tiedosto löytyy: ${DATA_DIR}${DEFAULT_ID}.json`;
+        const msg = `JSONin lataus epäonnistui: ${e.message}.`;
         ["docs-wrap","ref-wrap","sector-wrap","sources-wrap","tab-timeline","tab-themes","tab-overlaps"].forEach(id=>{
           $(id).className = "error";
           $(id).textContent = msg;
