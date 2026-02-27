@@ -3,54 +3,201 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Yleiskuva – Toimeenpanotilannekuva</title>
+  <title>Toimeenpanotilannekuva – Yleiskuva</title>
 
   <style>
-    :root{
-      --owal-orange:#FF9900; --owal-purple:#6600CC;
-      --text:#1A1A1A; --muted:#666666; --line:#E6E6E6;
-      --panel:#F8F8F8; --panel2:#F4F4F4; --white:#fff;
-      --orangeL:#FFF2E8; --purpleL:#F2EBFF;
-      --radius:18px; --shadow:0 1px 0 rgba(0,0,0,.03);
+    @font-face{
+      font-family:"OwalMark";
+      src:
+        local("MarkOffcPro"),
+        local("MarkOffcPro-Regular"),
+        local("MarkOffcPro-ExtraLight"),
+        local("MarkOffcPro-Light"),
+        local("MarkOffcPro-Medium"),
+        local("MarkOffcPro-Bold"),
+        local("MarkOffcPro-Black"),
+        local("MarkOffcPro-Heavy"),
+        local("MarkScOffcPro"),
+        local("MarkScOffcPro-Regular"),
+        local("MarkScOffcPro-ExtraLight"),
+        local("MarkScOffcPro-Light"),
+        local("MarkScOffcPro-Medium"),
+        local("MarkScOffcPro-Bold"),
+        local("MarkScOffcPro-Black"),
+        local("MarkScOffcPro-Heavy");
+      font-weight:100 900;
+      font-style:normal;
+      font-display:swap;
     }
+
+    :root{
+      --owal-orange:#FF9900;
+      --owal-purple:#6600CC;
+      --orangeL:#FFF2E8;
+      --purpleL:#F2EBFF;
+
+      --text:#141414;
+      --muted:#676767;
+      --line:#E6E6E6;
+      --panel:#F8F8F8;
+      --panel2:#F4F4F4;
+      --white:#FFFFFF;
+
+      --radius:18px;
+      --shadow:0 2px 0 rgba(0,0,0,.02);
+
+      --fw-regular:400;
+      --fw-medium:600;
+      --fw-bold:700;
+      --fw-heavy:900;
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--white)}
-    .topbar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2px solid var(--line);padding:18px 24px 14px 24px}
-    .topbar::after{content:"";display:block;height:4px;background:var(--owal-orange);margin:14px -24px -14px -24px}
-    .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .logo{width:160px;height:34px;display:flex;align-items:center;font-weight:900;letter-spacing:.2px}
-    h1{margin:0;font-size:22px;font-weight:900}
-    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;text-decoration:none;color:var(--text)}
-    .pill.on{background:var(--orangeL);border-color:var(--owal-orange)}
-    .pill.purple{background:var(--purpleL);border-color:var(--owal-purple)}
-    .wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px 24px}
-    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .body{padding:14px 16px}
-    h2{margin:0 0 10px 0;font-size:16px;font-weight:900}
-    .hint{margin:0 0 12px 0;color:var(--muted);font-size:13px}
-    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-    thead th{background:#EEE;padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:12px}
-    tbody td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
-    tbody tr:last-child td{border-bottom:none}
-    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);white-space:nowrap}
-    .badge.orange{background:var(--orangeL);border-color:var(--owal-orange);color:var(--owal-orange)}
+    body{
+      margin:0;
+      font-family:"OwalMark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      font-weight:var(--fw-regular);
+      color:var(--text);
+      background:linear-gradient(180deg, #fff 0%, #fff 60%, #fafafa 100%);
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:14px 22px 12px 22px;
+    }
+    .topbar::after{
+      content:"";
+      display:block;
+      height:4px;
+      background:linear-gradient(90deg, var(--owal-orange), #ffb64a);
+      margin:12px -22px -12px -22px;
+    }
+    .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;text-decoration:none;padding:6px 8px;border-radius:14px}
+    .logo:hover{background:var(--panel)}
+    .logo img{height:34px;width:auto;display:block}
+    .titleWrap{flex:1;min-width:280px}
+    .productTitle{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
+    .productSubtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      font-size:12px;font-weight:var(--fw-medium);
+      text-decoration:none;color:var(--text);
+      user-select:none;
+    }
+    .pill.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
+    .pill.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 22px 70px 22px}
+
+    /* Hero */
+    .hero{
+      margin-top:10px;
+      padding:16px 16px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:
+        radial-gradient(1200px 420px at 15% 0%, var(--orangeL) 0%, rgba(255,242,232,0) 60%),
+        radial-gradient(900px 360px at 95% 25%, var(--purpleL) 0%, rgba(242,235,255,0) 60%),
+        #fff;
+      box-shadow:var(--shadow);
+    }
+    .heroRow{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+    .heroTitle{margin:0;font-size:28px;font-weight:var(--fw-heavy);letter-spacing:-.35px}
+    .heroDesc{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.4;max-width:900px}
+
+    /* Mode toggle */
+    .modeToggle{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .modeBtn{
+      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
+      background:var(--panel2);font-size:12px;font-weight:var(--fw-medium);
+      cursor:pointer;user-select:none;
+    }
+    .modeBtn.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
+
+    /* Layout */
+    .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-top:14px}
+    @media (max-width:1000px){.grid{grid-template-columns:1fr}}
+
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .cardHeader{padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
+    .cardBody{padding:14px 16px}
+    h2{margin:0;font-size:16px;font-weight:var(--fw-bold)}
+    .hint{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    /* Mini KPI strip (3 items, no boxes) */
+    .strip{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+    .stripItem{min-width:220px;flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .stripLabel{color:var(--muted);font-size:12px}
+    .stripVal{margin-top:6px;font-weight:var(--fw-heavy);font-size:16px;letter-spacing:-.2px}
+
+    /* Samanaikaisuus calendar */
+    .cal{
+      display:grid;
+      grid-template-columns: 140px 1fr 1fr;
+      gap:10px;
+      align-items:center;
+    }
+    .calHead{font-size:12px;color:var(--muted);font-weight:var(--fw-bold)}
+    .qLabel{font-weight:var(--fw-bold);font-size:13px}
+    .cell{
+      height:34px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 10px;
+      font-size:12px;
+      color:var(--text);
+    }
+    .cell small{color:var(--muted);font-weight:var(--fw-medium)}
+    .cell.low{background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
+    .cell.mid{background:linear-gradient(180deg, var(--orangeL) 0%, #fff 100%); border-color:rgba(255,153,0,.35)}
+    .cell.high{background:linear-gradient(180deg, rgba(255,153,0,.28) 0%, #fff 100%); border-color:rgba(255,153,0,.55)}
+    .cell.on{outline:3px solid rgba(255,153,0,.25)}
+
+    /* Right panel visuals */
+    .bars{margin-top:10px}
+    .barRow{display:grid;grid-template-columns:120px 1fr 36px;gap:10px;align-items:center;margin:8px 0}
+    .barLabel{font-size:12px;color:var(--muted)}
+    .barTrack{height:10px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
+    .barFill{height:100%;background:linear-gradient(90deg,var(--owal-orange),#ffb64a);width:0%}
+    .barN{font-size:12px;color:var(--muted);text-align:right}
+
+    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);font-weight:var(--fw-medium);white-space:nowrap;margin-right:6px;margin-bottom:6px}
+    .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:var(--owal-orange)}
+    .badge.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
     .small{font-size:12px;color:var(--muted)}
-    .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
-    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     a{color:var(--text);text-decoration:none}
     a:hover{text-decoration:underline}
+
+    .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
+    .error{border:1px solid #ffb4b4;border-radius:14px;background:#fff0f0;padding:12px;color:#7a1a1a;font-size:13px}
+
+    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </style>
 </head>
 
 <body>
   <div class="topbar">
-    <div class="brand">
-      <div class="logo">owalgroup</div>
-      <div>
-        <h1>Yleiskuva</h1>
-        <div class="subtitle">Tilannekuva säädöspaketeista (laki + asetukset) – listaus ja suodatus</div>
+    <div class="brandRow">
+      <a class="logo" href="./yleiskuva.html" aria-label="Owal Group">
+        <img src="./assets/owal_logo.png" alt="Owal Group logo" />
+      </a>
+      <div class="titleWrap">
+        <div class="productTitle">Toimeenpanotilannekuva</div>
+        <div class="productSubtitle">Yleiskuva: samanaikaisuus ja toimeenpanoteemat päätöksenteon ja toimeenpanon tueksi</div>
       </div>
     </div>
 
@@ -63,47 +210,320 @@
   </div>
 
   <div class="wrap">
-    <div class="card">
-      <div class="body">
-        <h2>Säädöspaketit</h2>
-        <p class="hint">Tavoite: löydä nopeasti, mitä on tulossa ja mihin se kohdistuu. (Kasautumat syvennetään seuraavassa iteraatiossa.)</p>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px">
-          <label class="small">Kohdistus:</label>
-          <select id="scope-filter">
-            <option value="">Kaikki</option>
-            <option value="Kunnat">Kunnat</option>
-            <option value="Hyvinvointialueet">Hyvinvointialueet</option>
-            <option value="Valtio">Valtio</option>
-          </select>
-
-          <label class="small">Sektori:</label>
-          <select id="sector-filter">
-            <option value="">Kaikki</option>
-            <option value="Työllisyys">Työllisyys</option>
-            <option value="SOTE">SOTE</option>
-            <option value="Digitalisaatio">Digitalisaatio</option>
-          </select>
+    <div class="hero">
+      <div class="heroRow">
+        <div>
+          <div class="heroTitle">Tilannekuva</div>
+          <div class="heroDesc">
+            Tämä näkymä auttaa näkemään nopeasti <b>milloin</b> muutoksia osuu samaan aikaan ja <b>mihin</b> ne käytännössä osuvat (toimeenpanoteemat).
+          </div>
         </div>
+      </div>
 
-        <div id="list" class="loading">Ladataan…</div>
+      <div class="modeToggle" aria-label="Moodivalinta">
+        <span class="modeBtn on" data-mode="KUNTA">KUNTA</span>
+        <span class="modeBtn" data-mode="MINISTERIÖ">MINISTERIÖ</span>
+      </div>
+
+      <div class="strip">
+        <div class="stripItem">
+          <div class="stripLabel">Seuraava 90 päivää</div>
+          <div class="stripVal" id="kpi-90">—</div>
+        </div>
+        <div class="stripItem">
+          <div class="stripLabel">Seuraava samanaikaisuusjakso</div>
+          <div class="stripVal" id="kpi-nextq">—</div>
+        </div>
+        <div class="stripItem">
+          <div class="stripLabel">Toimeenpanoteemat korostuvat</div>
+          <div class="stripVal" id="kpi-topthemes">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: calendar -->
+      <div class="card">
+        <div class="cardHeader">
+          <h2>Samanaikaisuus kvartaaleittain</h2>
+          <div class="hint">Klikkaa kvartaalin ruutua → oikealla näkyy, mistä samanaikaisuus koostuu.</div>
+        </div>
+        <div class="cardBody">
+          <div class="cal">
+            <div></div>
+            <div class="calHead">Kunnat</div>
+            <div class="calHead">Hyvinvointialueet</div>
+            <div id="cal-rows" style="grid-column:1/-1" class="loading">Ladataan…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: explanation -->
+      <div class="card">
+        <div class="cardHeader">
+          <h2 id="side-title">Valittu ajankohta</h2>
+          <div class="hint" id="side-hint">Valitse kvartaaliruutu vasemmalta.</div>
+        </div>
+        <div class="cardBody">
+          <div class="small"><b>Toimeenpanoteemat (top)</b></div>
+          <div id="side-bars" class="loading" style="margin-top:8px">—</div>
+
+          <div style="height:12px"></div>
+          <div class="small"><b>Täsmennykset asetuksilla</b></div>
+          <div id="side-ref" class="loading" style="margin-top:8px">—</div>
+
+          <div style="height:12px"></div>
+          <div class="small"><b>Säädöspaketit</b></div>
+          <div id="side-pkgs" class="loading" style="margin-top:8px">—</div>
+
+          <div style="height:12px"></div>
+          <div id="side-note" class="small">—</div>
+        </div>
       </div>
     </div>
 
     <div class="footer">
       <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="small">Vinkki: lisää uusia paketteja data/-kansioon ja päivitä PACKAGES-lista tässä tiedostossa.</div>
+      <div class="small">Lisää uudet paketit PACKAGES-listaan tiedoston lopussa.</div>
     </div>
   </div>
 
   <script>
+    // MVP: listaa paketit manuaalisesti
     const PACKAGES = ["pkg-001", "pkg-002"];
     const DATA_DIR = "./data/";
 
     const $ = (id) => document.getElementById(id);
-    const uniq = (arr) => [...new Set(arr.filter(Boolean))];
+    const uniq = (arr) => [...new Set((arr||[]).filter(Boolean))];
 
-    async function loadPkgs(){
+    function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
+    function quarterLabel(dateStr){
+      if(!isIsoDate(dateStr)) return "—";
+      const [y,m] = dateStr.split("-").map(n=>parseInt(n,10));
+      const q = Math.floor((m-1)/3)+1;
+      return `${y} Q${q}`;
+    }
+    function withinDays(dateStr, days){
+      if(!isIsoDate(dateStr)) return false;
+      const d = new Date(dateStr + "T00:00:00");
+      const now = new Date();
+      const diff = (d - now) / (1000*60*60*24);
+      return diff >= 0 && diff <= days;
+    }
+
+    let mode = "KUNTA"; // or MINISTERIÖ
+    let allPkgs = [];
+    let calendar = {}; // q -> {kunnat:{level,score,pkgs,areas,refs}, hva:{...}}
+
+    function levelFromScore(score){
+      if(score >= 6) return "high";
+      if(score >= 3) return "mid";
+      return "low";
+    }
+
+    function scoreForScope(pkg, scope){
+      // kuormittava=2, sekavaikutus=1, keventävä=-1
+      const themes = (pkg.themes||[]).filter(t => (t.scope||[]).includes(scope));
+      let score = 0;
+      themes.forEach(t=>{
+        const d = (t.direction||"").toLowerCase();
+        if(d.includes("kuormittava")) score += 2;
+        else if(d.includes("sekavaikutus")) score += 1;
+        else if(d.includes("keventävä")) score -= 1;
+      });
+      return Math.max(0, score);
+    }
+
+    function topThemeCounts(pkgs, scope){
+      const m = new Map();
+      pkgs.forEach(p=>{
+        (p.themes||[])
+          .filter(t => (t.scope||[]).includes(scope) || scope==="VALTIO")
+          .forEach(t => m.set(t.area||"Muu",(m.get(t.area||"Muu")||0)+1));
+      });
+      return [...m.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
+    }
+
+    function collectRefs(pkgs){
+      const rows = [];
+      pkgs.forEach(p=>{
+        (p.decree_refinements||[]).forEach(r=>{
+          rows.push({decree:r.decree, what:r.what, area:r.area, scope:(r.scope||[]).join(", ")});
+        });
+      });
+      return rows;
+    }
+
+    function renderKpis(){
+      // next 90 days: count packages with any event within 90
+      let count90 = 0;
+      allPkgs.forEach(p=>{
+        const hit = (p.events||[]).some(e => withinDays(e.date, 90));
+        if(hit) count90++;
+      });
+      $("kpi-90").textContent = `${count90} merkittävää säädöspakettia`;
+
+      // next quarter with any non-low cell
+      const qs = Object.keys(calendar).sort();
+      let nextq = "—";
+      for(const q of qs){
+        const c = calendar[q];
+        const lev = (mode==="KUNTA") ? c.kunnat.level : c.kunnat.level; // ministeriössä katsotaan silti molemmat, mutta valitaan ensimmäinen ei-low
+        if(c.kunnat.level !== "low" || c.hva.level !== "low"){ nextq = q; break; }
+      }
+      $("kpi-nextq").textContent = nextq;
+
+      // top themes overall (mode-dependent)
+      const scope = (mode==="KUNTA") ? "Kunnat" : "VALTIO";
+      const top = topThemeCounts(allPkgs, scope).slice(0,2).map(x=>x[0]);
+      $("kpi-topthemes").textContent = top.length ? top.join(" + ") : "—";
+    }
+
+    function renderCalendar(){
+      const qs = Object.keys(calendar).sort();
+      if(!qs.length){
+        $("cal-rows").className = "loading";
+        $("cal-rows").textContent = "Ei ajoitettuja eventtejä (päivämäärät puuttuvat) tai paketteja liian vähän.";
+        return;
+      }
+
+      // build rows: q label + kunnat cell + hva cell
+      const rows = qs.map(q=>{
+        const c = calendar[q];
+        const kun = c.kunnat;
+        const hva = c.hva;
+
+        return `
+          <div class="qLabel">${q}</div>
+          <div class="cell ${kun.level}" data-q="${q}" data-s="Kunnat">
+            <span>${labelLevel(kun.level)}</span>
+            <small>${kun.pkgs.length} pak.</small>
+          </div>
+          <div class="cell ${hva.level}" data-q="${q}" data-s="Hyvinvointialueet">
+            <span>${labelLevel(hva.level)}</span>
+            <small>${hva.pkgs.length} pak.</small>
+          </div>
+        `;
+      }).join("");
+
+      $("cal-rows").className = "";
+      $("cal-rows").style.display = "contents";
+      $("cal-rows").innerHTML = rows;
+
+      document.querySelectorAll(".cell").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          document.querySelectorAll(".cell").forEach(x=>x.classList.remove("on"));
+          el.classList.add("on");
+          const q = el.getAttribute("data-q");
+          const scope = el.getAttribute("data-s");
+          renderSide(q, scope);
+        });
+      });
+
+      // auto-select first row (kunnat)
+      const firstCell = document.querySelector(".cell");
+      if(firstCell) firstCell.click();
+    }
+
+    function labelLevel(level){
+      if(level==="high") return "Korkea";
+      if(level==="mid") return "Keskitaso";
+      return "Matala";
+    }
+
+    function renderSide(q, scope){
+      const c = calendar[q];
+      const bucket = (scope==="Kunnat") ? c.kunnat : c.hva;
+
+      $("side-title").textContent = `${q} • ${scope}`;
+      $("side-hint").textContent = `Samanaikaisuus: ${labelLevel(bucket.level)} (abstrakti)`;
+
+      // bars
+      const topAreas = bucket.topAreas;
+      if(!topAreas.length){
+        $("side-bars").innerHTML = `<div class="small">Ei toimeenpanoteemoja tälle kohdistukselle.</div>`;
+      } else {
+        const max = topAreas[0][1] || 1;
+        $("side-bars").innerHTML = `
+          <div class="bars">
+            ${topAreas.map(([area,n])=>{
+              const pct = Math.round((n/max)*100);
+              return `
+                <div class="barRow">
+                  <div class="barLabel">${area}</div>
+                  <div class="barTrack"><div class="barFill" style="width:${pct}%"></div></div>
+                  <div class="barN">${n}</div>
+                </div>`;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      // refs
+      const refs = bucket.refs.slice(0,6);
+      $("side-ref").innerHTML = refs.length
+        ? refs.map(r=>`<div class="small" style="margin:6px 0">
+            <span class="badge ${r.decree==="VNA"?"orange":"purple"}">${r.decree}</span>
+            ${r.what} <span class="small">• ${r.area||"—"}</span>
+          </div>`).join("")
+        : `<div class="small">Ei täsmennyksiä asetuksilla tässä koosteessa.</div>`;
+
+      // packages
+      $("side-pkgs").innerHTML = bucket.pkgs.length
+        ? bucket.pkgs.slice(0,8).map(p=>`<div class="small" style="margin:6px 0">
+            <a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a>
+          </div>`).join("")
+        : `<div class="small">—</div>`;
+
+      // mode note
+      $("side-note").innerHTML =
+        (mode==="KUNTA")
+        ? `Kunta-moodi painottaa <b>priorisointia</b>: mitä osuu samaan aikaan ja mihin käytännössä (toimeenpanoteemat).`
+        : `Ministeriö-moodi painottaa <b>kentän kokonaiskuvaa</b>: samanaikaisuus + toimeenpanoteemat + asetustäsmennykset.`;
+    }
+
+    function buildCalendar(){
+      // build quarter buckets from events
+      const map = {}; // q -> {kunnatPkgs:[], hvaPkgs:[]}
+      allPkgs.forEach(p=>{
+        const qs = uniq((p.events||[]).filter(e=>isIsoDate(e.date)).map(e=>quarterLabel(e.date))).filter(q=>q!=="—");
+        qs.forEach(q=>{
+          map[q] = map[q] || {kunnat:[], hva:[]};
+          // if pkg targets scope, include
+          const targets = p.admin_tags?.kohdistus || [];
+          if(targets.includes("Kunnat")) map[q].kunnat.push(p);
+          if(targets.includes("Hyvinvointialueet")) map[q].hva.push(p);
+        });
+      });
+
+      const out = {};
+      Object.keys(map).forEach(q=>{
+        const kunPkgs = map[q].kunnat;
+        const hvaPkgs = map[q].hva;
+
+        const kunScore = kunPkgs.reduce((s,p)=>s+scoreForScope(p,"Kunnat"),0) + kunPkgs.length; // add +1 per pkg for “samanaikaisuus”
+        const hvaScore = hvaPkgs.reduce((s,p)=>s+scoreForScope(p,"Hyvinvointialueet"),0) + hvaPkgs.length;
+
+        out[q] = {
+          kunnat: {
+            level: levelFromScore(kunScore),
+            pkgs: kunPkgs.map(p=>({package_id:p.package_id,title:p.title})),
+            topAreas: topThemeCounts(kunPkgs,"Kunnat"),
+            refs: collectRefs(kunPkgs)
+          },
+          hva: {
+            level: levelFromScore(hvaScore),
+            pkgs: hvaPkgs.map(p=>({package_id:p.package_id,title:p.title})),
+            topAreas: topThemeCounts(hvaPkgs,"Hyvinvointialueet"),
+            refs: collectRefs(hvaPkgs)
+          }
+        };
+      });
+
+      calendar = out;
+    }
+
+    async function loadAll(){
       const pkgs = [];
       for(const id of PACKAGES){
         try{
@@ -112,49 +532,30 @@
           pkgs.push(await res.json());
         } catch(e){}
       }
-      return pkgs;
+      allPkgs = pkgs;
+      buildCalendar();
+      renderKpis();
+      renderCalendar();
     }
 
-    function matchesFilters(p, scope, sector){
-      const scopes = (p.admin_tags?.kohdistus||[]);
-      const sectors = (p.admin_tags?.sektorit||[]);
-      if(scope && !scopes.includes(scope)) return false;
-      if(sector && !sectors.includes(sector)) return false;
-      return true;
+    function wireMode(){
+      document.querySelectorAll("[data-mode]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          document.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("on"));
+          el.classList.add("on");
+          mode = el.getAttribute("data-mode");
+          renderKpis();
+          // keep same selected cell if any
+          const selected = document.querySelector(".cell.on");
+          if(selected){
+            renderSide(selected.getAttribute("data-q"), selected.getAttribute("data-s"));
+          }
+        });
+      });
     }
 
-    function render(pkgs){
-      const scope = $("scope-filter").value;
-      const sector = $("sector-filter").value;
-
-      const filtered = pkgs.filter(p => matchesFilters(p, scope, sector));
-
-      const rows = filtered.map(p=>{
-        const scopes = (p.admin_tags?.kohdistus||[]).map(s=>`<span class="badge" style="margin-right:6px">${s}</span>`).join("");
-        const sectors = (p.admin_tags?.sektorit||[]).slice(0,4).map(s=>`<span class="badge orange" style="margin-right:6px">${s}</span>`).join("");
-        return `<tr>
-          <td><a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a><div class="small">${p.description||""}</div></td>
-          <td>${scopes || "—"}</td>
-          <td>${sectors || "—"}</td>
-        </tr>`;
-      }).join("");
-
-      const table = `
-        <table>
-          <thead><tr><th>Säädöspaketti</th><th>Kohdistus</th><th>Sektorit</th></tr></thead>
-          <tbody>${rows || `<tr><td colspan="3">Ei osumia suodattimilla.</td></tr>`}</tbody>
-        </table>
-      `;
-      $("list").className = "";
-      $("list").innerHTML = table;
-    }
-
-    (async ()=>{
-      const pkgs = await loadPkgs();
-      $("scope-filter").addEventListener("change", ()=>render(pkgs));
-      $("sector-filter").addEventListener("change", ()=>render(pkgs));
-      render(pkgs);
-    })();
+    wireMode();
+    loadAll();
   </script>
 </body>
 </html>
