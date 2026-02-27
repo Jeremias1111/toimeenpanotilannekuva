@@ -8,22 +8,29 @@
 
   <style>
     /* Brand font: FF Mark (local only) */
-    @font-face{
-      font-family:"FF Mark";
-      src:
-        local("FF Mark"),
-        local("FFMark"),
-        local("FF Mark Pro"),
-        local("FF Mark W1G"),
-        local("FF Mark Regular"),
-        local("FF Mark Medium"),
-        local("FF Mark Bold"),
-        local("FF Mark Black"),
-        local("FF Mark Heavy");
-      font-weight:100 900;
-      font-style:normal;
-      font-display:swap;
-    }
+  @font-face{
+  font-family:"OwalMark";
+  src:
+    local("MarkOffcPro"),
+    local("MarkOffcPro-Regular"),
+    local("MarkOffcPro-ExtraLight"),
+    local("MarkOffcPro-Light"),
+    local("MarkOffcPro-Medium"),
+    local("MarkOffcPro-Bold"),
+    local("MarkOffcPro-Black"),
+    local("MarkOffcPro-Heavy"),
+    local("MarkScOffcPro"),
+    local("MarkScOffcPro-Regular"),
+    local("MarkScOffcPro-ExtraLight"),
+    local("MarkScOffcPro-Light"),
+    local("MarkScOffcPro-Medium"),
+    local("MarkScOffcPro-Bold"),
+    local("MarkScOffcPro-Black"),
+    local("MarkScOffcPro-Heavy");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
 
     :root{
       --owal-orange:#FF9900;
@@ -46,7 +53,7 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"FF Mark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"OwalMark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
       background:linear-gradient(180deg, #fff 0%, #fff 55%, #fafafa 100%);
     }
@@ -434,9 +441,9 @@
     <!-- Font check (poista myöhemmin jos haluat) -->
     <div class="footer">
       <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="small">Font test: <span style="font-family:'FF Mark';font-weight:900">FF Mark Heavy</span> /
-        <span style="font-family:'FF Mark';font-weight:600">FF Mark Medium</span> /
-        <span style="font-family:'FF Mark';font-weight:400">FF Mark Regular</span>
+      <div class="small">Font test: <span style="font-family:'OwalMark';font-weight:900">Heavy</span> /
+<span style="font-family:'OwalMark';font-weight:600">Medium</span> /
+<span style="font-family:'OwalMark';font-weight:400">Regular</span>
       </div>
     </div>
   </div>
