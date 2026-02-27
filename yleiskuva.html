@@ -1,1 +1,160 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Yleiskuva – Toimeenpanotilannekuva</title>
 
+  <style>
+    :root{
+      --owal-orange:#FF9900; --owal-purple:#6600CC;
+      --text:#1A1A1A; --muted:#666666; --line:#E6E6E6;
+      --panel:#F8F8F8; --panel2:#F4F4F4; --white:#fff;
+      --orangeL:#FFF2E8; --purpleL:#F2EBFF;
+      --radius:18px; --shadow:0 1px 0 rgba(0,0,0,.03);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--white)}
+    .topbar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2px solid var(--line);padding:18px 24px 14px 24px}
+    .topbar::after{content:"";display:block;height:4px;background:var(--owal-orange);margin:14px -24px -14px -24px}
+    .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .logo{width:160px;height:34px;display:flex;align-items:center;font-weight:900;letter-spacing:.2px}
+    h1{margin:0;font-size:22px;font-weight:900}
+    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);font-size:12px;text-decoration:none;color:var(--text)}
+    .pill.on{background:var(--orangeL);border-color:var(--owal-orange)}
+    .pill.purple{background:var(--purpleL);border-color:var(--owal-purple)}
+    .wrap{max-width:1180px;margin:0 auto;padding:22px 24px 60px 24px}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .body{padding:14px 16px}
+    h2{margin:0 0 10px 0;font-size:16px;font-weight:900}
+    .hint{margin:0 0 12px 0;color:var(--muted);font-size:13px}
+    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    thead th{background:#EEE;padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:12px}
+    tbody td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+    tbody tr:last-child td{border-bottom:none}
+    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);white-space:nowrap}
+    .badge.orange{background:var(--orangeL);border-color:var(--owal-orange);color:var(--owal-orange)}
+    .small{font-size:12px;color:var(--muted)}
+    .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
+    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    a{color:var(--text);text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">owalgroup</div>
+      <div>
+        <h1>Yleiskuva</h1>
+        <div class="subtitle">Tilannekuva säädöspaketeista (laki + asetukset) – listaus ja suodatus</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="pill on" href="./yleiskuva.html">Yleiskuva</a>
+      <a class="pill" href="./index.html">Uudistusnäkymä</a>
+      <a class="pill" href="./hallinnonalat.html">Hallinnonalat</a>
+      <span class="pill purple">MVP</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="body">
+        <h2>Säädöspaketit</h2>
+        <p class="hint">Tavoite: löydä nopeasti, mitä on tulossa ja mihin se kohdistuu. (Kasautumat syvennetään seuraavassa iteraatiossa.)</p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px">
+          <label class="small">Kohdistus:</label>
+          <select id="scope-filter">
+            <option value="">Kaikki</option>
+            <option value="Kunnat">Kunnat</option>
+            <option value="Hyvinvointialueet">Hyvinvointialueet</option>
+            <option value="Valtio">Valtio</option>
+          </select>
+
+          <label class="small">Sektori:</label>
+          <select id="sector-filter">
+            <option value="">Kaikki</option>
+            <option value="Työllisyys">Työllisyys</option>
+            <option value="SOTE">SOTE</option>
+            <option value="Digitalisaatio">Digitalisaatio</option>
+          </select>
+        </div>
+
+        <div id="list" class="loading">Ladataan…</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
+      <div class="small">Vinkki: lisää uusia paketteja data/-kansioon ja päivitä PACKAGES-lista tässä tiedostossa.</div>
+    </div>
+  </div>
+
+  <script>
+    const PACKAGES = ["pkg-001", "pkg-002"];
+    const DATA_DIR = "./data/";
+
+    const $ = (id) => document.getElementById(id);
+    const uniq = (arr) => [...new Set(arr.filter(Boolean))];
+
+    async function loadPkgs(){
+      const pkgs = [];
+      for(const id of PACKAGES){
+        try{
+          const res = await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
+          if(!res.ok) continue;
+          pkgs.push(await res.json());
+        } catch(e){}
+      }
+      return pkgs;
+    }
+
+    function matchesFilters(p, scope, sector){
+      const scopes = (p.admin_tags?.kohdistus||[]);
+      const sectors = (p.admin_tags?.sektorit||[]);
+      if(scope && !scopes.includes(scope)) return false;
+      if(sector && !sectors.includes(sector)) return false;
+      return true;
+    }
+
+    function render(pkgs){
+      const scope = $("scope-filter").value;
+      const sector = $("sector-filter").value;
+
+      const filtered = pkgs.filter(p => matchesFilters(p, scope, sector));
+
+      const rows = filtered.map(p=>{
+        const scopes = (p.admin_tags?.kohdistus||[]).map(s=>`<span class="badge" style="margin-right:6px">${s}</span>`).join("");
+        const sectors = (p.admin_tags?.sektorit||[]).slice(0,4).map(s=>`<span class="badge orange" style="margin-right:6px">${s}</span>`).join("");
+        return `<tr>
+          <td><a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a><div class="small">${p.description||""}</div></td>
+          <td>${scopes || "—"}</td>
+          <td>${sectors || "—"}</td>
+        </tr>`;
+      }).join("");
+
+      const table = `
+        <table>
+          <thead><tr><th>Säädöspaketti</th><th>Kohdistus</th><th>Sektorit</th></tr></thead>
+          <tbody>${rows || `<tr><td colspan="3">Ei osumia suodattimilla.</td></tr>`}</tbody>
+        </table>
+      `;
+      $("list").className = "";
+      $("list").innerHTML = table;
+    }
+
+    (async ()=>{
+      const pkgs = await loadPkgs();
+      $("scope-filter").addEventListener("change", ()=>render(pkgs));
+      $("sector-filter").addEventListener("change", ()=>render(pkgs));
+      render(pkgs);
+    })();
+  </script>
+</body>
+</html>
