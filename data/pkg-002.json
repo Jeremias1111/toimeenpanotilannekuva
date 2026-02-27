@@ -1,0 +1,38 @@
+{
+  "package_id": "pkg-002",
+  "title": "Toinen säädöspaketti (demo) – vaihda otsikko",
+  "description": "Lyhyt kuvaus: mitä tämä säädöspaketti täsmentää ja miksi se on kentälle relevantti.",
+  "admin_tags": {
+    "hallinnonala": "STM (esimerkki)",
+    "sektorit": ["SOTE"],
+    "kohdistus": ["Kunnat", "Hyvinvointialueet"],
+    "status": "draft"
+  },
+  "documents": [
+    { "doc_id": "doc-201", "type": "Laki", "title": "Laki (vaihda)", "url": "https://www.finlex.fi/", "date": "" },
+    { "doc_id": "doc-202", "type": "VNA", "title": "VNA (vaihda, jos on)", "url": "", "date": "" },
+    { "doc_id": "doc-203", "type": "MIN", "title": "Ministeriön asetus (vaihda, jos on)", "url": "", "date": "" }
+  ],
+  "events": [
+    {
+      "id": "ev-201",
+      "type": "voimaantulo",
+      "date": "—",
+      "scope": ["Kaikki"],
+      "anchor": { "doc_type": "Laki", "ref": "—", "quote": "Lisää katkelma voimaantulosäännöksestä." },
+      "confidence": "low"
+    }
+  ],
+  "themes": [
+    {
+      "id": "th-201",
+      "area": "Prosessi",
+      "scope": ["Kunnat"],
+      "direction": "Sekavaikutus",
+      "text": "Lisää teema (abstrakti): mihin vaikutusalueeseen muutos osuu.",
+      "anchor": { "doc_type": "Laki", "ref": "—", "quote": "Lyhyt katkelma pykälästä." },
+      "confidence": "low"
+    }
+  ],
+  "decree_refinements": []
+}
