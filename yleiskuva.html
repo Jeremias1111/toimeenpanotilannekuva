@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Toimeenpanotilannekuva – Yleiskuva</title>
+  <title>Uudistuskuorman seuranta – Yleiskuva</title>
 
   <style>
+    /* Local font mapping */
     @font-face{
       font-family:"OwalMark";
       src:
@@ -21,32 +22,49 @@
     }
 
     :root{
+      /* Brand */
       --orange:#FF9900;
       --orangeRed:#FF6633;
-      --orangeL:#FFF2E8;
+      --orangeTint:#FFF2E8;
+
+      /* Neutrals */
       --text:#141414;
       --muted:#6A6A6A;
       --line:#E7E7E7;
-      --panel:#F7F7F7;
-      --panel2:#F2F2F2;
-      --white:#fff;
+      --bg:#FAFAFA;
+      --panel:#F4F4F4;
+      --white:#FFFFFF;
 
-      --radius:18px;
-      --shadow:0 2px 0 rgba(0,0,0,.02);
+      /* Radii */
+      --r-lg:18px;
+      --r-md:14px;
+      --r-sm:12px;
 
+      --shadow:0 1px 0 rgba(0,0,0,.02);
+
+      /* Type system (consistent) */
       --fw-regular:400;
       --fw-medium:600;
       --fw-bold:700;
       --fw-heavy:900;
+
+      --fs-xxl:28px; /* H1 */
+      --fs-xl:20px;  /* Page heading */
+      --fs-lg:16px;  /* Section title */
+      --fs-md:13px;  /* Body */
+      --fs-sm:12px;  /* Labels */
+      --fs-xs:11px;  /* Micro */
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"OwalMark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"OwalMark", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       font-weight:var(--fw-regular);
       color:var(--text);
-      background:linear-gradient(180deg, #fff 0%, #fff 62%, #fafafa 100%);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
     /* Topbar */
@@ -64,35 +82,54 @@
       background:linear-gradient(90deg, var(--orange), var(--orangeRed));
       margin:12px -22px -12px -22px;
     }
-    .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-    .logo{display:flex;align-items:center;text-decoration:none;padding:6px 8px;border-radius:14px}
+
+    .brandRow{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;text-decoration:none;padding:6px 8px;border-radius:var(--r-md)}
     .logo:hover{background:var(--panel)}
     .logo img{height:34px;width:auto;display:block}
-    .titleWrap{flex:1;min-width:280px}
-    .title{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
-    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
-    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    .head{min-width:280px;flex:1}
+    .pageTitle{
+      margin:0;
+      font-size:var(--fs-xl);
+      font-weight:var(--fw-heavy);
+      letter-spacing:-.2px;
+      line-height:1.05;
+    }
+    .pageSub{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:var(--fs-md);
+      line-height:1.35;
+      font-weight:var(--fw-regular);
+    }
+
+    .nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;
+      padding:8px 12px;
+      border-radius:999px;
       border:1px solid var(--line);
-      background:var(--panel2);
-      font-size:12px;font-weight:var(--fw-medium);
-      text-decoration:none;color:var(--text);
+      background:var(--panel);
+      font-size:var(--fs-sm);
+      font-weight:var(--fw-medium);
+      text-decoration:none;
+      color:var(--text);
       user-select:none;
     }
-    .pill.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
+    .pill.on{
+      background:var(--orangeTint);
+      border-color:rgba(255,153,0,.55);
+    }
+
     .wrap{max-width:1280px;margin:0 auto;padding:18px 22px 70px 22px}
 
-    /* Filters bar */
+    /* Filters */
     .filters{
-      margin-top:12px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
       padding:12px;
-      border:1px solid var(--line);
-      border-radius:18px;
       background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--r-lg);
       box-shadow:var(--shadow);
     }
     .search{
@@ -101,13 +138,19 @@
       border:1px solid var(--line);
       border-radius:999px;
       padding:10px 12px;
-      background:var(--panel);
+      background:var(--bg);
+    }
+    .searchLabel{
+      font-size:var(--fs-sm);
+      font-weight:var(--fw-bold);
+      color:var(--muted);
     }
     .search input{
       border:none; outline:none; width:100%;
       background:transparent;
       font-family:inherit;
-      font-size:13px;
+      font-size:var(--fs-md);
+      font-weight:var(--fw-regular);
     }
     .select{
       border:1px solid var(--line);
@@ -115,28 +158,26 @@
       padding:10px 12px;
       background:#fff;
       font-family:inherit;
-      font-size:13px;
+      font-size:var(--fs-md);
+      font-weight:var(--fw-medium);
     }
-    .seg{
-      display:flex; gap:8px; flex-wrap:wrap;
-      align-items:center;
-    }
-    .chipBtn{
+    .seg{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .segBtn{
       padding:8px 10px;
       border-radius:999px;
       border:1px solid var(--line);
-      background:var(--panel2);
-      font-size:12px;
+      background:var(--panel);
+      font-size:var(--fs-sm);
       font-weight:var(--fw-medium);
       cursor:pointer;
       user-select:none;
     }
-    .chipBtn.on{
-      background:var(--orangeL);
-      border-color:rgba(255,153,0,.65);
+    .segBtn.on{
+      background:var(--orangeTint);
+      border-color:rgba(255,153,0,.55);
     }
 
-    /* Layout: 3 panels like mockup */
+    /* Grid */
     .grid{
       display:grid;
       grid-template-columns: 360px 1fr 420px;
@@ -145,30 +186,89 @@
       align-items:start;
     }
     @media (max-width:1200px){
-      .grid{grid-template-columns: 1fr}
+      .grid{grid-template-columns:1fr}
     }
 
+    /* Cards */
     .card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:var(--r-lg);
       box-shadow:var(--shadow);
       overflow:hidden;
     }
     .cardHeader{
       padding:14px 16px;
       border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,#fff 0%, #fafafa 100%);
+      background:#fff;
     }
     .cardBody{padding:14px 16px}
-    .h2{margin:0;font-size:16px;font-weight:var(--fw-bold);letter-spacing:-.1px}
-    .hint{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+    .h2{
+      margin:0;
+      font-size:var(--fs-lg);
+      font-weight:var(--fw-bold);
+      letter-spacing:-.1px;
+      line-height:1.15;
+    }
+    .hint{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:var(--fs-md);
+      line-height:1.35;
+    }
+
+    /* KPI strip (4 cards) */
+    .kpiRow{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width:1200px){
+      .kpiRow{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width:700px){
+      .kpiRow{grid-template-columns: 1fr}
+    }
+    .kpi{
+      border:1px solid var(--line);
+      border-radius:var(--r-md);
+      background:#fff;
+      padding:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .kpi::before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0;
+      width:6px;
+      background:var(--orange);
+    }
+    .kpi.red::before{background:var(--orangeRed)}
+    .kpiLabel{
+      font-size:var(--fs-sm);
+      color:var(--muted);
+      font-weight:var(--fw-bold);
+    }
+    .kpiVal{
+      margin-top:6px;
+      font-size:18px;
+      font-weight:var(--fw-heavy);
+      letter-spacing:-.2px;
+      line-height:1.1;
+    }
+    .kpiSub{
+      margin-top:4px;
+      font-size:var(--fs-sm);
+      color:var(--muted);
+      line-height:1.3;
+    }
 
     /* Left list (12 kk) */
     .list{display:flex;flex-direction:column;gap:10px}
     .item{
       border:1px solid var(--line);
-      border-radius:14px;
+      border-radius:var(--r-md);
       padding:12px;
       background:#fff;
       cursor:pointer;
@@ -176,35 +276,40 @@
     }
     .item:hover{transform:translateY(-1px)}
     .itemTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .itemTitle{font-weight:var(--fw-bold);font-size:13px;line-height:1.25}
-    .itemMeta{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.35}
+    .itemTitle{
+      font-size:var(--fs-md);
+      font-weight:var(--fw-bold);
+      line-height:1.25;
+      letter-spacing:-.05px;
+    }
+    .itemMeta{margin-top:6px;color:var(--muted);font-size:var(--fs-sm);line-height:1.35}
     .tagRow{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
     .tag{
-      font-size:11px;
+      font-size:var(--fs-xs);
       border:1px solid var(--line);
-      background:var(--panel2);
+      background:var(--panel);
       color:var(--muted);
       padding:4px 8px;
       border-radius:999px;
       font-weight:var(--fw-medium);
     }
 
-    /* Intensity pill 1–5 */
+    /* Score badge (1–5) */
     .score{
-      min-width:56px;
+      min-width:54px;
       text-align:center;
       border-radius:999px;
       padding:6px 10px;
-      font-size:12px;
+      font-size:var(--fs-sm);
       font-weight:var(--fw-bold);
       border:1px solid rgba(255,153,0,.45);
-      background:var(--orangeL);
-      color:#8a3a00;
+      background:var(--orangeTint);
+      color:#7a3a00;
     }
     .score.high{
       border-color:rgba(255,102,51,.55);
-      background:linear-gradient(180deg, rgba(255,102,51,.18), #fff);
-      color:#8a1f00;
+      background:rgba(255,102,51,.12);
+      color:#7a1f00;
     }
     .score.low{
       border-color:var(--line);
@@ -212,37 +317,57 @@
       color:var(--muted);
     }
 
-    /* Middle: 24 kk timeline bars */
-    .timeline{
+    /* Timeline chart (24 kk) */
+    .chart{
       display:grid;
-      grid-template-columns: 70px 1fr;
-      gap:10px;
-      align-items:center;
+      grid-template-columns: 64px 1fr;
+      gap:12px;
+      align-items:start;
     }
-    .rowLabel{font-size:12px;color:var(--muted);font-weight:var(--fw-bold)}
-    .bars{display:grid;grid-template-columns: repeat(8, 1fr); gap:8px}
-    .qbar{
+    .chartLabel{
+      font-size:var(--fs-sm);
+      font-weight:var(--fw-bold);
+      color:var(--muted);
+      padding-top:6px;
+    }
+    .bars{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap:8px;
+      align-items:end;
+    }
+    .bar{
+      height:150px;
       border:1px solid var(--line);
-      border-radius:14px;
-      background:var(--panel2);
-      height:84px;
-      padding:10px;
+      border-radius:var(--r-md);
+      background:#fff;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
+      justify-content:flex-end;
       cursor:pointer;
+      overflow:hidden;
     }
-    .qbar.on{outline:3px solid rgba(255,153,0,.22)}
-    .qbar .q{font-size:12px;font-weight:var(--fw-bold)}
-    .qbar .v{font-size:14px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
-    .qbar.low{background:#fff}
-    .qbar.mid{background:linear-gradient(180deg, var(--orangeL), #fff); border-color:rgba(255,153,0,.35)}
-    .qbar.high{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff); border-color:rgba(255,102,51,.45)}
-    .qbar .sub{font-size:11px;color:var(--muted);font-weight:var(--fw-medium)}
+    .barInner{
+      height:0%;
+      background:rgba(255,153,0,.25);
+      border-top:1px solid rgba(255,153,0,.35);
+      transition:height .15s ease;
+    }
+    .bar.high .barInner{background:rgba(255,102,51,.22); border-top-color:rgba(255,102,51,.35)}
+    .bar.on{outline:3px solid rgba(255,153,0,.22)}
+    .barCap{
+      padding:10px 10px 9px 10px;
+      border-top:1px solid var(--line);
+      background:var(--bg);
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:8px;
+    }
+    .barQ{font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--muted)}
+    .barV{font-size:var(--fs-md);font-weight:var(--fw-heavy);letter-spacing:-.15px}
 
-    /* Right: heatmap "now" */
-    .heatTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-end;flex-wrap:wrap}
-    .heatNote{color:var(--muted);font-size:12px;line-height:1.35}
+    /* Heatmap tiles (not circles) */
     .heat{
       margin-top:12px;
       display:grid;
@@ -250,46 +375,65 @@
       gap:8px;
       align-items:stretch;
     }
-    .heat .h{font-size:11px;color:var(--muted);font-weight:var(--fw-bold);padding:6px 0}
-    .heat .r{font-size:12px;color:var(--muted);font-weight:var(--fw-bold);display:flex;align-items:center}
-    .cell{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:var(--panel2);
+    .heat .h{
+      font-size:var(--fs-xs);
+      font-weight:var(--fw-bold);
+      color:var(--muted);
+      padding:6px 0;
+    }
+    .heat .r{
+      font-size:var(--fs-sm);
+      font-weight:var(--fw-bold);
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+    }
+    .tile{
       height:44px;
+      border-radius:var(--r-md);
+      border:1px solid var(--line);
+      background:var(--panel);
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:var(--fw-heavy);
-      letter-spacing:-.2px;
+      letter-spacing:-.15px;
       cursor:pointer;
       user-select:none;
     }
-    .cell.low{background:#fff}
-    .cell.mid{background:linear-gradient(180deg, var(--orangeL), #fff); border-color:rgba(255,153,0,.35)}
-    .cell.high{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff); border-color:rgba(255,102,51,.45)}
-    .cell.on{outline:3px solid rgba(255,153,0,.22)}
+    .tile.low{background:#fff}
+    .tile.mid{background:rgba(255,153,0,.16); border-color:rgba(255,153,0,.35)}
+    .tile.high{background:rgba(255,102,51,.16); border-color:rgba(255,102,51,.40)}
+    .tile.on{outline:3px solid rgba(255,153,0,.22)}
 
-    /* Side drill (under heatmap) */
+    /* Drilldown */
     .drill{
       margin-top:12px;
       border-top:1px solid var(--line);
       padding-top:12px;
     }
-    .drillTitle{font-weight:var(--fw-bold);font-size:13px}
+    .drillTitle{
+      font-size:var(--fs-md);
+      font-weight:var(--fw-bold);
+      letter-spacing:-.05px;
+    }
     .drillList{margin-top:8px;display:flex;flex-direction:column;gap:6px}
-    .drillItem{font-size:12px;color:var(--text)}
-    .drillItem small{color:var(--muted)}
+    .drillItem{
+      font-size:var(--fs-sm);
+      line-height:1.3;
+    }
+    .drillItem small{color:var(--muted);font-weight:var(--fw-regular)}
+
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
 
     .loading{
       border:1px solid var(--line);
-      border-radius:14px;
+      border-radius:var(--r-md);
       background:var(--panel);
       padding:12px;
       color:var(--muted);
-      font-size:13px;
+      font-size:var(--fs-md);
     }
 
     .footer{
@@ -297,7 +441,7 @@
       padding-top:16px;
       border-top:1px solid var(--line);
       color:var(--muted);
-      font-size:12px;
+      font-size:var(--fs-sm);
       display:flex;
       justify-content:space-between;
       gap:12px;
@@ -312,9 +456,9 @@
       <a class="logo" href="./yleiskuva.html" aria-label="Owal Group">
         <img src="./assets/owal_logo.png" alt="Owal Group logo" />
       </a>
-      <div class="titleWrap">
-        <div class="title">Uudistuskuorman seuranta</div>
-        <div class="subtitle">Selkeä yleiskuva (12 kk + 24 kk + kartta nyt). Tarkennukset uudistusnäkymässä.</div>
+      <div class="head">
+        <div class="pageTitle">Uudistuskuorman seuranta</div>
+        <div class="pageSub">Selkeä yleiskuva (12 kk + 24 kk + kartta nyt). Tarkennukset uudistusnäkymässä.</div>
       </div>
     </div>
 
@@ -328,7 +472,7 @@
   <div class="wrap">
     <div class="filters">
       <div class="search">
-        <span style="font-weight:var(--fw-bold);color:var(--muted)">Hae</span>
+        <span class="searchLabel">Hae</span>
         <input id="q" placeholder="esim. työllisyys, data, sote…" />
       </div>
 
@@ -342,10 +486,34 @@
       </select>
 
       <div class="seg" aria-label="Kohdistus">
-        <span class="chipBtn on" data-scope="">Kaikki</span>
-        <span class="chipBtn" data-scope="Kunnat">Kunnat</span>
-        <span class="chipBtn" data-scope="Hyvinvointialueet">Hyvinvointialueet</span>
-        <span class="chipBtn" data-scope="Valtio">Valtio</span>
+        <span class="segBtn on" data-scope="">Kaikki</span>
+        <span class="segBtn" data-scope="Kunnat">Kunnat</span>
+        <span class="segBtn" data-scope="Hyvinvointialueet">Hyvinvointialueet</span>
+        <span class="segBtn" data-scope="Valtio">Valtio</span>
+      </div>
+    </div>
+
+    <!-- KPI Row (mockup style) -->
+    <div class="kpiRow">
+      <div class="kpi">
+        <div class="kpiLabel">Uudistusintensiteetti</div>
+        <div class="kpiVal" id="kpi-intensity">—</div>
+        <div class="kpiSub" id="kpi-intensity-sub">—</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpiLabel">Kapasiteettipaine</div>
+        <div class="kpiVal" id="kpi-capacity">—</div>
+        <div class="kpiSub" id="kpi-capacity-sub">—</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpiLabel">Aikapaine</div>
+        <div class="kpiVal" id="kpi-time">—</div>
+        <div class="kpiSub" id="kpi-time-sub">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpiLabel">Rakenteellinen valmius</div>
+        <div class="kpiVal" id="kpi-ready">—</div>
+        <div class="kpiSub" id="kpi-ready-sub">—</div>
       </div>
     </div>
 
@@ -361,11 +529,11 @@
         </div>
       </div>
 
-      <!-- Middle: 24 kk timeline -->
+      <!-- Middle: 24 kk timeline chart -->
       <div class="card">
         <div class="cardHeader">
-          <div class="h2">Aikajana (24 kk)</div>
-          <div class="hint">Kvartaaleittain: samanaikaisuus kunnille ja hyvinvointialueille.</div>
+          <div class="h2">Toimeenpanokuorman aikajana (24 kk)</div>
+          <div class="hint">Kvartaaleittain: samanaikaisuus kunnille ja hyvinvointialueille (1–5).</div>
         </div>
         <div class="cardBody">
           <div id="timeline" class="loading">Ladataan…</div>
@@ -375,16 +543,12 @@
       <!-- Right: heatmap now -->
       <div class="card">
         <div class="cardHeader">
-          <div class="heatTop">
-            <div>
-              <div class="h2">Kartta (nyt)</div>
-              <div class="hint">Sektori × kohdistus. Klikkaa solua → näytä, mistä koostuu.</div>
-            </div>
-            <div class="heatNote" id="nowLabel">—</div>
-          </div>
+          <div class="h2">Kuormituskartta (nyt)</div>
+          <div class="hint" id="nowLabel">—</div>
         </div>
         <div class="cardBody">
           <div id="heat" class="loading">Ladataan…</div>
+
           <div class="drill">
             <div class="drillTitle" id="drillTitle">Valitse solu kartasta</div>
             <div class="drillList" id="drillList"></div>
@@ -403,36 +567,32 @@
     // MVP: listaa paketit manuaalisesti
     const PACKAGES = ["pkg-001", "pkg-002"];
     const DATA_DIR = "./data/";
+    const SECTORS = ["SOTE","Koulutus","Työllisyys","Ilmasto","Digitalisaatio"];
+    const ROWS = [
+      ["Hallinnonalat","Valtio"],
+      ["Kunnat","Kunnat"],
+      ["Hyvinvointialueet","Hyvinvointialueet"]
+    ];
 
-    const $ = (id) => document.getElementById(id);
+    const $ = (id)=>document.getElementById(id);
 
     function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
-    function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
+    function isIsoDate(s){ return typeof s==="string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
+    function addMonths(d, m){ const x=new Date(d.getTime()); x.setMonth(x.getMonth()+m); return x; }
+
     function quarterLabel(dateStr){
       if(!isIsoDate(dateStr)) return null;
-      const [y,m] = dateStr.split("-").map(n=>parseInt(n,10));
-      const q = Math.floor((m-1)/3)+1;
-      return `${y} Q${q}`;
-    }
-    function addMonths(d, m){
-      const x = new Date(d.getTime());
-      x.setMonth(x.getMonth()+m);
-      return x;
-    }
-    function nowQuarter(){
-      const d = new Date();
-      const y = d.getFullYear();
-      const q = Math.floor(d.getMonth()/3)+1;
+      const [y,m]=dateStr.split("-").map(n=>parseInt(n,10));
+      const q=Math.floor((m-1)/3)+1;
       return `${y} Q${q}`;
     }
     function nextQuarters(n=8){
       const out=[];
       const d=new Date();
-      // start at current quarter
-      const startMonth = Math.floor(d.getMonth()/3)*3;
-      const start = new Date(d.getFullYear(), startMonth, 1);
+      const startMonth=Math.floor(d.getMonth()/3)*3;
+      const start=new Date(d.getFullYear(), startMonth, 1);
       for(let i=0;i<n;i++){
-        const dt = addMonths(start, i*3);
+        const dt=addMonths(start, i*3);
         const y=dt.getFullYear();
         const q=Math.floor(dt.getMonth()/3)+1;
         out.push(`${y} Q${q}`);
@@ -440,56 +600,81 @@
       return out;
     }
 
-    function pkgHasScope(p, scope){
-      return (p.admin_tags?.kohdistus||[]).includes(scope);
+    function primaryDate(p){
+      const ds=(p.events||[]).map(e=>e.date).filter(isIsoDate).sort();
+      return ds[0] || null;
+    }
+    function inNextMonths(dateStr, months){
+      if(!isIsoDate(dateStr)) return false;
+      const d=new Date(dateStr+"T00:00:00");
+      const now=new Date();
+      const lim=addMonths(now, months);
+      return d>=now && d<=lim;
     }
 
-    // Intensity 1–5 derived from themes (scope aware). Simple, consistent.
-    function intensity(p, scope){
-      const themes = (p.themes||[]).filter(t => (t.scope||[]).includes(scope));
-      let s=0;
+    // --------- NEW: absolute index (does not collapse on small data) ----------
+    function concurrencyIndex(pkg, scope, quarter){
+      // +15 per package if it has any event in the quarter
+      const qset = new Set((pkg.events||[]).map(e=>quarterLabel(e.date)).filter(Boolean));
+      if(!qset.has(quarter)) return 0;
+
+      let idx = 15;
+
+      // themes: +8 kuormittava, +4 sekavaikutus, -3 keventävä
+      const themes=(pkg.themes||[]).filter(t => (t.scope||[]).includes(scope));
       for(const t of themes){
         const d=(t.direction||"").toLowerCase();
-        if(d.includes("kuormittava")) s+=2;
-        else if(d.includes("sekavaikutus")) s+=1;
-        else if(d.includes("keventävä")) s-=1;
+        if(d.includes("kuormittava")) idx += 8;
+        else if(d.includes("sekavaikutus")) idx += 4;
+        else if(d.includes("keventävä")) idx -= 3;
       }
-      s = Math.max(0, s) + Math.min(2, themes.length); // + small “volume” factor
-      // map to 1..5
-      if(s>=9) return 5;
-      if(s>=6) return 4;
-      if(s>=4) return 3;
-      if(s>=2) return 2;
-      return 1;
+
+      // decree refinements add: +10 if any (scope match loosely)
+      const refs=(pkg.decree_refinements||[]);
+      if(refs.length) idx += 10;
+
+      return Math.max(0, idx);
     }
 
-    function levelClass(v){
+    function indexToScore(idx){
+      // 1..5 stable buckets
+      if(idx >= 75) return 5;
+      if(idx >= 55) return 4;
+      if(idx >= 35) return 3;
+      if(idx >= 20) return 2;
+      return 1;
+    }
+    function scoreClass(v){
       if(v>=4) return "high";
       if(v>=3) return "mid";
       return "low";
     }
 
-    function primaryDate(p){
-      // prefer earliest ISO event date
-      const ds = (p.events||[]).map(e=>e.date).filter(isIsoDate).sort();
-      return ds[0] || null;
+    // List score per pkg (12 kk): choose best relevant scope
+    function pkgScore12m(pkg, scopeFilter){
+      const scopes = scopeFilter ? [scopeFilter] : (pkg.admin_tags?.kohdistus||["Kunnat"]);
+      const dates = (pkg.events||[]).map(e=>e.date).filter(isIsoDate);
+      const relevant = dates.filter(d=>inNextMonths(d,12));
+      if(!relevant.length) return 1;
+
+      // take earliest quarter within 12m and compute score for that quarter
+      const q = quarterLabel(relevant.sort()[0]);
+      let best=1;
+      for(const s of scopes){
+        const sc=indexToScore(concurrencyIndex(pkg, s, q));
+        best=Math.max(best, sc);
+      }
+      return best;
     }
 
-    function inNextMonths(dateStr, months){
-      if(!isIsoDate(dateStr)) return false;
-      const d = new Date(dateStr+"T00:00:00");
-      const now = new Date();
-      const limit = addMonths(now, months);
-      return d >= now && d <= limit;
-    }
-
+    // --------- Filters ----------
     let allPkgs=[];
-    let selectedScope=""; // filter
+    let selectedScope="";
     let selectedSector="";
     let qText="";
 
     function matchesFilters(p){
-      const text = (qText||"").toLowerCase().trim();
+      const text=(qText||"").toLowerCase().trim();
       const title=(p.title||"").toLowerCase();
       const desc=(p.description||"").toLowerCase();
       const sectors=(p.admin_tags?.sektorit||[]);
@@ -500,14 +685,70 @@
       return true;
     }
 
+    // --------- Render: KPI row ----------
+    function renderKpis(){
+      // Use 24kk max score (kunnat/hva) as base summary
+      const qs=nextQuarters(8);
+      let maxScore=1;
+      let maxCount=0;
+      let peakQ=null;
+
+      for(const q of qs){
+        let sum = 0;
+        let count=0;
+        for(const p of allPkgs){
+          if(!matchesFilters(p)) continue;
+          // count if any target in kunnat/hva
+          const targets = p.admin_tags?.kohdistus||[];
+          const relevantScopes = targets.filter(x => x==="Kunnat" || x==="Hyvinvointialueet");
+          for(const s of relevantScopes){
+            const idx = concurrencyIndex(p, s, q);
+            if(idx>0){ sum += idx; count++; }
+          }
+        }
+        const score=indexToScore(sum);
+        if(score>maxScore){ maxScore=score; peakQ=q; maxCount=count; }
+      }
+
+      const intensityLabel = maxScore>=4 ? "Keskitaso–korkea" : (maxScore===3 ? "Keskitaso" : "Matala");
+      $("kpi-intensity").textContent = intensityLabel;
+      $("kpi-intensity-sub").textContent = peakQ ? `Samanaikaisuuspiikki: ${peakQ}` : "Ei ajoittuneita eventtejä";
+
+      // Capacity: based on how many packages match filters in 12 months
+      const next12 = allPkgs.filter(p => matchesFilters(p) && (p.events||[]).some(e=>inNextMonths(e.date,12)));
+      const cap = next12.length >= 6 ? "Korkea" : (next12.length>=3 ? "Keskitaso" : "Matala");
+      $("kpi-capacity").textContent = cap;
+      $("kpi-capacity-sub").textContent = `Uudistuksia 12 kk: ${next12.length}`;
+
+      // Time pressure: if many events in next 6 months
+      const next6 = allPkgs.filter(p => matchesFilters(p) && (p.events||[]).some(e=>inNextMonths(e.date,6)));
+      const time = next6.length >= 4 ? "Tiukka aikataulu" : (next6.length>=2 ? "Kohtalainen" : "Hallittava");
+      $("kpi-time").textContent = time;
+      $("kpi-time-sub").textContent = `Lähikuukausille osuu: ${next6.length}`;
+
+      // Readiness (proxy): more “roles/data” themes -> lower readiness. Keep neutral.
+      let risk=0;
+      for(const p of allPkgs){
+        if(!matchesFilters(p)) continue;
+        for(const t of (p.themes||[])){
+          const a=(t.area||"").toLowerCase();
+          if(a.includes("data") || a.includes("raport")) risk++;
+        }
+      }
+      const ready = risk>=8 ? "Keskitaso" : (risk>=4 ? "Keskitaso–hyvä" : "Hyvä");
+      $("kpi-ready").textContent = ready;
+      $("kpi-ready-sub").textContent = "Roolit ja tiedonhallinta korostuvat";
+    }
+
+    // --------- Render: list (12 kk) ----------
     function renderList(){
       const items = allPkgs
         .filter(matchesFilters)
         .map(p=>{
           const d = primaryDate(p);
-          const dateLabel = d ? `Voimaan / virstanpylväs: ${d}` : "Ajankohta: —";
+          const dateLabel = d ? `Seuraava virstanpylväs: ${d}` : "Ajankohta: —";
           const scopeForScore = selectedScope || (p.admin_tags?.kohdistus||[])[0] || "Kunnat";
-          const score = intensity(p, scopeForScore);
+          const score = pkgScore12m(p, scopeForScore);
           const cls = score>=4 ? "high" : (score<=2 ? "low" : "");
           const tags = []
             .concat((p.admin_tags?.sektorit||[]).slice(0,2).map(x=>`<span class="tag">${x}</span>`))
@@ -529,181 +770,167 @@
         });
 
       $("list").className="";
-      $("list").innerHTML = `<div class="list">${items.length?items.join(""):`<div class="loading">Ei osumia suodattimilla.</div>`}</div>`;
+      $("list").innerHTML = `<div class="list">${items.length ? items.join("") : `<div class="loading">Ei osumia suodattimilla.</div>`}</div>`;
     }
 
+    // --------- Render: timeline (24 kk) ----------
     function renderTimeline(){
-      const qs = nextQuarters(8);
-      const scopes = ["Kunnat","Hyvinvointialueet"];
-
-      // compute quarter intensity per scope
-      const bucket = {}; // scope -> q -> score sum (normalized later)
-      for(const s of scopes){
-        bucket[s]={};
-        for(const q of qs) bucket[s][q]=0;
-      }
-
-      for(const p of allPkgs){
-        if(!matchesFilters(p)) continue;
-        const sectors=(p.admin_tags?.sektorit||[]);
-        if(selectedSector && !sectors.includes(selectedSector)) continue;
-
-        // quarter presence: any event in quarter
-        const qset = new Set((p.events||[]).map(e=>quarterLabel(e.date)).filter(Boolean));
-        for(const scope of scopes){
-          if(!pkgHasScope(p, scope)) continue;
-          for(const q of qs){
-            if(qset.has(q)){
-              bucket[scope][q] += intensity(p, scope);
-            }
-          }
+      const qs=nextQuarters(8);
+      // compute sum index for each quarter (kunnat + hva)
+      const vals = qs.map(q=>{
+        let sumIdx=0;
+        for(const p of allPkgs){
+          if(!matchesFilters(p)) continue;
+          // sector filter already in matchesFilters
+          const targets = p.admin_tags?.kohdistus||[];
+          if(targets.includes("Kunnat")) sumIdx += concurrencyIndex(p, "Kunnat", q);
+          if(targets.includes("Hyvinvointialueet")) sumIdx += concurrencyIndex(p, "Hyvinvointialueet", q);
         }
-      }
+        return sumIdx;
+      });
 
-      // normalize each scope into 1..5 relative within view
-      const norm = {};
-      for(const scope of scopes){
-        const vals = qs.map(q=>bucket[scope][q]);
-        const max = Math.max(1, ...vals);
-        norm[scope] = qs.map(q=>{
-          const v = bucket[scope][q];
-          const scaled = Math.round((v/max)*5);
-          return Math.max(1, scaled || 1);
-        });
-      }
-
-      const makeRow = (scopeLabel, scopeKey) => {
-        const bars = qs.map((q, i)=>{
-          const v = norm[scopeKey][i];
-          const cls = levelClass(v);
-          return `
-            <div class="qbar ${cls}" data-q="${q}" data-s="${scopeKey}">
-              <div class="q">${q}</div>
-              <div class="v">${v}/5</div>
-              <div class="sub">samanaikaisuus</div>
+      const max = Math.max(1, ...vals);
+      const bars = qs.map((q, i)=>{
+        const idx = vals[i];
+        const score = indexToScore(idx);
+        const cls = scoreClass(score);
+        const pct = Math.round((idx / max) * 100);
+        return `
+          <div class="bar ${cls}" data-q="${q}" data-idx="${idx}" data-score="${score}">
+            <div class="barInner" style="height:${pct}%"></div>
+            <div class="barCap">
+              <div class="barQ">${q}</div>
+              <div class="barV">${score}/5</div>
             </div>
-          `;
-        }).join("");
-        return `<div class="timeline"><div class="rowLabel">${scopeLabel}</div><div class="bars">${bars}</div></div>`;
-      };
+          </div>
+        `;
+      }).join("");
 
       $("timeline").className="";
-      $("timeline").innerHTML = makeRow("Kunnat","Kunnat") + `<div style="height:10px"></div>` + makeRow("HVA","Hyvinvointialueet");
+      $("timeline").innerHTML = `
+        <div class="chart">
+          <div class="chartLabel">Kunnat + HVA</div>
+          <div class="bars" id="bars">${bars}</div>
+        </div>
+      `;
 
-      // click highlight -> drill in heatmap panel
-      document.querySelectorAll(".qbar").forEach(el=>{
+      // click selects quarter and re-renders heat "now label" to that quarter
+      document.querySelectorAll(".bar").forEach(el=>{
         el.addEventListener("click", ()=>{
-          document.querySelectorAll(".qbar").forEach(x=>x.classList.remove("on"));
+          document.querySelectorAll(".bar").forEach(x=>x.classList.remove("on"));
           el.classList.add("on");
-          // auto set nowLabel as selected quarter
-          $("nowLabel").textContent = `Valittu: ${el.getAttribute("data-q")} • ${el.getAttribute("data-s")}`;
+          const q = el.getAttribute("data-q");
+          $("nowLabel").textContent = `Valittu ajankohta: ${q} (kartta näyttää lähikuukausien painotuksen)`;
         });
       });
     }
 
+    // --------- Render: heatmap (now = next 6 months) ----------
     function renderHeatmap(){
-      const sectors = ["SOTE","Koulutus","Työllisyys","Ilmasto","Digitalisaatio"];
-      const rows = ["Hallinnonalat","Kunnat","Hyvinvointialueet"];
+      // compute max score per row x sector among pkgs with event in next 6 months
+      const now = new Date();
+      const inNow = (pkg) => {
+        const dates=(pkg.events||[]).map(e=>e.date).filter(isIsoDate);
+        return dates.some(d=>inNextMonths(d,6));
+      };
 
-      const qNow = nowQuarter();
-      $("nowLabel").textContent = `Nyt: ${qNow} (lähikuukaudet)`;
-
-      // compute cell score: max intensity among packages matching row+sector with event within next 6 months
-      const cellScore = {}; // row -> sector -> 1..5
-      const cellPkgs = {};  // row -> sector -> list
-      for(const r of rows){
-        cellScore[r]={}; cellPkgs[r]={};
-        for(const s of sectors){ cellScore[r][s]=1; cellPkgs[r][s]=[]; }
+      const cellScore={}; // rowName -> sector -> score
+      const cellPkgs={};  // rowName -> sector -> pkgs
+      for(const [rowName] of ROWS){
+        cellScore[rowName]={}; cellPkgs[rowName]={};
+        for(const sec of SECTORS){
+          cellScore[rowName][sec]=1;
+          cellPkgs[rowName][sec]=[];
+        }
       }
 
       for(const p of allPkgs){
         if(!matchesFilters(p)) continue;
-        const pSectors = (p.admin_tags?.sektorit||[]);
-        const pScopes = (p.admin_tags?.kohdistus||[]);
-        const d = primaryDate(p);
-        // “now” = any event within next 6 months
-        const inNow = (p.events||[]).some(e=>inNextMonths(e.date,6)) || (d && inNextMonths(d,6));
-        if(!inNow) continue;
+        if(!inNow(p)) continue;
 
-        for(const sec of sectors){
+        const pSectors=p.admin_tags?.sektorit||[];
+        for(const sec of SECTORS){
           if(!pSectors.includes(sec)) continue;
-          // map row->scope key
-          const pairs = [
-            ["Hallinnonalat","Valtio"],
-            ["Kunnat","Kunnat"],
-            ["Hyvinvointialueet","Hyvinvointialueet"]
-          ];
-          for(const [row, scope] of pairs){
-            if(!pScopes.includes(scope)) continue;
-            const v = intensity(p, scope);
-            if(v >= cellScore[row][sec]){
-              cellScore[row][sec] = v;
-            }
-            cellPkgs[row][sec].push(p);
+          for(const [rowName, scopeKey] of ROWS){
+            if(!(p.admin_tags?.kohdistus||[]).includes(scopeKey)) continue;
+            const sc = pkgScore12m(p, scopeKey); // stable 1..5
+            cellScore[rowName][sec] = Math.max(cellScore[rowName][sec], sc);
+            cellPkgs[rowName][sec].push(p);
           }
         }
       }
 
-      // build grid
+      $("nowLabel").textContent = `Nyt (lähikuukaudet): kuormituskartta sektorin ja kohdistuksen mukaan`;
+
       let html = `<div class="heat">`;
       html += `<div></div>`;
-      for(const sec of sectors) html += `<div class="h">${sec}</div>`;
-      for(const row of rows){
-        html += `<div class="r">${row}</div>`;
-        for(const sec of sectors){
-          const v = cellScore[row][sec];
-          const cls = levelClass(v);
-          html += `<div class="cell ${cls}" data-row="${row}" data-sec="${sec}">${v}/5</div>`;
+      for(const sec of SECTORS) html += `<div class="h">${sec}</div>`;
+      for(const [rowName] of ROWS){
+        html += `<div class="r">${rowName}</div>`;
+        for(const sec of SECTORS){
+          const v = cellScore[rowName][sec];
+          const cls = scoreClass(v);
+          html += `<div class="tile ${cls}" data-row="${rowName}" data-sec="${sec}">${v}/5</div>`;
         }
       }
       html += `</div>`;
-
       $("heat").className="";
-      $("heat").innerHTML = html;
+      $("heat").innerHTML=html;
 
-      // drill click
-      document.querySelectorAll(".cell").forEach(el=>{
+      // drill
+      document.querySelectorAll(".tile").forEach(el=>{
         el.addEventListener("click", ()=>{
-          document.querySelectorAll(".cell").forEach(x=>x.classList.remove("on"));
+          document.querySelectorAll(".tile").forEach(x=>x.classList.remove("on"));
           el.classList.add("on");
           const row = el.getAttribute("data-row");
           const sec = el.getAttribute("data-sec");
-          const pkgs = (cellPkgs[row][sec]||[]).slice(0,10);
+          const pkgs = (cellPkgs[row][sec]||[])
+            .filter(matchesFilters)
+            .slice(0,10);
 
           $("drillTitle").textContent = `${row} • ${sec}`;
           $("drillList").innerHTML = pkgs.length
             ? pkgs.map(p=>`<div class="drillItem"><a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a> <small>(${p.package_id})</small></div>`).join("")
-            : `<div class="small">Ei osumia lähikuukausille tässä sektorissa.</div>`;
+            : `<div class="loading">Ei osumia lähikuukausille tässä sektorissa.</div>`;
         });
       });
     }
 
+    // --------- Wiring ----------
     async function loadAll(){
       const pkgs=[];
       for(const id of PACKAGES){
         try{
-          const r = await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
+          const r=await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
           if(!r.ok) continue;
           pkgs.push(await r.json());
         }catch(e){}
       }
-      allPkgs = pkgs;
+      allPkgs=pkgs;
 
+      renderKpis();
       renderList();
       renderTimeline();
       renderHeatmap();
     }
 
     function wire(){
-      $("q").addEventListener("input", (e)=>{ qText=e.target.value; renderList(); renderTimeline(); renderHeatmap(); });
-      $("sector").addEventListener("change", (e)=>{ selectedSector=e.target.value; renderList(); renderTimeline(); renderHeatmap(); });
+      $("q").addEventListener("input", (e)=>{
+        qText=e.target.value;
+        renderKpis(); renderList(); renderTimeline(); renderHeatmap();
+      });
+
+      $("sector").addEventListener("change", (e)=>{
+        selectedSector=e.target.value;
+        renderKpis(); renderList(); renderTimeline(); renderHeatmap();
+      });
 
       document.querySelectorAll("[data-scope]").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           document.querySelectorAll("[data-scope]").forEach(x=>x.classList.remove("on"));
           btn.classList.add("on");
-          selectedScope = btn.getAttribute("data-scope");
-          renderList(); renderTimeline(); renderHeatmap();
+          selectedScope=btn.getAttribute("data-scope");
+          renderKpis(); renderList(); renderTimeline(); renderHeatmap();
         });
       });
     }
