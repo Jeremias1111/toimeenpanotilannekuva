@@ -9,39 +9,27 @@
     @font-face{
       font-family:"OwalMark";
       src:
-        local("MarkOffcPro"),
-        local("MarkOffcPro-Regular"),
-        local("MarkOffcPro-ExtraLight"),
-        local("MarkOffcPro-Light"),
-        local("MarkOffcPro-Medium"),
-        local("MarkOffcPro-Bold"),
-        local("MarkOffcPro-Black"),
-        local("MarkOffcPro-Heavy"),
-        local("MarkScOffcPro"),
-        local("MarkScOffcPro-Regular"),
-        local("MarkScOffcPro-ExtraLight"),
-        local("MarkScOffcPro-Light"),
-        local("MarkScOffcPro-Medium"),
-        local("MarkScOffcPro-Bold"),
-        local("MarkScOffcPro-Black"),
-        local("MarkScOffcPro-Heavy");
+        local("MarkOffcPro"), local("MarkOffcPro-Regular"), local("MarkOffcPro-ExtraLight"),
+        local("MarkOffcPro-Light"), local("MarkOffcPro-Medium"), local("MarkOffcPro-Bold"),
+        local("MarkOffcPro-Black"), local("MarkOffcPro-Heavy"),
+        local("MarkScOffcPro"), local("MarkScOffcPro-Regular"), local("MarkScOffcPro-ExtraLight"),
+        local("MarkScOffcPro-Light"), local("MarkScOffcPro-Medium"), local("MarkScOffcPro-Bold"),
+        local("MarkScOffcPro-Black"), local("MarkScOffcPro-Heavy");
       font-weight:100 900;
       font-style:normal;
       font-display:swap;
     }
 
     :root{
-      --owal-orange:#FF9900;
-      --owal-purple:#6600CC;
+      --orange:#FF9900;
+      --orangeRed:#FF6633;
       --orangeL:#FFF2E8;
-      --purpleL:#F2EBFF;
-
       --text:#141414;
-      --muted:#676767;
-      --line:#E6E6E6;
-      --panel:#F8F8F8;
-      --panel2:#F4F4F4;
-      --white:#FFFFFF;
+      --muted:#6A6A6A;
+      --line:#E7E7E7;
+      --panel:#F7F7F7;
+      --panel2:#F2F2F2;
+      --white:#fff;
 
       --radius:18px;
       --shadow:0 2px 0 rgba(0,0,0,.02);
@@ -58,12 +46,12 @@
       font-family:"OwalMark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       font-weight:var(--fw-regular);
       color:var(--text);
-      background:linear-gradient(180deg, #fff 0%, #fff 60%, #fafafa 100%);
+      background:linear-gradient(180deg, #fff 0%, #fff 62%, #fafafa 100%);
     }
 
     /* Topbar */
     .topbar{
-      position:sticky; top:0; z-index:30;
+      position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.92);
       backdrop-filter:saturate(140%) blur(10px);
       border-bottom:1px solid var(--line);
@@ -73,7 +61,7 @@
       content:"";
       display:block;
       height:4px;
-      background:linear-gradient(90deg, var(--owal-orange), #ffb64a);
+      background:linear-gradient(90deg, var(--orange), var(--orangeRed));
       margin:12px -22px -12px -22px;
     }
     .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -81,8 +69,8 @@
     .logo:hover{background:var(--panel)}
     .logo img{height:34px;width:auto;display:block}
     .titleWrap{flex:1;min-width:280px}
-    .productTitle{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
-    .productSubtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+    .title{margin:0;font-size:22px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
+    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
     .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
     .pill{
@@ -95,97 +83,226 @@
       user-select:none;
     }
     .pill.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
-    .pill.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
-    .wrap{max-width:1240px;margin:0 auto;padding:18px 22px 70px 22px}
+    .wrap{max-width:1280px;margin:0 auto;padding:18px 22px 70px 22px}
 
-    /* Hero */
-    .hero{
-      margin-top:10px;
-      padding:16px 16px;
+    /* Filters bar */
+    .filters{
+      margin-top:12px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      padding:12px;
       border:1px solid var(--line);
-      border-radius:22px;
-      background:
-        radial-gradient(1200px 420px at 15% 0%, var(--orangeL) 0%, rgba(255,242,232,0) 60%),
-        radial-gradient(900px 360px at 95% 25%, var(--purpleL) 0%, rgba(242,235,255,0) 60%),
-        #fff;
+      border-radius:18px;
+      background:#fff;
       box-shadow:var(--shadow);
     }
-    .heroRow{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
-    .heroTitle{margin:0;font-size:28px;font-weight:var(--fw-heavy);letter-spacing:-.35px}
-    .heroDesc{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.4;max-width:900px}
-
-    /* Mode toggle */
-    .modeToggle{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .modeBtn{
-      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
-      background:var(--panel2);font-size:12px;font-weight:var(--fw-medium);
-      cursor:pointer;user-select:none;
+    .search{
+      flex:1; min-width:240px;
+      display:flex; align-items:center; gap:10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 12px;
+      background:var(--panel);
     }
-    .modeBtn.on{background:var(--orangeL);border-color:rgba(255,153,0,.65)}
+    .search input{
+      border:none; outline:none; width:100%;
+      background:transparent;
+      font-family:inherit;
+      font-size:13px;
+    }
+    .select{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 12px;
+      background:#fff;
+      font-family:inherit;
+      font-size:13px;
+    }
+    .seg{
+      display:flex; gap:8px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .chipBtn{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      font-size:12px;
+      font-weight:var(--fw-medium);
+      cursor:pointer;
+      user-select:none;
+    }
+    .chipBtn.on{
+      background:var(--orangeL);
+      border-color:rgba(255,153,0,.65);
+    }
 
-    /* Layout */
-    .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-top:14px}
-    @media (max-width:1000px){.grid{grid-template-columns:1fr}}
+    /* Layout: 3 panels like mockup */
+    .grid{
+      display:grid;
+      grid-template-columns: 360px 1fr 420px;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    @media (max-width:1200px){
+      .grid{grid-template-columns: 1fr}
+    }
 
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .cardHeader{padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardHeader{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#fff 0%, #fafafa 100%);
+    }
     .cardBody{padding:14px 16px}
-    h2{margin:0;font-size:16px;font-weight:var(--fw-bold)}
+    .h2{margin:0;font-size:16px;font-weight:var(--fw-bold);letter-spacing:-.1px}
     .hint{margin:8px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
 
-    /* Mini KPI strip (3 items, no boxes) */
-    .strip{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
-    .stripItem{min-width:220px;flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fff}
-    .stripLabel{color:var(--muted);font-size:12px}
-    .stripVal{margin-top:6px;font-weight:var(--fw-heavy);font-size:16px;letter-spacing:-.2px}
+    /* Left list (12 kk) */
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+      cursor:pointer;
+      transition:transform .06s ease;
+    }
+    .item:hover{transform:translateY(-1px)}
+    .itemTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .itemTitle{font-weight:var(--fw-bold);font-size:13px;line-height:1.25}
+    .itemMeta{margin-top:6px;color:var(--muted);font-size:12px;line-height:1.35}
+    .tagRow{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+    .tag{
+      font-size:11px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      color:var(--muted);
+      padding:4px 8px;
+      border-radius:999px;
+      font-weight:var(--fw-medium);
+    }
 
-    /* Samanaikaisuus calendar */
-    .cal{
+    /* Intensity pill 1–5 */
+    .score{
+      min-width:56px;
+      text-align:center;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      font-weight:var(--fw-bold);
+      border:1px solid rgba(255,153,0,.45);
+      background:var(--orangeL);
+      color:#8a3a00;
+    }
+    .score.high{
+      border-color:rgba(255,102,51,.55);
+      background:linear-gradient(180deg, rgba(255,102,51,.18), #fff);
+      color:#8a1f00;
+    }
+    .score.low{
+      border-color:var(--line);
+      background:#fff;
+      color:var(--muted);
+    }
+
+    /* Middle: 24 kk timeline bars */
+    .timeline{
       display:grid;
-      grid-template-columns: 140px 1fr 1fr;
+      grid-template-columns: 70px 1fr;
       gap:10px;
       align-items:center;
     }
-    .calHead{font-size:12px;color:var(--muted);font-weight:var(--fw-bold)}
-    .qLabel{font-weight:var(--fw-bold);font-size:13px}
-    .cell{
-      height:34px;
-      border-radius:12px;
+    .rowLabel{font-size:12px;color:var(--muted);font-weight:var(--fw-bold)}
+    .bars{display:grid;grid-template-columns: repeat(8, 1fr); gap:8px}
+    .qbar{
       border:1px solid var(--line);
+      border-radius:14px;
       background:var(--panel2);
+      height:84px;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
       cursor:pointer;
+    }
+    .qbar.on{outline:3px solid rgba(255,153,0,.22)}
+    .qbar .q{font-size:12px;font-weight:var(--fw-bold)}
+    .qbar .v{font-size:14px;font-weight:var(--fw-heavy);letter-spacing:-.2px}
+    .qbar.low{background:#fff}
+    .qbar.mid{background:linear-gradient(180deg, var(--orangeL), #fff); border-color:rgba(255,153,0,.35)}
+    .qbar.high{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff); border-color:rgba(255,102,51,.45)}
+    .qbar .sub{font-size:11px;color:var(--muted);font-weight:var(--fw-medium)}
+
+    /* Right: heatmap "now" */
+    .heatTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-end;flex-wrap:wrap}
+    .heatNote{color:var(--muted);font-size:12px;line-height:1.35}
+    .heat{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 120px repeat(5, 1fr);
+      gap:8px;
+      align-items:stretch;
+    }
+    .heat .h{font-size:11px;color:var(--muted);font-weight:var(--fw-bold);padding:6px 0}
+    .heat .r{font-size:12px;color:var(--muted);font-weight:var(--fw-bold);display:flex;align-items:center}
+    .cell{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel2);
+      height:44px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      padding:0 10px;
-      font-size:12px;
-      color:var(--text);
+      justify-content:center;
+      font-weight:var(--fw-heavy);
+      letter-spacing:-.2px;
+      cursor:pointer;
+      user-select:none;
     }
-    .cell small{color:var(--muted);font-weight:var(--fw-medium)}
-    .cell.low{background:linear-gradient(180deg,#fff 0%, #fafafa 100%)}
-    .cell.mid{background:linear-gradient(180deg, var(--orangeL) 0%, #fff 100%); border-color:rgba(255,153,0,.35)}
-    .cell.high{background:linear-gradient(180deg, rgba(255,153,0,.28) 0%, #fff 100%); border-color:rgba(255,153,0,.55)}
-    .cell.on{outline:3px solid rgba(255,153,0,.25)}
+    .cell.low{background:#fff}
+    .cell.mid{background:linear-gradient(180deg, var(--orangeL), #fff); border-color:rgba(255,153,0,.35)}
+    .cell.high{background:linear-gradient(180deg, rgba(255,102,51,.18), #fff); border-color:rgba(255,102,51,.45)}
+    .cell.on{outline:3px solid rgba(255,153,0,.22)}
 
-    /* Right panel visuals */
-    .bars{margin-top:10px}
-    .barRow{display:grid;grid-template-columns:120px 1fr 36px;gap:10px;align-items:center;margin:8px 0}
-    .barLabel{font-size:12px;color:var(--muted)}
-    .barTrack{height:10px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
-    .barFill{height:100%;background:linear-gradient(90deg,var(--owal-orange),#ffb64a);width:0%}
-    .barN{font-size:12px;color:var(--muted);text-align:right}
-
-    .badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:12px;font-size:11px;border:1px solid var(--line);background:#EEE;color:var(--muted);font-weight:var(--fw-medium);white-space:nowrap;margin-right:6px;margin-bottom:6px}
-    .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:var(--owal-orange)}
-    .badge.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
-    .small{font-size:12px;color:var(--muted)}
-    a{color:var(--text);text-decoration:none}
+    /* Side drill (under heatmap) */
+    .drill{
+      margin-top:12px;
+      border-top:1px solid var(--line);
+      padding-top:12px;
+    }
+    .drillTitle{font-weight:var(--fw-bold);font-size:13px}
+    .drillList{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+    .drillItem{font-size:12px;color:var(--text)}
+    .drillItem small{color:var(--muted)}
+    a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
 
-    .loading{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--muted);font-size:13px}
-    .error{border:1px solid #ffb4b4;border-radius:14px;background:#fff0f0;padding:12px;color:#7a1a1a;font-size:13px}
+    .loading{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel);
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
 
-    .footer{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .footer{
+      margin-top:22px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
   </style>
 </head>
 
@@ -196,95 +313,89 @@
         <img src="./assets/owal_logo.png" alt="Owal Group logo" />
       </a>
       <div class="titleWrap">
-        <div class="productTitle">Toimeenpanotilannekuva</div>
-        <div class="productSubtitle">Yleiskuva: samanaikaisuus ja toimeenpanoteemat päätöksenteon ja toimeenpanon tueksi</div>
+        <div class="title">Uudistuskuorman seuranta</div>
+        <div class="subtitle">Selkeä yleiskuva (12 kk + 24 kk + kartta nyt). Tarkennukset uudistusnäkymässä.</div>
       </div>
     </div>
 
     <div class="nav">
       <a class="pill on" href="./yleiskuva.html">Yleiskuva</a>
-      <a class="pill" href="./index.html">Uudistusnäkymä</a>
+      <a class="pill" href="./index.html?id=pkg-001">Uudistusnäkymä</a>
       <a class="pill" href="./hallinnonalat.html">Hallinnonalat</a>
-      <span class="pill purple">MVP</span>
     </div>
   </div>
 
   <div class="wrap">
-    <div class="hero">
-      <div class="heroRow">
-        <div>
-          <div class="heroTitle">Tilannekuva</div>
-          <div class="heroDesc">
-            Tämä näkymä auttaa näkemään nopeasti <b>milloin</b> muutoksia osuu samaan aikaan ja <b>mihin</b> ne käytännössä osuvat (toimeenpanoteemat).
-          </div>
-        </div>
+    <div class="filters">
+      <div class="search">
+        <span style="font-weight:var(--fw-bold);color:var(--muted)">Hae</span>
+        <input id="q" placeholder="esim. työllisyys, data, sote…" />
       </div>
 
-      <div class="modeToggle" aria-label="Moodivalinta">
-        <span class="modeBtn on" data-mode="KUNTA">KUNTA</span>
-        <span class="modeBtn" data-mode="MINISTERIÖ">MINISTERIÖ</span>
-      </div>
+      <select id="sector" class="select" title="Sektori">
+        <option value="">Sektori: Kaikki</option>
+        <option value="SOTE">SOTE</option>
+        <option value="Koulutus">Koulutus</option>
+        <option value="Työllisyys">Työllisyys</option>
+        <option value="Ilmasto">Ilmasto</option>
+        <option value="Digitalisaatio">Digitalisaatio</option>
+      </select>
 
-      <div class="strip">
-        <div class="stripItem">
-          <div class="stripLabel">Seuraava 90 päivää</div>
-          <div class="stripVal" id="kpi-90">—</div>
-        </div>
-        <div class="stripItem">
-          <div class="stripLabel">Seuraava samanaikaisuusjakso</div>
-          <div class="stripVal" id="kpi-nextq">—</div>
-        </div>
-        <div class="stripItem">
-          <div class="stripLabel">Toimeenpanoteemat korostuvat</div>
-          <div class="stripVal" id="kpi-topthemes">—</div>
-        </div>
+      <div class="seg" aria-label="Kohdistus">
+        <span class="chipBtn on" data-scope="">Kaikki</span>
+        <span class="chipBtn" data-scope="Kunnat">Kunnat</span>
+        <span class="chipBtn" data-scope="Hyvinvointialueet">Hyvinvointialueet</span>
+        <span class="chipBtn" data-scope="Valtio">Valtio</span>
       </div>
     </div>
 
     <div class="grid">
-      <!-- LEFT: calendar -->
+      <!-- Left: 12 kk list -->
       <div class="card">
         <div class="cardHeader">
-          <h2>Samanaikaisuus kvartaaleittain</h2>
-          <div class="hint">Klikkaa kvartaalin ruutua → oikealla näkyy, mistä samanaikaisuus koostuu.</div>
+          <div class="h2">Uudistukset (12 kk)</div>
+          <div class="hint">Klikkaa korttia → avaa uudistusnäkymä.</div>
         </div>
         <div class="cardBody">
-          <div class="cal">
-            <div></div>
-            <div class="calHead">Kunnat</div>
-            <div class="calHead">Hyvinvointialueet</div>
-            <div id="cal-rows" style="grid-column:1/-1" class="loading">Ladataan…</div>
-          </div>
+          <div id="list" class="loading">Ladataan…</div>
         </div>
       </div>
 
-      <!-- RIGHT: explanation -->
+      <!-- Middle: 24 kk timeline -->
       <div class="card">
         <div class="cardHeader">
-          <h2 id="side-title">Valittu ajankohta</h2>
-          <div class="hint" id="side-hint">Valitse kvartaaliruutu vasemmalta.</div>
+          <div class="h2">Aikajana (24 kk)</div>
+          <div class="hint">Kvartaaleittain: samanaikaisuus kunnille ja hyvinvointialueille.</div>
         </div>
         <div class="cardBody">
-          <div class="small"><b>Toimeenpanoteemat (top)</b></div>
-          <div id="side-bars" class="loading" style="margin-top:8px">—</div>
+          <div id="timeline" class="loading">Ladataan…</div>
+        </div>
+      </div>
 
-          <div style="height:12px"></div>
-          <div class="small"><b>Täsmennykset asetuksilla</b></div>
-          <div id="side-ref" class="loading" style="margin-top:8px">—</div>
-
-          <div style="height:12px"></div>
-          <div class="small"><b>Säädöspaketit</b></div>
-          <div id="side-pkgs" class="loading" style="margin-top:8px">—</div>
-
-          <div style="height:12px"></div>
-          <div id="side-note" class="small">—</div>
+      <!-- Right: heatmap now -->
+      <div class="card">
+        <div class="cardHeader">
+          <div class="heatTop">
+            <div>
+              <div class="h2">Kartta (nyt)</div>
+              <div class="hint">Sektori × kohdistus. Klikkaa solua → näytä, mistä koostuu.</div>
+            </div>
+            <div class="heatNote" id="nowLabel">—</div>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div id="heat" class="loading">Ladataan…</div>
+          <div class="drill">
+            <div class="drillTitle" id="drillTitle">Valitse solu kartasta</div>
+            <div class="drillList" id="drillList"></div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="small">Lisää uudet paketit PACKAGES-listaan tiedoston lopussa.</div>
+      <div>Owal Group • päätöksenteon ja toimeenpanon tuki</div>
+      <div>Lisää paketit: muokkaa <b>PACKAGES</b>-listaa tiedoston lopussa.</div>
     </div>
   </div>
 
@@ -294,267 +405,310 @@
     const DATA_DIR = "./data/";
 
     const $ = (id) => document.getElementById(id);
-    const uniq = (arr) => [...new Set((arr||[]).filter(Boolean))];
 
+    function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
     function isIsoDate(s){ return typeof s === "string" && /^\\d{4}-\\d{2}-\\d{2}$/.test(s); }
     function quarterLabel(dateStr){
-      if(!isIsoDate(dateStr)) return "—";
+      if(!isIsoDate(dateStr)) return null;
       const [y,m] = dateStr.split("-").map(n=>parseInt(n,10));
       const q = Math.floor((m-1)/3)+1;
       return `${y} Q${q}`;
     }
-    function withinDays(dateStr, days){
-      if(!isIsoDate(dateStr)) return false;
-      const d = new Date(dateStr + "T00:00:00");
-      const now = new Date();
-      const diff = (d - now) / (1000*60*60*24);
-      return diff >= 0 && diff <= days;
+    function addMonths(d, m){
+      const x = new Date(d.getTime());
+      x.setMonth(x.getMonth()+m);
+      return x;
+    }
+    function nowQuarter(){
+      const d = new Date();
+      const y = d.getFullYear();
+      const q = Math.floor(d.getMonth()/3)+1;
+      return `${y} Q${q}`;
+    }
+    function nextQuarters(n=8){
+      const out=[];
+      const d=new Date();
+      // start at current quarter
+      const startMonth = Math.floor(d.getMonth()/3)*3;
+      const start = new Date(d.getFullYear(), startMonth, 1);
+      for(let i=0;i<n;i++){
+        const dt = addMonths(start, i*3);
+        const y=dt.getFullYear();
+        const q=Math.floor(dt.getMonth()/3)+1;
+        out.push(`${y} Q${q}`);
+      }
+      return out;
     }
 
-    let mode = "KUNTA"; // or MINISTERIÖ
-    let allPkgs = [];
-    let calendar = {}; // q -> {kunnat:{level,score,pkgs,areas,refs}, hva:{...}}
+    function pkgHasScope(p, scope){
+      return (p.admin_tags?.kohdistus||[]).includes(scope);
+    }
 
-    function levelFromScore(score){
-      if(score >= 6) return "high";
-      if(score >= 3) return "mid";
+    // Intensity 1–5 derived from themes (scope aware). Simple, consistent.
+    function intensity(p, scope){
+      const themes = (p.themes||[]).filter(t => (t.scope||[]).includes(scope));
+      let s=0;
+      for(const t of themes){
+        const d=(t.direction||"").toLowerCase();
+        if(d.includes("kuormittava")) s+=2;
+        else if(d.includes("sekavaikutus")) s+=1;
+        else if(d.includes("keventävä")) s-=1;
+      }
+      s = Math.max(0, s) + Math.min(2, themes.length); // + small “volume” factor
+      // map to 1..5
+      if(s>=9) return 5;
+      if(s>=6) return 4;
+      if(s>=4) return 3;
+      if(s>=2) return 2;
+      return 1;
+    }
+
+    function levelClass(v){
+      if(v>=4) return "high";
+      if(v>=3) return "mid";
       return "low";
     }
 
-    function scoreForScope(pkg, scope){
-      // kuormittava=2, sekavaikutus=1, keventävä=-1
-      const themes = (pkg.themes||[]).filter(t => (t.scope||[]).includes(scope));
-      let score = 0;
-      themes.forEach(t=>{
-        const d = (t.direction||"").toLowerCase();
-        if(d.includes("kuormittava")) score += 2;
-        else if(d.includes("sekavaikutus")) score += 1;
-        else if(d.includes("keventävä")) score -= 1;
-      });
-      return Math.max(0, score);
+    function primaryDate(p){
+      // prefer earliest ISO event date
+      const ds = (p.events||[]).map(e=>e.date).filter(isIsoDate).sort();
+      return ds[0] || null;
     }
 
-    function topThemeCounts(pkgs, scope){
-      const m = new Map();
-      pkgs.forEach(p=>{
-        (p.themes||[])
-          .filter(t => (t.scope||[]).includes(scope) || scope==="VALTIO")
-          .forEach(t => m.set(t.area||"Muu",(m.get(t.area||"Muu")||0)+1));
-      });
-      return [...m.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
+    function inNextMonths(dateStr, months){
+      if(!isIsoDate(dateStr)) return false;
+      const d = new Date(dateStr+"T00:00:00");
+      const now = new Date();
+      const limit = addMonths(now, months);
+      return d >= now && d <= limit;
     }
 
-    function collectRefs(pkgs){
-      const rows = [];
-      pkgs.forEach(p=>{
-        (p.decree_refinements||[]).forEach(r=>{
-          rows.push({decree:r.decree, what:r.what, area:r.area, scope:(r.scope||[]).join(", ")});
+    let allPkgs=[];
+    let selectedScope=""; // filter
+    let selectedSector="";
+    let qText="";
+
+    function matchesFilters(p){
+      const text = (qText||"").toLowerCase().trim();
+      const title=(p.title||"").toLowerCase();
+      const desc=(p.description||"").toLowerCase();
+      const sectors=(p.admin_tags?.sektorit||[]);
+      const scopes=(p.admin_tags?.kohdistus||[]);
+      if(text && !(title.includes(text) || desc.includes(text))) return false;
+      if(selectedSector && !sectors.includes(selectedSector)) return false;
+      if(selectedScope && !scopes.includes(selectedScope)) return false;
+      return true;
+    }
+
+    function renderList(){
+      const items = allPkgs
+        .filter(matchesFilters)
+        .map(p=>{
+          const d = primaryDate(p);
+          const dateLabel = d ? `Voimaan / virstanpylväs: ${d}` : "Ajankohta: —";
+          const scopeForScore = selectedScope || (p.admin_tags?.kohdistus||[])[0] || "Kunnat";
+          const score = intensity(p, scopeForScore);
+          const cls = score>=4 ? "high" : (score<=2 ? "low" : "");
+          const tags = []
+            .concat((p.admin_tags?.sektorit||[]).slice(0,2).map(x=>`<span class="tag">${x}</span>`))
+            .concat((p.admin_tags?.kohdistus||[]).slice(0,2).map(x=>`<span class="tag">${x}</span>`))
+            .join("");
+
+          return `
+            <div class="item" onclick="location.href='./index.html?id=${p.package_id}'">
+              <div class="itemTop">
+                <div>
+                  <div class="itemTitle">${p.title || p.package_id}</div>
+                  <div class="itemMeta">${dateLabel}</div>
+                </div>
+                <div class="score ${cls}">${score}/5</div>
+              </div>
+              <div class="tagRow">${tags}</div>
+            </div>
+          `;
+        });
+
+      $("list").className="";
+      $("list").innerHTML = `<div class="list">${items.length?items.join(""):`<div class="loading">Ei osumia suodattimilla.</div>`}</div>`;
+    }
+
+    function renderTimeline(){
+      const qs = nextQuarters(8);
+      const scopes = ["Kunnat","Hyvinvointialueet"];
+
+      // compute quarter intensity per scope
+      const bucket = {}; // scope -> q -> score sum (normalized later)
+      for(const s of scopes){
+        bucket[s]={};
+        for(const q of qs) bucket[s][q]=0;
+      }
+
+      for(const p of allPkgs){
+        if(!matchesFilters(p)) continue;
+        const sectors=(p.admin_tags?.sektorit||[]);
+        if(selectedSector && !sectors.includes(selectedSector)) continue;
+
+        // quarter presence: any event in quarter
+        const qset = new Set((p.events||[]).map(e=>quarterLabel(e.date)).filter(Boolean));
+        for(const scope of scopes){
+          if(!pkgHasScope(p, scope)) continue;
+          for(const q of qs){
+            if(qset.has(q)){
+              bucket[scope][q] += intensity(p, scope);
+            }
+          }
+        }
+      }
+
+      // normalize each scope into 1..5 relative within view
+      const norm = {};
+      for(const scope of scopes){
+        const vals = qs.map(q=>bucket[scope][q]);
+        const max = Math.max(1, ...vals);
+        norm[scope] = qs.map(q=>{
+          const v = bucket[scope][q];
+          const scaled = Math.round((v/max)*5);
+          return Math.max(1, scaled || 1);
+        });
+      }
+
+      const makeRow = (scopeLabel, scopeKey) => {
+        const bars = qs.map((q, i)=>{
+          const v = norm[scopeKey][i];
+          const cls = levelClass(v);
+          return `
+            <div class="qbar ${cls}" data-q="${q}" data-s="${scopeKey}">
+              <div class="q">${q}</div>
+              <div class="v">${v}/5</div>
+              <div class="sub">samanaikaisuus</div>
+            </div>
+          `;
+        }).join("");
+        return `<div class="timeline"><div class="rowLabel">${scopeLabel}</div><div class="bars">${bars}</div></div>`;
+      };
+
+      $("timeline").className="";
+      $("timeline").innerHTML = makeRow("Kunnat","Kunnat") + `<div style="height:10px"></div>` + makeRow("HVA","Hyvinvointialueet");
+
+      // click highlight -> drill in heatmap panel
+      document.querySelectorAll(".qbar").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          document.querySelectorAll(".qbar").forEach(x=>x.classList.remove("on"));
+          el.classList.add("on");
+          // auto set nowLabel as selected quarter
+          $("nowLabel").textContent = `Valittu: ${el.getAttribute("data-q")} • ${el.getAttribute("data-s")}`;
         });
       });
-      return rows;
     }
 
-    function renderKpis(){
-      // next 90 days: count packages with any event within 90
-      let count90 = 0;
-      allPkgs.forEach(p=>{
-        const hit = (p.events||[]).some(e => withinDays(e.date, 90));
-        if(hit) count90++;
-      });
-      $("kpi-90").textContent = `${count90} merkittävää säädöspakettia`;
+    function renderHeatmap(){
+      const sectors = ["SOTE","Koulutus","Työllisyys","Ilmasto","Digitalisaatio"];
+      const rows = ["Hallinnonalat","Kunnat","Hyvinvointialueet"];
 
-      // next quarter with any non-low cell
-      const qs = Object.keys(calendar).sort();
-      let nextq = "—";
-      for(const q of qs){
-        const c = calendar[q];
-        const lev = (mode==="KUNTA") ? c.kunnat.level : c.kunnat.level; // ministeriössä katsotaan silti molemmat, mutta valitaan ensimmäinen ei-low
-        if(c.kunnat.level !== "low" || c.hva.level !== "low"){ nextq = q; break; }
-      }
-      $("kpi-nextq").textContent = nextq;
+      const qNow = nowQuarter();
+      $("nowLabel").textContent = `Nyt: ${qNow} (lähikuukaudet)`;
 
-      // top themes overall (mode-dependent)
-      const scope = (mode==="KUNTA") ? "Kunnat" : "VALTIO";
-      const top = topThemeCounts(allPkgs, scope).slice(0,2).map(x=>x[0]);
-      $("kpi-topthemes").textContent = top.length ? top.join(" + ") : "—";
-    }
-
-    function renderCalendar(){
-      const qs = Object.keys(calendar).sort();
-      if(!qs.length){
-        $("cal-rows").className = "loading";
-        $("cal-rows").textContent = "Ei ajoitettuja eventtejä (päivämäärät puuttuvat) tai paketteja liian vähän.";
-        return;
+      // compute cell score: max intensity among packages matching row+sector with event within next 6 months
+      const cellScore = {}; // row -> sector -> 1..5
+      const cellPkgs = {};  // row -> sector -> list
+      for(const r of rows){
+        cellScore[r]={}; cellPkgs[r]={};
+        for(const s of sectors){ cellScore[r][s]=1; cellPkgs[r][s]=[]; }
       }
 
-      // build rows: q label + kunnat cell + hva cell
-      const rows = qs.map(q=>{
-        const c = calendar[q];
-        const kun = c.kunnat;
-        const hva = c.hva;
+      for(const p of allPkgs){
+        if(!matchesFilters(p)) continue;
+        const pSectors = (p.admin_tags?.sektorit||[]);
+        const pScopes = (p.admin_tags?.kohdistus||[]);
+        const d = primaryDate(p);
+        // “now” = any event within next 6 months
+        const inNow = (p.events||[]).some(e=>inNextMonths(e.date,6)) || (d && inNextMonths(d,6));
+        if(!inNow) continue;
 
-        return `
-          <div class="qLabel">${q}</div>
-          <div class="cell ${kun.level}" data-q="${q}" data-s="Kunnat">
-            <span>${labelLevel(kun.level)}</span>
-            <small>${kun.pkgs.length} pak.</small>
-          </div>
-          <div class="cell ${hva.level}" data-q="${q}" data-s="Hyvinvointialueet">
-            <span>${labelLevel(hva.level)}</span>
-            <small>${hva.pkgs.length} pak.</small>
-          </div>
-        `;
-      }).join("");
+        for(const sec of sectors){
+          if(!pSectors.includes(sec)) continue;
+          // map row->scope key
+          const pairs = [
+            ["Hallinnonalat","Valtio"],
+            ["Kunnat","Kunnat"],
+            ["Hyvinvointialueet","Hyvinvointialueet"]
+          ];
+          for(const [row, scope] of pairs){
+            if(!pScopes.includes(scope)) continue;
+            const v = intensity(p, scope);
+            if(v >= cellScore[row][sec]){
+              cellScore[row][sec] = v;
+            }
+            cellPkgs[row][sec].push(p);
+          }
+        }
+      }
 
-      $("cal-rows").className = "";
-      $("cal-rows").style.display = "contents";
-      $("cal-rows").innerHTML = rows;
+      // build grid
+      let html = `<div class="heat">`;
+      html += `<div></div>`;
+      for(const sec of sectors) html += `<div class="h">${sec}</div>`;
+      for(const row of rows){
+        html += `<div class="r">${row}</div>`;
+        for(const sec of sectors){
+          const v = cellScore[row][sec];
+          const cls = levelClass(v);
+          html += `<div class="cell ${cls}" data-row="${row}" data-sec="${sec}">${v}/5</div>`;
+        }
+      }
+      html += `</div>`;
 
+      $("heat").className="";
+      $("heat").innerHTML = html;
+
+      // drill click
       document.querySelectorAll(".cell").forEach(el=>{
         el.addEventListener("click", ()=>{
           document.querySelectorAll(".cell").forEach(x=>x.classList.remove("on"));
           el.classList.add("on");
-          const q = el.getAttribute("data-q");
-          const scope = el.getAttribute("data-s");
-          renderSide(q, scope);
+          const row = el.getAttribute("data-row");
+          const sec = el.getAttribute("data-sec");
+          const pkgs = (cellPkgs[row][sec]||[]).slice(0,10);
+
+          $("drillTitle").textContent = `${row} • ${sec}`;
+          $("drillList").innerHTML = pkgs.length
+            ? pkgs.map(p=>`<div class="drillItem"><a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a> <small>(${p.package_id})</small></div>`).join("")
+            : `<div class="small">Ei osumia lähikuukausille tässä sektorissa.</div>`;
         });
       });
-
-      // auto-select first row (kunnat)
-      const firstCell = document.querySelector(".cell");
-      if(firstCell) firstCell.click();
-    }
-
-    function labelLevel(level){
-      if(level==="high") return "Korkea";
-      if(level==="mid") return "Keskitaso";
-      return "Matala";
-    }
-
-    function renderSide(q, scope){
-      const c = calendar[q];
-      const bucket = (scope==="Kunnat") ? c.kunnat : c.hva;
-
-      $("side-title").textContent = `${q} • ${scope}`;
-      $("side-hint").textContent = `Samanaikaisuus: ${labelLevel(bucket.level)} (abstrakti)`;
-
-      // bars
-      const topAreas = bucket.topAreas;
-      if(!topAreas.length){
-        $("side-bars").innerHTML = `<div class="small">Ei toimeenpanoteemoja tälle kohdistukselle.</div>`;
-      } else {
-        const max = topAreas[0][1] || 1;
-        $("side-bars").innerHTML = `
-          <div class="bars">
-            ${topAreas.map(([area,n])=>{
-              const pct = Math.round((n/max)*100);
-              return `
-                <div class="barRow">
-                  <div class="barLabel">${area}</div>
-                  <div class="barTrack"><div class="barFill" style="width:${pct}%"></div></div>
-                  <div class="barN">${n}</div>
-                </div>`;
-            }).join("")}
-          </div>
-        `;
-      }
-
-      // refs
-      const refs = bucket.refs.slice(0,6);
-      $("side-ref").innerHTML = refs.length
-        ? refs.map(r=>`<div class="small" style="margin:6px 0">
-            <span class="badge ${r.decree==="VNA"?"orange":"purple"}">${r.decree}</span>
-            ${r.what} <span class="small">• ${r.area||"—"}</span>
-          </div>`).join("")
-        : `<div class="small">Ei täsmennyksiä asetuksilla tässä koosteessa.</div>`;
-
-      // packages
-      $("side-pkgs").innerHTML = bucket.pkgs.length
-        ? bucket.pkgs.slice(0,8).map(p=>`<div class="small" style="margin:6px 0">
-            <a href="./index.html?id=${p.package_id}"><b>${p.title}</b></a>
-          </div>`).join("")
-        : `<div class="small">—</div>`;
-
-      // mode note
-      $("side-note").innerHTML =
-        (mode==="KUNTA")
-        ? `Kunta-moodi painottaa <b>priorisointia</b>: mitä osuu samaan aikaan ja mihin käytännössä (toimeenpanoteemat).`
-        : `Ministeriö-moodi painottaa <b>kentän kokonaiskuvaa</b>: samanaikaisuus + toimeenpanoteemat + asetustäsmennykset.`;
-    }
-
-    function buildCalendar(){
-      // build quarter buckets from events
-      const map = {}; // q -> {kunnatPkgs:[], hvaPkgs:[]}
-      allPkgs.forEach(p=>{
-        const qs = uniq((p.events||[]).filter(e=>isIsoDate(e.date)).map(e=>quarterLabel(e.date))).filter(q=>q!=="—");
-        qs.forEach(q=>{
-          map[q] = map[q] || {kunnat:[], hva:[]};
-          // if pkg targets scope, include
-          const targets = p.admin_tags?.kohdistus || [];
-          if(targets.includes("Kunnat")) map[q].kunnat.push(p);
-          if(targets.includes("Hyvinvointialueet")) map[q].hva.push(p);
-        });
-      });
-
-      const out = {};
-      Object.keys(map).forEach(q=>{
-        const kunPkgs = map[q].kunnat;
-        const hvaPkgs = map[q].hva;
-
-        const kunScore = kunPkgs.reduce((s,p)=>s+scoreForScope(p,"Kunnat"),0) + kunPkgs.length; // add +1 per pkg for “samanaikaisuus”
-        const hvaScore = hvaPkgs.reduce((s,p)=>s+scoreForScope(p,"Hyvinvointialueet"),0) + hvaPkgs.length;
-
-        out[q] = {
-          kunnat: {
-            level: levelFromScore(kunScore),
-            pkgs: kunPkgs.map(p=>({package_id:p.package_id,title:p.title})),
-            topAreas: topThemeCounts(kunPkgs,"Kunnat"),
-            refs: collectRefs(kunPkgs)
-          },
-          hva: {
-            level: levelFromScore(hvaScore),
-            pkgs: hvaPkgs.map(p=>({package_id:p.package_id,title:p.title})),
-            topAreas: topThemeCounts(hvaPkgs,"Hyvinvointialueet"),
-            refs: collectRefs(hvaPkgs)
-          }
-        };
-      });
-
-      calendar = out;
     }
 
     async function loadAll(){
-      const pkgs = [];
+      const pkgs=[];
       for(const id of PACKAGES){
         try{
-          const res = await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
-          if(!res.ok) continue;
-          pkgs.push(await res.json());
-        } catch(e){}
+          const r = await fetch(`${DATA_DIR}${id}.json`, {cache:"no-cache"});
+          if(!r.ok) continue;
+          pkgs.push(await r.json());
+        }catch(e){}
       }
       allPkgs = pkgs;
-      buildCalendar();
-      renderKpis();
-      renderCalendar();
+
+      renderList();
+      renderTimeline();
+      renderHeatmap();
     }
 
-    function wireMode(){
-      document.querySelectorAll("[data-mode]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          document.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("on"));
-          el.classList.add("on");
-          mode = el.getAttribute("data-mode");
-          renderKpis();
-          // keep same selected cell if any
-          const selected = document.querySelector(".cell.on");
-          if(selected){
-            renderSide(selected.getAttribute("data-q"), selected.getAttribute("data-s"));
-          }
+    function wire(){
+      $("q").addEventListener("input", (e)=>{ qText=e.target.value; renderList(); renderTimeline(); renderHeatmap(); });
+      $("sector").addEventListener("change", (e)=>{ selectedSector=e.target.value; renderList(); renderTimeline(); renderHeatmap(); });
+
+      document.querySelectorAll("[data-scope]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          document.querySelectorAll("[data-scope]").forEach(x=>x.classList.remove("on"));
+          btn.classList.add("on");
+          selectedScope = btn.getAttribute("data-scope");
+          renderList(); renderTimeline(); renderHeatmap();
         });
       });
     }
 
-    wireMode();
+    wire();
     loadAll();
   </script>
 </body>
