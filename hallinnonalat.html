@@ -6,13 +6,30 @@
   <title>Toimeenpanotilannekuva – Hallinnonalat</title>
 
   <style>
+    @font-face{
+      font-family:"FF Mark";
+      src:
+        local("FF Mark"),
+        local("FFMark"),
+        local("FF Mark Pro"),
+        local("FF Mark W1G"),
+        local("FF Mark Regular"),
+        local("FF Mark Medium"),
+        local("FF Mark Bold"),
+        local("FF Mark Black"),
+        local("FF Mark Heavy");
+      font-weight:100 900;
+      font-style:normal;
+      font-display:swap;
+    }
+
     :root{
       --owal-orange:#FF9900;
       --owal-purple:#6600CC;
       --orangeL:#FFF2E8;
       --purpleL:#F2EBFF;
 
-      --text:#1A1A1A;
+      --text:#141414;
       --muted:#666666;
       --line:#E6E6E6;
       --panel:#F8F8F8;
@@ -20,73 +37,73 @@
       --white:#FFFFFF;
 
       --radius:18px;
-      --shadow:0 1px 0 rgba(0,0,0,.03);
+      --shadow:0 10px 30px rgba(0,0,0,.06);
+      --shadow2:0 2px 0 rgba(0,0,0,.02);
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:"Mark FF","MarkFF","Mark FF Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"FF Mark",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
-      background:var(--white);
+      background:linear-gradient(180deg, #fff 0%, #fff 55%, #fafafa 100%);
     }
 
     .topbar{
-      position:sticky; top:0; z-index:20;
-      background:var(--white);
-      border-bottom:2px solid var(--line);
-      padding:16px 22px 12px 22px;
+      position:sticky; top:0; z-index:30;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:14px 22px 12px 22px;
     }
     .topbar::after{
       content:"";
       display:block;
       height:4px;
-      background:var(--owal-orange);
+      background:linear-gradient(90deg, var(--owal-orange), #ffb64a);
       margin:12px -22px -12px -22px;
     }
-    .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-    .logo{display:flex;align-items:center;text-decoration:none}
-    .logo img{height:34px;width:auto;display:block}
-    h1{margin:0;font-size:22px;font-weight:900}
-    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px}
 
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:12px; align-items:center;
-    }
+    .brandRow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;text-decoration:none;padding:6px 8px;border-radius:14px}
+    .logo:hover{background:var(--panel)}
+    .logo img{height:34px;width:auto;display:block}
+
+    h1{margin:0;font-size:22px;font-weight:900;letter-spacing:-.2px}
+    .subtitle{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
       border:1px solid var(--line);
       background:var(--panel2);
-      font-size:12px;
-      text-decoration:none;
-      color:var(--text);
+      font-size:12px;text-decoration:none;color:var(--text);
       user-select:none;
     }
     .pill.on{background:var(--orangeL);border-color:var(--owal-orange)}
-    .pill.purple{background:var(--purpleL);border-color:var(--owal-purple)}
+    .pill.purple{background:var(--purpleL);border-color:var(--owal-purple);color:var(--owal-purple)}
     .pill.ghost{background:#fff}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
 
-    .wrap{max-width:1220px;margin:0 auto;padding:20px 22px 70px 22px}
+    .wrap{max-width:1240px;margin:0 auto;padding:18px 22px 70px 22px}
 
-    .row{display:flex;gap:14px;flex-wrap:wrap}
+    .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
     .card{
       background:var(--white);
       border:1px solid var(--line);
       border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow2);
       overflow:hidden;
     }
     .accent{width:10px;background:var(--owal-orange);border-radius:var(--radius) 0 0 var(--radius);flex:0 0 auto}
     .body{padding:14px 16px}
     .kpi{flex:1;min-width:240px;display:flex}
     .label{color:var(--muted);font-size:12px}
-    .val{font-weight:900;font-size:18px;margin-top:6px}
+    .val{font-weight:900;font-size:18px;margin-top:6px;letter-spacing:-.2px}
     .sub{color:var(--muted);font-size:12px;margin-top:2px}
 
-    h2{margin:0 0 10px 0;font-size:16px;font-weight:900}
+    h2{margin:0 0 10px 0;font-size:16px;font-weight:900;letter-spacing:-.1px}
     .hint{margin:0 0 12px 0;color:var(--muted);font-size:13px;line-height:1.35}
 
     table{
@@ -96,20 +113,23 @@
       border:1px solid var(--line);
       border-radius:14px;
       overflow:hidden;
+      background:#fff;
     }
     thead th{
       text-align:left;
       font-size:12px;
-      background:#EEE;
+      background:linear-gradient(180deg, #f0f0f0 0%, #e9e9e9 100%);
       padding:10px 10px;
       border-bottom:1px solid var(--line);
       vertical-align:top;
+      font-weight:800;
     }
     tbody td{
       font-size:13px;
       padding:10px 10px;
       border-bottom:1px solid var(--line);
       vertical-align:top;
+      line-height:1.35;
     }
     tbody tr:last-child td{border-bottom:none}
 
@@ -121,14 +141,14 @@
       white-space:nowrap;
       margin-right:6px;margin-bottom:6px;
     }
-    .badge.orange{background:var(--orangeL);border-color:var(--owal-orange);color:var(--owal-orange)}
-    .badge.purple{background:var(--purpleL);border-color:var(--owal-purple);color:var(--owal-purple)}
+    .badge.orange{background:var(--orangeL);border-color:rgba(255,153,0,.6);color:var(--owal-orange)}
+    .badge.purple{background:var(--purpleL);border-color:rgba(102,0,204,.35);color:var(--owal-purple)}
     .small{font-size:12px;color:var(--muted)}
     a{color:var(--text);text-decoration:none}
     a:hover{text-decoration:underline}
 
     .note{
-      margin-top:12px;
+      margin-top:10px;
       padding:10px 12px;
       border-radius:12px;
       border:1px solid var(--line);
@@ -158,7 +178,6 @@
       color:var(--muted);font-size:12px;
       display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
     }
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
   </style>
 </head>
 
@@ -179,7 +198,7 @@
       <a class="pill" href="./index.html">Uudistusnäkymä</a>
       <a class="pill on" href="./hallinnonalat.html">Hallinnonalat</a>
       <span class="pill purple">MVP</span>
-      <span class="pill ghost small">Muista lisätä uudet paketit <span class="mono">PACKAGES</span>-listaan</span>
+      <span class="pill ghost small">Lisää uudet paketit <span class="mono">PACKAGES</span>-listaan</span>
     </div>
   </div>
 
@@ -255,13 +274,14 @@
 
     <div class="footer">
       <div>Owal Group • yhteiskunnallisen vaikuttavuuden asiantuntijayritys • Tieto päätöksenteon tueksi</div>
-      <div class="mono">data: ./data/&lt;id&gt;.json</div>
+      <div class="small">Font test: <span style="font-family:'FF Mark';font-weight:900">FF Mark Heavy</span> /
+        <span style="font-family:'FF Mark';font-weight:600">FF Mark Medium</span> /
+        <span style="font-family:'FF Mark';font-weight:400">FF Mark Regular</span>
+      </div>
     </div>
   </div>
 
   <script>
-    // ---------------- Manual package list (MVP) ----------------
-    // Lisää tähän uusia paketteja, kun lisäät data/-kansioon uusia json-tiedostoja.
     const PACKAGES = ["pkg-001", "pkg-002"];
     const DATA_DIR = "./data/";
 
@@ -309,39 +329,31 @@
         } catch(e){}
       }
 
-      // KPI count
       $("kpi-count").textContent = pkgs.length.toString();
 
-      // KPI abstract impact
       const allThemes = pkgs.flatMap(p => p.themes || []);
       $("kpi-kunnat").textContent = scoreLabel(allThemes, "Kunnat");
       $("kpi-hva").textContent = scoreLabel(allThemes, "Hyvinvointialueet");
 
-      // KPI refinements count
       const refs = pkgs.flatMap(p => p.decree_refinements || []);
       const vna = refs.filter(r => r.decree==="VNA").length;
       const min = refs.filter(r => r.decree==="MIN").length;
       $("kpi-ref").textContent = `${vna} VNA • ${min} MIN`;
 
-      // Kasautumat: ryhmitellään kvartaaleihin eventtien mukaan, ja nostetaan ajurit (vaikutusalueet)
+      // Kasautumat (kvartaali + ajurit)
       const bucket = {}; // q -> {packages:Set, events:count, areas:Map, scopes:Set}
       pkgs.forEach(p=>{
         const events = (p.events||[]).filter(e=>isIsoDate(e.date));
         const qs = uniq(events.map(e=>quarterLabel(e.date)).filter(q=>q!=="—"));
         qs.forEach(q=>{
-          bucket[q] = bucket[q] || {packages:new Set(), events:0, areas:new Map(), scopes:new Set(), titles:[]};
+          bucket[q] = bucket[q] || {packages:new Set(), events:0, areas:new Map(), scopes:new Set()};
           bucket[q].packages.add(p.package_id);
-          bucket[q].titles.push(p.title);
           bucket[q].events += events.filter(e=>quarterLabel(e.date)===q).length;
 
-          // scopes from admin_tags
           (p.admin_tags?.kohdistus||[]).forEach(s=>bucket[q].scopes.add(s));
-
-          // areas from themes
           (p.themes||[]).forEach(t=>{
             const area = t.area || "Muu";
-            const prev = bucket[q].areas.get(area) || 0;
-            bucket[q].areas.set(area, prev + 1);
+            bucket[q].areas.set(area, (bucket[q].areas.get(area)||0) + 1);
           });
         });
       });
@@ -351,9 +363,8 @@
         const b = bucket[q];
         const topAreas = [...b.areas.entries()].sort((a,b)=>b[1]-a[1]).slice(0,4);
         const areaChips = topAreas.map(a=>`<span class="badge orange">${a[0]} (${a[1]})</span>`).join("");
-        const scopeChips = [...b.scopes].slice(0,5).map(s=>`<span class="badge">${s}</span>`).join("");
+        const scopeChips = [...b.scopes].slice(0,6).map(s=>`<span class="badge">${s}</span>`).join("");
 
-        // abstract level based on number of packages & events
         const pkgN = b.packages.size;
         const evN = b.events;
         let level = "Matala";
@@ -396,22 +407,16 @@
         refRows || `<tr><td colspan="4">Ei täsmennyksiä.</td></tr>`
       );
 
-      // Notes (auto-generated, simple)
+      // Notes
       const noteItems = [];
-      if(qs.length){
-        noteItems.push(`Kasautumia löydetty: ${qs.length} (tarkastelussa kvartaaleittain).`);
-      }
-      if(vna+min > 0){
-        noteItems.push(`Asetustäsmennyksiä koottu: ${vna+min}.`);
-      }
-      const topAreasAll = [...(new Map(allThemes.map(t=>[t.area,0]))).keys()].slice(0,6);
-      if(topAreasAll.length){
-        noteItems.push(`Yleisimmät ajurit (teemoista): ${uniq(allThemes.map(t=>t.area)).slice(0,4).join(", ")}.`);
-      }
+      if(qs.length) noteItems.push(`Kasautumia löydetty: ${qs.length} (kvartaaleittain).`);
+      if(vna+min > 0) noteItems.push(`Asetustäsmennyksiä koottu: ${vna+min}.`);
+      const topAreasAll = uniq(allThemes.map(t=>t.area)).slice(0,4);
+      if(topAreasAll.length) noteItems.push(`Yleisimmät ajurit (teemoista): ${topAreasAll.join(", ")}.`);
       $("notes").className = "";
       $("notes").innerHTML = `<div class="note">${noteItems.map(x=>`• ${x}`).join("<br/>") || "—"}</div>`;
 
-      // Actions (static but aligned with concept)
+      // Actions
       const actions = [
         "Yhtenäistä asetustäsmennykset: minimisisällöt ja termit (data-IT / raportointi).",
         "Julkaise kooste kentälle: mitä täsmentyy asetuksilla ja mihin se kohdistuu.",
